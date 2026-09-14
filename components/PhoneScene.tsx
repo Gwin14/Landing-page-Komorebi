@@ -52,7 +52,7 @@ async function screenTexture() {
       ctx.lineTo(700, 215 + (955 * i) / 3);
       ctx.stroke();
     }
-    ctx.strokeStyle = "#ffb947";
+    ctx.strokeStyle = "#ffaa00";
     ctx.lineWidth = 2;
     ctx.strokeRect(302, 642, 116, 116);
     ctx.restore();
@@ -74,7 +74,7 @@ async function screenTexture() {
     ctx.fillText("ISO 100", 65, 1230);
     ctx.fillText("1/250 s", 300, 1230);
     ctx.fillText("ƒ / 1.8", 570, 1230);
-    ctx.strokeStyle = "#ffb947";
+    ctx.strokeStyle = "#ffaa00";
     ctx.lineWidth = 5;
     ctx.beginPath();
     ctx.roundRect(310, 1310, 100, 100, 31);

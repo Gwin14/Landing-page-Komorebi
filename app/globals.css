@@ -4,7 +4,7 @@
   --surface: #1a1d18;
   --ink: #eeeee5;
   --muted: #a0a398;
-  --orange: #ff7542;
+  --orange: #ffaa00;
   --line: #ffffff19;
   --font: "DM Sans", Arial, sans-serif;
   --display: "Manrope", Arial, sans-serif;
@@ -214,7 +214,7 @@ em {
   color: #181912;
 }
 .button-orange:hover {
-  background: #ff905f;
+  background: #ffbd3f;
 }
 .hero-note {
   display: flex;
@@ -780,7 +780,7 @@ h3 {
   height: 50px;
   background: var(--orange);
   left: 50%;
-  box-shadow: 0 0 18px #ff754255;
+  box-shadow: 0 0 18px #ffaa0055;
 }
 .camera-settings {
   display: flex;
