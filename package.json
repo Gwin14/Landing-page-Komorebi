@@ -6,7 +6,10 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:docs": "node --test tests/docs.test.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:komorebi-drift": "node scripts/check-komorebi-drift.mjs"
   },
   "dependencies": {
     "next": "16.3.5",

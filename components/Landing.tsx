@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import {
   Aperture,
   ArrowUpRight,
@@ -18,6 +19,7 @@ import {
   Focus,
 } from "lucide-react";
 import { PROJECT_URL } from "@/lib/site";
+import { compatibilitySummary } from "@/lib/feature-matrix";
 import ColorLab from "./ColorLab";
 const PhoneScene = dynamic(() => import("./PhoneScene"), {
   ssr: false,
@@ -35,7 +37,7 @@ const questions = [
   ],
   [
     "Quais aparelhos são compatíveis?",
-    "O projeto contempla iOS e Android. RAW/ProRAW, Live Photo, modo retrato e Camera Control usam integrações nativas no iOS e dependem do aparelho e da lente. A configuração atual exige iOS 18 ou Android 8 e posteriores.",
+    compatibilitySummary,
   ],
   [
     "Posso usar meus próprios LUTs?",
@@ -93,6 +95,9 @@ export default function Landing() {
           <a href="#recursos" onClick={() => setMenuOpen(false)}>
             Os detalhes
           </a>
+          <Link href="/docs" onClick={() => setMenuOpen(false)}>
+            Documentação
+          </Link>
         </nav>
         <a
           className="header-cta"
@@ -402,6 +407,9 @@ export default function Landing() {
           <a href={PROJECT_URL} target="_blank" rel="noreferrer">
             <Code2 size={16} /> GitHub
           </a>
+          <Link href="/docs">Documentação</Link>
+          <Link href="/politica-de-privacidade">Privacidade</Link>
+          <Link href="/termos-de-uso">Termos</Link>
           <a href="#">Voltar ao topo ↑</a>
         </div>
       </footer>
