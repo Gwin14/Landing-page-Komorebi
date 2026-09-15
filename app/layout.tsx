@@ -16,7 +16,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" data-scroll-behavior="smooth">
       <body><noscript><style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style></noscript>{children}</body>
     </html>
   );
