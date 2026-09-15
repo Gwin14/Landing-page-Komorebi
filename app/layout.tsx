@@ -16,7 +16,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth">
+    <html lang="pt-BR" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var p=localStorage.getItem("komorebi-docs-theme")||"auto";var d=p==="dark"||(p==="auto"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.docsTheme=d?"dark":"light"}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body><noscript><style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style></noscript>{children}</body>
     </html>
   );

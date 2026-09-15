@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Aperture, Menu, X } from "lucide-react";
 import { useState } from "react";
 import DocsSearch from "./DocsSearch";
+import ThemeToggle from "./ThemeToggle";
 
 export default function DocsHeader() {
   const [open, setOpen] = useState(false);
@@ -16,6 +17,7 @@ export default function DocsHeader() {
         <small>documentação</small>
       </Link>
       <div className="docs-header-actions">
+        <ThemeToggle />
         <DocsSearch />
         <button
           className="docs-menu-button"
