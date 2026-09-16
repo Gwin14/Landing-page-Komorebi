@@ -1,4 +1,5 @@
-export type FeatureStatus = "supported" | "conditional" | "unavailable" | "validate";
+export type FeatureStatus =
+  "supported" | "conditional" | "unavailable" | "validate";
 
 export type Feature = {
   id: string;
@@ -29,7 +30,10 @@ export const featureMatrix: Feature[] = [
     ios: "conditional",
     android: "conditional",
     condition: "O aparelho precisa informar mais de uma lente compatível.",
-    sources: ["app/hooks/useCameraDevices.js", "app/components/LensSelector.jsx"],
+    sources: [
+      "app/hooks/useCameraDevices.js",
+      "app/components/LensSelector.jsx",
+    ],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -37,8 +41,12 @@ export const featureMatrix: Feature[] = [
     title: "Controles manuais",
     ios: "conditional",
     android: "conditional",
-    condition: "ISO, obturador, foco e balanço de branco variam conforme a câmera ativa.",
-    sources: ["app/hooks/useManualCameraControls.js", "modules/camera-manual-controls"],
+    condition:
+      "ISO, obturador, foco e balanço de branco variam conforme a câmera ativa.",
+    sources: [
+      "app/hooks/useManualCameraControls.js",
+      "modules/camera-manual-controls",
+    ],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -46,8 +54,13 @@ export const featureMatrix: Feature[] = [
     title: "LUTs, grão e halation",
     ios: "supported",
     android: "supported",
-    condition: "O processamento depende de uma captura válida e acesso ao armazenamento local.",
-    sources: ["app/utils/lutCatalog.js", "app/utils/grainCatalog.js", "app/utils/halationCatalog.js"],
+    condition:
+      "O processamento depende de uma captura válida e acesso ao armazenamento local.",
+    sources: [
+      "app/utils/lutCatalog.js",
+      "app/utils/grainCatalog.js",
+      "app/utils/halationCatalog.js",
+    ],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -55,7 +68,8 @@ export const featureMatrix: Feature[] = [
     title: "RAW e ProRAW",
     ios: "conditional",
     android: "unavailable",
-    condition: "Requer módulo nativo iOS e formato RAW informado pela câmera ativa.",
+    condition:
+      "Requer módulo nativo iOS e formato RAW informado pela câmera ativa.",
     sources: ["modules/camera-raw-capture", "app/hooks/useRawCapture.js"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
@@ -74,7 +88,10 @@ export const featureMatrix: Feature[] = [
     ios: "conditional",
     android: "unavailable",
     condition: "Requer iOS e suporte a profundidade ou matte na câmera ativa.",
-    sources: ["modules/camera-portrait-capture", "app/hooks/usePortraitCapture.js"],
+    sources: [
+      "modules/camera-portrait-capture",
+      "app/hooks/usePortraitCapture.js",
+    ],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -82,8 +99,12 @@ export const featureMatrix: Feature[] = [
     title: "Camera Control",
     ios: "conditional",
     android: "unavailable",
-    condition: "Disponível somente em iPhones com o controle físico correspondente.",
-    sources: ["modules/camera-control-button", "app/hooks/useCameraControlButton.js"],
+    condition:
+      "Disponível somente em iPhones com o controle físico correspondente.",
+    sources: [
+      "modules/camera-control-button",
+      "app/hooks/useCameraControlButton.js",
+    ],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -91,7 +112,8 @@ export const featureMatrix: Feature[] = [
     title: "GPS e clima",
     ios: "conditional",
     android: "conditional",
-    condition: "Localização durante o uso precisa estar autorizada; clima requer internet.",
+    condition:
+      "Localização durante o uso precisa estar autorizada; clima requer internet.",
     sources: ["app/hooks/useWeather.js", "app/utils/exifLocation.js"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
@@ -100,7 +122,8 @@ export const featureMatrix: Feature[] = [
     title: "Galeria e projetos",
     ios: "supported",
     android: "supported",
-    condition: "Requer acesso à biblioteca de mídia; projetos usam álbuns locais.",
+    condition:
+      "Requer acesso à biblioteca de mídia; projetos usam álbuns locais.",
     sources: ["app/components/Gallery.jsx", "app/utils/projects.js"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },

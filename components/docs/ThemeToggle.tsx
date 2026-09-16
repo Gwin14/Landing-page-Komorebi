@@ -10,7 +10,8 @@ const storageKey = "komorebi-docs-theme";
 function applyTheme(preference: ThemePreference) {
   const isDark =
     preference === "dark" ||
-    (preference === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    (preference === "auto" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
   document.documentElement.dataset.docsTheme = isDark ? "dark" : "light";
 }
 
@@ -19,13 +20,15 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     const saved = localStorage.getItem(storageKey);
-    const initial: ThemePreference = saved === "dark" || saved === "light" ? saved : "auto";
+    const initial: ThemePreference =
+      saved === "dark" || saved === "light" ? saved : "auto";
     if (selectRef.current) selectRef.current.value = initial;
     applyTheme(initial);
 
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const syncAutomaticTheme = () => {
-      if ((localStorage.getItem(storageKey) || "auto") === "auto") applyTheme("auto");
+      if ((localStorage.getItem(storageKey) || "auto") === "auto")
+        applyTheme("auto");
     };
     media.addEventListener("change", syncAutomaticTheme);
     return () => media.removeEventListener("change", syncAutomaticTheme);

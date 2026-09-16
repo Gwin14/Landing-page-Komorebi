@@ -2,12 +2,23 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const navigation = await readFile(new URL("../lib/docs-navigation.ts", import.meta.url), "utf8");
-const pages = await readFile(new URL("../content/docs-pages.ts", import.meta.url), "utf8");
-const matrix = await readFile(new URL("../lib/feature-matrix.ts", import.meta.url), "utf8");
+const navigation = await readFile(
+  new URL("../lib/docs-navigation.ts", import.meta.url),
+  "utf8",
+);
+const pages = await readFile(
+  new URL("../content/docs-pages.ts", import.meta.url),
+  "utf8",
+);
+const matrix = await readFile(
+  new URL("../lib/feature-matrix.ts", import.meta.url),
+  "utf8",
+);
 
 function values(source, field) {
-  return [...source.matchAll(new RegExp(`\\b${field}: \\\"([^\\\"]+)\\\"`, "g"))].map((match) => match[1]);
+  return [
+    ...source.matchAll(new RegExp(`\\b${field}: \\\"([^\\\"]+)\\\"`, "g")),
+  ].map((match) => match[1]);
 }
 
 test("cada rota de navegação possui uma página de conteúdo", () => {
@@ -26,8 +37,14 @@ test("a matriz usa identificadores únicos e registra fontes", () => {
 });
 
 test("as páginas legais públicas estão presentes", async () => {
-  const privacy = await readFile(new URL("../app/politica-de-privacidade/page.tsx", import.meta.url), "utf8");
-  const terms = await readFile(new URL("../app/termos-de-uso/page.tsx", import.meta.url), "utf8");
+  const privacy = await readFile(
+    new URL("../app/politica-de-privacidade/page.tsx", import.meta.url),
+    "utf8",
+  );
+  const terms = await readFile(
+    new URL("../app/termos-de-uso/page.tsx", import.meta.url),
+    "utf8",
+  );
   assert.match(privacy, /privacySections/);
   assert.match(terms, /termsSections/);
 });

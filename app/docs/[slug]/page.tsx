@@ -9,11 +9,24 @@ export function generateStaticParams() {
 
 type DocsRouteProps = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params }: DocsRouteProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: DocsRouteProps): Promise<Metadata> {
   const { slug } = await params;
   const page = getDocsPage(slug);
   if (!page) return {};
-  return { title: page.title, description: page.description };
+  const path = `/docs/${page.slug}`;
+  return {
+    title: page.title,
+    description: page.description,
+    alternates: { canonical: path },
+    openGraph: {
+      title: `${page.title} | Komorebi`,
+      description: page.description,
+      url: path,
+      type: "article",
+    },
+  };
 }
 
 export default async function DocsPageRoute({ params }: DocsRouteProps) {

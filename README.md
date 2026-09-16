@@ -11,6 +11,12 @@ npm run dev -- --port 3017
 
 Abra http://127.0.0.1:3017. A porta exclusiva evita conflitos com caches e service workers de outros projetos locais.
 
+Defina `NEXT_PUBLIC_SITE_URL` com a URL pública, sem caminho final, no ambiente de produção. Na Vercel, a URL de produção é detectada automaticamente; localmente, o fallback é `http://localhost:3000`.
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://seu-dominio.com npm run build
+```
+
 ```bash
 npm run lint
 npm run typecheck

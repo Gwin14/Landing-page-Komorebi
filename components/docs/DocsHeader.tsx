@@ -11,7 +11,11 @@ export default function DocsHeader() {
 
   return (
     <header className="docs-header">
-      <Link className="docs-brand" href="/" aria-label="Komorebi, página inicial">
+      <Link
+        className="docs-brand"
+        href="/"
+        aria-label="Komorebi, página inicial"
+      >
         <Aperture size={25} strokeWidth={1.7} />
         <span>komorebi.</span>
         <small>documentação</small>

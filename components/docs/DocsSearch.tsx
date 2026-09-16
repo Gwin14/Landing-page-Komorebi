@@ -22,7 +22,8 @@ export default function DocsSearch() {
 
   useEffect(() => {
     function close(event: MouseEvent) {
-      if (!containerRef.current?.contains(event.target as Node)) setActive(false);
+      if (!containerRef.current?.contains(event.target as Node))
+        setActive(false);
     }
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
@@ -30,7 +31,9 @@ export default function DocsSearch() {
 
   return (
     <div className="docs-search" ref={containerRef}>
-      <label htmlFor={inputId} className="sr-only">Buscar na documentação</label>
+      <label htmlFor={inputId} className="sr-only">
+        Buscar na documentação
+      </label>
       <Search size={17} aria-hidden="true" />
       <input
         id={inputId}
@@ -45,18 +48,37 @@ export default function DocsSearch() {
         }}
       />
       {query && (
-        <button type="button" aria-label="Limpar busca" onClick={() => setQuery("")}>
+        <button
+          type="button"
+          aria-label="Limpar busca"
+          onClick={() => setQuery("")}
+        >
           <X size={16} />
         </button>
       )}
       {active && normalized && (
-        <div className="docs-search-results" role="listbox" aria-label="Resultados da busca">
-          {results.length ? results.map((item) => (
-            <Link key={item.slug} href={`/docs/${item.slug}`} onClick={() => { setActive(false); setQuery(""); }}>
-              <span>{item.title}</span>
-              <small>{item.summary}</small>
-            </Link>
-          )) : <p>Nenhuma página encontrada.</p>}
+        <div
+          className="docs-search-results"
+          role="listbox"
+          aria-label="Resultados da busca"
+        >
+          {results.length ? (
+            results.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/docs/${item.slug}`}
+                onClick={() => {
+                  setActive(false);
+                  setQuery("");
+                }}
+              >
+                <span>{item.title}</span>
+                <small>{item.summary}</small>
+              </Link>
+            ))
+          ) : (
+            <p>Nenhuma página encontrada.</p>
+          )}
         </div>
       )}
     </div>
