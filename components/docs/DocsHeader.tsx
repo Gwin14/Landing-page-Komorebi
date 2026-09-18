@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Aperture, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { docsNavigation } from "@/lib/docs-navigation";
 import DocsSearch from "./DocsSearch";
 import ThemeToggle from "./ThemeToggle";
 
@@ -43,10 +44,7 @@ export default function DocsHeader() {
 function DocsMobileLinks({ onNavigate }: { onNavigate: () => void }) {
   const links = [
     ["Visão geral", "/docs"],
-    ["Primeiros passos", "/docs/primeiros-passos"],
-    ["Câmera e captura", "/docs/camera"],
-    ["Compatibilidade", "/docs/compatibilidade"],
-    ["Desenvolvimento", "/docs/desenvolvimento"],
+    ...docsNavigation.map((item) => [item.title, `/docs/${item.slug}`]),
   ];
 
   return links.map(([label, href]) => (

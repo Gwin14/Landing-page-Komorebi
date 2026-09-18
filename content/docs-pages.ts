@@ -3,6 +3,7 @@ import type { FeatureStatus } from "@/lib/feature-matrix";
 export type DocsSection = {
   id: string;
   title: string;
+  badge?: "Novo" | "Beta";
   paragraphs?: string[];
   items?: string[];
 };
@@ -55,7 +56,7 @@ export const docsPages: DocsPage[] = [
       },
       {
         id: "topbar",
-        title: "Personalize a TopBar",
+        title: "Organize os atalhos da câmera",
         paragraphs: [
           "Nas configurações, escolha quais controles aparecem e altere a ordem. A TopBar aceita até oito controles e também pode ser exibida abaixo do preview.",
         ],
@@ -80,32 +81,56 @@ export const docsPages: DocsPage[] = [
     ],
     sections: [
       {
-        id: "interface",
-        title: "Interface da câmera",
+        id: "conheca-a-camera",
+        title: "Conheça a câmera",
         paragraphs: [
           "O preview ocupa a área principal. A TopBar reúne atalhos configuráveis; os controles inferiores concentram obturador, galeria, troca de câmera, lentes e ajustes contextuais. Nível e histograma podem ser ativados nas configurações.",
         ],
         items: [
           "Um destaque visual indica controles ativos.",
-          "A seleção de lente só aparece quando o aparelho informa opções físicas.",
-          "Zoom por pinça e controle dedicado respeitam os limites da câmera ativa.",
+          "Toque no preview para escolher o ponto de foco em aparelhos compatíveis.",
+          "A miniatura no canto inferior abre o projeto ou álbum ativo.",
         ],
       },
       {
-        id: "captura",
-        title: "Captura padrão e dupla",
+        id: "tire-uma-foto",
+        title: "Tire uma foto",
         paragraphs: [
-          "A captura padrão funciona nas duas plataformas. Também há câmera frontal, flash, proporção vertical ou horizontal e captura dupla. O disparo automático por sorriso analisa o preview e só deve ser usado quando o rosto estiver bem iluminado.",
+          "Enquadre a cena e toque no obturador. O app processa a captura em segundo plano, aplica os efeitos selecionados e salva o resultado no álbum Komorebi ou no projeto ativo.",
         ],
         items: [
-          "O botão de volume pode disparar a câmera.",
-          "Camera Control depende de um iPhone compatível.",
-          "Flash, lente e proporção disponíveis variam conforme a câmera ativa.",
+          "A animação na miniatura indica que ainda há fotos na fila de processamento.",
+          "Evite fechar o app enquanto a fila estiver ativa.",
         ],
       },
       {
-        id: "manual",
-        title: "Controles manuais",
+        id: "lentes-zoom-foco",
+        title: "Use lentes, zoom e foco",
+        items: [
+          "O seletor de lentes aparece somente quando o aparelho informa mais de uma câmera física.",
+          "Faça o gesto de pinça ou use o controle dedicado para ajustar o zoom dentro dos limites da lente.",
+          "Toque em um ponto do preview para definir foco e o assunto de referência do próximo Scan.",
+        ],
+      },
+      {
+        id: "selfie-flash-proporcao",
+        title: "Use câmera frontal, flash e proporção",
+        items: [
+          "Use o botão de alternância para fotografar com a câmera frontal.",
+          "Flash e lentes disponíveis mudam conforme a câmera ativa.",
+          "O controle de proporção alterna o enquadramento horizontal 4:3 e vertical 9:16.",
+        ],
+      },
+      {
+        id: "auxilios-de-enquadramento",
+        title: "Ative grade, nível e histograma",
+        paragraphs: [
+          "Grade, nível do aparelho e histograma em tempo real são auxílios visuais opcionais. Ative cada um em Configurações; eles não são gravados na foto.",
+        ],
+      },
+      {
+        id: "exposicao-e-controles-manuais",
+        title: "Ajuste exposição e controles manuais",
         paragraphs: [
           "Compensação, ISO, velocidade do obturador, balanço de branco e foco são oferecidos conforme a capacidade detectada. Volte ao modo automático pelo controle correspondente quando quiser que a câmera recalcule o ajuste.",
         ],
@@ -116,13 +141,76 @@ export const docsPages: DocsPage[] = [
         ],
       },
       {
-        id: "modos-ios",
-        title: "Modos avançados no iOS",
+        id: "captura-dupla-e-sorriso",
+        title: "Use captura dupla e disparo por sorriso",
+        paragraphs: [
+          "A captura dupla produz composições complementares a partir do enquadramento ativo. O disparo por sorriso analisa o primeiro rosto detectado e fotografa automaticamente quando há iluminação e expressão suficientes.",
+        ],
         items: [
-          "RAW e ProRAW exigem formato compatível informado pela lente.",
-          "Live Photo exige suporte nativo e não pode ser combinada com RAW ou retrato.",
-          "Retrato depende de profundidade ou matte disponível.",
+          "O detector de sorriso entra em pausa durante o Scanner de composição.",
+          "Resultado e disponibilidade podem variar conforme a cena e o aparelho.",
+        ],
+      },
+      {
+        id: "scanner-de-composicao",
+        title: "Use o Scanner de composição",
+        badge: "Beta",
+        paragraphs: [
+          "No iOS, o Scan analisa um frame sob demanda, identifica um assunto e exibe uma moldura para orientar o reenquadramento. Ao alinhar a moldura, o app ajusta o zoom dentro do limite da lente; o recurso não dispara nem salva uma foto sozinho.",
+        ],
+        items: [
+          "Funciona na câmera traseira nos modos normal, manual e RAW/ProRAW; não aparece em Live Photo, Retrato ou Android.",
+          "Toque primeiro no assunto para orientar o próximo Scan. Sem seleção, o app escolhe uma região da cena.",
+          "A análise básica usa recursos do aparelho. Em Configurações, o modelo MiniCPM-V opcional adiciona análise semântica local e ocupa cerca de 1,6 GB.",
+          "Frames, sugestões e caixas detectadas não são enviados a um servidor nem gravados na foto.",
+        ],
+      },
+      {
+        id: "raw-proraw",
+        title: "Capture em RAW ou ProRAW",
+        items: [
+          "Disponível somente no iOS quando a lente informa um formato compatível.",
+          "RAW e ProRAW não podem ser combinados com Live Photo ou Retrato.",
+          "A proporção 9:16 é derivada do sensor 4:3 para preservar a captura RAW.",
+        ],
+      },
+      {
+        id: "live-photo",
+        title: "Capture uma Live Photo",
+        items: [
+          "Disponível somente no iOS e em hardware compatível.",
+          "O modo exige RAW e Retrato desativados.",
+          "A foto e o trecho de movimento são salvos como um par na biblioteca.",
+        ],
+      },
+      {
+        id: "retrato",
+        title: "Tire um retrato",
+        items: [
+          "Disponível somente no iOS quando a câmera fornece profundidade ou matte de retrato.",
           "Trocar de lente pode alterar imediatamente a disponibilidade do modo.",
+          "RAW e Live Photo precisam estar desativados.",
+        ],
+      },
+      {
+        id: "heif-ou-jpeg",
+        title: "Escolha entre HEIF e JPEG",
+        badge: "Novo",
+        paragraphs: [
+          "No iPhone, novas fotos são salvas em HEIF por padrão. Ative Salvar fotos em JPEG nas configurações quando precisar de maior compatibilidade com outros aplicativos e serviços.",
+        ],
+        items: [
+          "A preferência também é aplicada a Live Photos, retratos, capturas duplas e cópias sem efeitos quando o fluxo permitir.",
+          "RAW e ProRAW mantêm seus formatos próprios; a imagem derivada pode seguir a preferência escolhida.",
+        ],
+      },
+      {
+        id: "botoes-fisicos",
+        title: "Dispare com os botões físicos",
+        items: [
+          "Os botões de volume podem acionar o obturador.",
+          "Camera Control funciona somente em iPhones com o controle físico correspondente.",
+          "Os mesmos bloqueios da interface se aplicam enquanto uma foto está sendo processada.",
         ],
       },
     ],
@@ -163,12 +251,14 @@ export const docsPages: DocsPage[] = [
       },
       {
         id: "grao-halation",
-        title: "Grão e halation",
+        title: "Aplique grão e halation",
+        badge: "Novo",
         paragraphs: [
-          "Há seis opções de grão — Fino, Suave, Filme, Granulado, 16 mm e Push — e seis de halation — Suave, Médio, Filme, Âmbar, Neon e Aura. A intensidade faz parte da configuração do efeito.",
+          "Grão e halation foram recalibrados e agora oferecem três intensidades diretas: Suave, Médio e Forte. O grão simula textura fotográfica; o halation cria um halo avermelhado difuso ao redor de altas luzes com contraste local.",
         ],
         items: [
-          "A ordem de processamento é administrada pelo pipeline do app.",
+          "Escolha Sem Grão ou Sem Halation para desligar cada efeito.",
+          "LUT, grão e halation podem ser combinados no mesmo processamento.",
           "Ative a cópia original para salvar também uma versão sem LUT e efeitos quando o fluxo permitir.",
         ],
       },
@@ -237,7 +327,16 @@ export const docsPages: DocsPage[] = [
           "Grade: adiciona linhas de composição.",
           "Nível: mostra o alinhamento do aparelho.",
           "Histograma: mostra a distribuição de luminosidade em tempo real quando o pipeline ativo oferece suporte.",
+          "Scanner de composição (beta): mostra uma guia de reenquadramento no iOS.",
           "Controles invertidos: altera a posição da TopBar.",
+        ],
+      },
+      {
+        id: "inteligencia-do-scan",
+        title: "Inteligência do Scan",
+        badge: "Novo",
+        paragraphs: [
+          "No iOS, você pode baixar ou remover o modelo MiniCPM-V usado pelo Scanner de composição. O download ocupa cerca de 1,6 GB, fica no aparelho e é opcional: sem ele, o Scan continua com a análise básica fornecida pelo sistema.",
         ],
       },
       {
@@ -245,8 +344,9 @@ export const docsPages: DocsPage[] = [
         title: "Captura e metadados",
         items: [
           "Som do obturador: ativa ou desativa o som próprio do app, sem substituir regras do sistema.",
-          "Salvar original: mantém uma cópia sem LUT quando aplicável.",
+          "Salvar cópia sem efeitos: mantém uma versão sem LUT, grão ou halation quando aplicável.",
           "Salvar localização: grava GPS apenas em novas fotos e somente com permissão.",
+          "Salvar fotos em JPEG (iOS): troca o padrão HEIF por JPEG para ampliar a compatibilidade.",
           "LUTs personalizados: importa e remove arquivos .cube locais.",
         ],
       },
@@ -309,6 +409,7 @@ export const docsPages: DocsPage[] = [
         title: "Prepare o ambiente",
         items: [
           "Execute npm install no repositório do aplicativo.",
+          "No iOS, execute npm run setup:minicpm-ios para preparar o runtime local do Scan antes de instalar os pods.",
           "Use npm start para iniciar o Expo.",
           "Execute npm run ios ou npm run android para a plataforma desejada.",
           "Use aparelho físico para validar câmera, mídia e módulos nativos.",
@@ -318,7 +419,7 @@ export const docsPages: DocsPage[] = [
         id: "arquitetura",
         title: "Arquitetura",
         paragraphs: [
-          "As telas e componentes ficam em app, com hooks para comportamento, contexto para configurações e utilitários para EXIF, LUT e armazenamento. Os módulos Expo locais isolam controles manuais, RAW, Live Photo, retrato e Camera Control, com API pública em index.ts e implementação iOS em modules/*/ios.",
+          "As telas e componentes ficam em app, com hooks para comportamento, contexto para configurações e utilitários para EXIF, LUT e armazenamento. Os módulos Expo locais isolam controles manuais, RAW, Live Photo, retrato, Camera Control e Scanner de composição, com API pública em index.ts e implementação iOS em modules/*/ios.",
         ],
       },
       {

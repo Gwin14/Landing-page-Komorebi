@@ -7,7 +7,7 @@ import { APP_VERIFIED_COMMIT, APP_VERIFIED_DATE } from "@/lib/feature-matrix";
 const paths = [
   {
     title: "Comece a fotografar",
-    text: "Permissões, primeira captura e organização inicial.",
+    text: "Permissões, primeira captura, lentes e controles essenciais.",
     href: "/docs/primeiros-passos",
     icon: Camera,
   },
@@ -18,9 +18,9 @@ const paths = [
     icon: Palette,
   },
   {
-    title: "Consulte a referência",
-    text: "Compatibilidade e condições por plataforma.",
-    href: "/docs/compatibilidade",
+    title: "Use o Scanner de composição",
+    text: "Guia local de reenquadramento em beta no iOS.",
+    href: "/docs/camera#scanner-de-composicao",
     icon: BookOpen,
   },
   {
@@ -41,8 +41,8 @@ export default function DocsOverviewPage() {
           <h1>Fotografe com intenção e saiba o que cada recurso exige.</h1>
           <p>
             O Komorebi reúne controles de câmera, cores autorais e organização
-            local. Aqui você encontra instruções de uso, limites por aparelho e
-            a arquitetura do projeto.
+            local. Navegue por tópicos para encontrar instruções de uso,
+            recursos novos, limites por aparelho e a arquitetura do projeto.
           </p>
           <div className="docs-meta">
             <span>Revisado em {APP_VERIFIED_DATE}</span>

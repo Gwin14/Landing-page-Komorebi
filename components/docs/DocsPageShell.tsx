@@ -55,7 +55,12 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
             key={section.id}
             aria-labelledby={section.id}
           >
-            <h2 id={section.id}>{section.title}</h2>
+            <h2 id={section.id}>
+              {section.title}
+              {section.badge ? (
+                <span className="docs-topic-badge">{section.badge}</span>
+              ) : null}
+            </h2>
             {section.paragraphs?.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -105,7 +110,8 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
         {page.slug === "compatibilidade" && <a href="#matriz">Matriz</a>}
         {page.sections.map((section) => (
           <a key={section.id} href={`#${section.id}`}>
-            {section.title}
+            <span>{section.title}</span>
+            {section.badge ? <small>{section.badge}</small> : null}
           </a>
         ))}
       </aside>

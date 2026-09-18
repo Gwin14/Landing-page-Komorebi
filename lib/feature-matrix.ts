@@ -11,8 +11,8 @@ export type Feature = {
   verifiedCommit: string;
 };
 
-export const APP_VERIFIED_COMMIT = "e3bb093cc7ad5323db62e1d1cb14d45d943c3f54";
-export const APP_VERIFIED_DATE = "15 de setembro de 2026";
+export const APP_VERIFIED_COMMIT = "9cd38a3f04c2876ccee0e006eee2d836de6e5820";
+export const APP_VERIFIED_DATE = "18 de setembro de 2026";
 
 export const featureMatrix: Feature[] = [
   {
@@ -21,7 +21,7 @@ export const featureMatrix: Feature[] = [
     ios: "supported",
     android: "supported",
     condition: "Câmera e biblioteca de Fotos autorizadas.",
-    sources: ["app/index.jsx", "app/hooks/usePhotoCapture.js"],
+    sources: ["app/index.jsx", "app/utils/cameraUtils.js"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -31,7 +31,7 @@ export const featureMatrix: Feature[] = [
     android: "conditional",
     condition: "O aparelho precisa informar mais de uma lente compatível.",
     sources: [
-      "app/hooks/useCameraDevices.js",
+      "app/hooks/uselensselector.js",
       "app/components/LensSelector.jsx",
     ],
     verifiedCommit: APP_VERIFIED_COMMIT,
@@ -108,13 +108,41 @@ export const featureMatrix: Feature[] = [
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
+    id: "composition-scan",
+    title: "Scanner de composição",
+    ios: "validate",
+    android: "unavailable",
+    condition:
+      "Beta no iOS. A análise básica é local; o modelo semântico opcional ocupa cerca de 1,6 GB. Validação final em aparelho físico está pendente.",
+    sources: [
+      "modules/composition-scan",
+      "app/hooks/useCompositionScan.js",
+      "docs/composition-scan.md",
+    ],
+    verifiedCommit: APP_VERIFIED_COMMIT,
+  },
+  {
+    id: "heif-jpeg",
+    title: "Seleção entre HEIF e JPEG",
+    ios: "supported",
+    android: "unavailable",
+    condition:
+      "HEIF é o padrão no iOS, com JPEG opcional. O Android mantém a saída JPEG.",
+    sources: [
+      "app/context/SettingsContext.js",
+      "app/hooks/usePhotoProcessingQueue.js",
+      "app/utils/cameraUtils.js",
+    ],
+    verifiedCommit: APP_VERIFIED_COMMIT,
+  },
+  {
     id: "gps-weather",
     title: "GPS e clima",
     ios: "conditional",
     android: "conditional",
     condition:
       "Localização durante o uso precisa estar autorizada; clima requer internet.",
-    sources: ["app/hooks/useWeather.js", "app/utils/exifLocation.js"],
+    sources: ["app/components/PhotoWeather.jsx", "app/index.jsx"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -124,7 +152,7 @@ export const featureMatrix: Feature[] = [
     android: "supported",
     condition:
       "Requer acesso à biblioteca de mídia; projetos usam álbuns locais.",
-    sources: ["app/components/Gallery.jsx", "app/utils/projects.js"],
+    sources: ["app/components/Galery.jsx", "app/utils/projects.js"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
 ];
@@ -137,4 +165,4 @@ export const statusLabels: Record<FeatureStatus, string> = {
 };
 
 export const compatibilitySummary =
-  "O Komorebi requer iOS 18 ou Android 8. RAW/ProRAW, Live Photo, retrato e Camera Control são recursos condicionais do iOS e dependem do aparelho e da lente.";
+  "O Komorebi requer iOS 18 ou Android 8. RAW/ProRAW, Live Photo, retrato e Camera Control são recursos condicionais do iOS. O Scanner de composição está em beta e ainda precisa de validação final em aparelho físico.";

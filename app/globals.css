@@ -1584,7 +1584,11 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  max-height: calc(100vh - 132px);
+  overflow-y: auto;
+  padding-right: 8px;
   font-size: 13px;
+  scrollbar-width: thin;
 }
 .docs-sidebar > a,
 .docs-sidebar-group a {
@@ -1601,6 +1605,14 @@ footer a:hover {
   color: #6d4600;
   background: #e9dfca;
   font-weight: 700;
+}
+.docs-toc small {
+  flex: none;
+  color: #9a6500;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 .docs-sidebar-group {
   margin-top: 22px;
@@ -1724,6 +1736,24 @@ footer a:hover {
   line-height: 1.25;
   letter-spacing: -0.03em;
 }
+.docs-section h2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.docs-topic-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #efe2c4;
+  color: #765000;
+  font: 800 9px/1 var(--font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 .docs-section p,
 .docs-section li,
 .legal-document section p,
@@ -1798,6 +1828,10 @@ footer a:hover {
   padding: 0;
 }
 .docs-toc a {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
   color: #696c63;
   line-height: 1.4;
 }
@@ -2019,6 +2053,10 @@ html[data-docs-theme="dark"] .docs-sidebar a:hover {
   color: #fff;
 }
 html[data-docs-theme="dark"] .docs-sidebar a.active {
+  background: #ffaa0019;
+  color: #ffc14d;
+}
+html[data-docs-theme="dark"] .docs-topic-badge {
   background: #ffaa0019;
   color: #ffc14d;
 }

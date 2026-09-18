@@ -3,7 +3,36 @@
 import Link from "next/link";
 import { Search, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
+import { getDocsPage } from "@/content/docs-pages";
 import { docsNavigation } from "@/lib/docs-navigation";
+
+const searchEntries = docsNavigation.flatMap((item) => {
+  const page = getDocsPage(item.slug);
+  const pageEntry = {
+    id: item.slug,
+    title: item.title,
+    summary: item.summary,
+    href: `/docs/${item.slug}`,
+    searchText: [item.title, item.summary, item.group, ...item.keywords].join(
+      " ",
+    ),
+  };
+  const sectionEntries =
+    page?.sections.map((section) => ({
+      id: `${item.slug}-${section.id}`,
+      title: section.title,
+      summary: item.title,
+      href: `/docs/${item.slug}#${section.id}`,
+      searchText: [
+        section.title,
+        section.badge ?? "",
+        ...(section.paragraphs ?? []),
+        ...(section.items ?? []),
+      ].join(" "),
+    })) ?? [];
+
+  return [pageEntry, ...sectionEntries];
+});
 
 export default function DocsSearch() {
   const [query, setQuery] = useState("");
@@ -12,12 +41,13 @@ export default function DocsSearch() {
   const containerRef = useRef<HTMLDivElement>(null);
   const normalized = query.trim().toLocaleLowerCase("pt-BR");
   const results = normalized
-    ? docsNavigation.filter((item) =>
-        [item.title, item.summary, item.group, ...item.keywords]
-          .join(" ")
+    ? searchEntries
+        .filter((item) =>
+          item.searchText
           .toLocaleLowerCase("pt-BR")
           .includes(normalized),
-      )
+        )
+        .slice(0, 8)
     : [];
 
   useEffect(() => {
@@ -65,8 +95,8 @@ export default function DocsSearch() {
           {results.length ? (
             results.map((item) => (
               <Link
-                key={item.slug}
-                href={`/docs/${item.slug}`}
+                key={item.id}
+                href={item.href}
                 onClick={() => {
                   setActive(false);
                   setQuery("");
