@@ -53,3 +53,20 @@ A textura ocupa a tela frontal do modelo 3D. A imagem provisória é uma interfa
 - Ícones: Lucide. Tipografia: DM Sans e Manrope, Google Fonts.
 
 Os recursos e requisitos de hardware foram conferidos no código e na documentação local do app. A landing page não altera o repositório do aplicativo. O botão principal de acompanhamento aponta para o repositório oficial; substitua `PROJECT_URL` em `lib/site.ts` quando houver uma página de lançamento.
+
+## Documentação pública
+
+Os 15 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções, limites e links para os fontes do app no commit revisado. Páginas, busca e sitemap são gerados a partir desse conteúdo.
+
+A sidebar permite recolher cada seção e abre a seção da página atual. No celular, o menu também agrupa as páginas em seções recolhíveis e tem rolagem própria. O header da landing page permanece visível durante a rolagem.
+
+Para atualizar os guias, compare o código do repositório `../Komorebi` com as notas técnicas: algumas notas registram uma etapa antiga da implementação. Revise especialmente seleção de formatos, restrições dos modos, cópias sem efeitos, permissões e serviços externos. Registre o commit e a data em `lib/feature-matrix.ts` somente após a revisão. Diferencie recursos implementados de qualidade e desempenho ainda pendentes de teste físico.
+
+```bash
+npm run test:docs
+npm run check:komorebi-drift
+npm run build
+npm run check:links
+```
+
+Use `KOMOREBI_REPOSITORY=/caminho/do/app npm run check:komorebi-drift` se o app estiver em outro diretório. Esse comando compara commits; ele não confirma sozinho a exatidão do texto nem testa hardware.

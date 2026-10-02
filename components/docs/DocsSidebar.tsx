@@ -8,8 +8,12 @@ export default function DocsSidebar({ currentSlug }: { currentSlug?: string }) {
         Visão geral
       </Link>
       {docsGroups.map((group) => (
-        <div className="docs-sidebar-group" key={group}>
-          <h2>{group}</h2>
+        <details
+          className="docs-sidebar-group"
+          key={`${group}-${currentSlug ?? "overview"}`}
+          open={!currentSlug || docsNavigation.some((item) => item.group === group && item.slug === currentSlug)}
+        >
+          <summary>{group}</summary>
           {docsNavigation
             .filter((item) => item.group === group)
             .map((item) => (
@@ -22,13 +26,13 @@ export default function DocsSidebar({ currentSlug }: { currentSlug?: string }) {
                 {item.title}
               </Link>
             ))}
-        </div>
+        </details>
       ))}
-      <div className="docs-sidebar-group">
-        <h2>Legal</h2>
+      <details className="docs-sidebar-group">
+        <summary>Legal</summary>
         <Link href="/politica-de-privacidade">Política de Privacidade</Link>
         <Link href="/termos-de-uso">Termos de Uso</Link>
-      </div>
+      </details>
     </nav>
   );
 }

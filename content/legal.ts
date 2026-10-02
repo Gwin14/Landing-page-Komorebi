@@ -16,7 +16,8 @@ export const privacySections: LegalSection[] = [
     items: [
       "Latitude, longitude e altitude só podem ser gravadas no EXIF quando a permissão estiver concedida e a opção de localização estiver ativada.",
       "Preferências incluem grade, som, formato de imagem, cópia original e configuração da TopBar.",
-      "Arquivos .cube importados ficam armazenados localmente.",
+      "Arquivos .cube importados e o modelo opcional de inteligência ficam armazenados localmente. A análise de composição, tags e nomes ocorre no aparelho.",
+      "Autor, direitos autorais, classificação e palavras-chave podem ser gravados nos metadados das imagens. Trabalhos HEIF+ pendentes conservam fontes temporárias no aparelho até conclusão ou descarte.",
     ],
   },
   {
@@ -48,9 +49,10 @@ export const privacySections: LegalSection[] = [
     items: [
       "Open-Meteo recebe latitude e longitude aproximadas para dados meteorológicos.",
       "BigDataCloud recebe latitude e longitude aproximadas para geocodificação reversa.",
-      "Leaflet, Carto e unpkg carregam scripts, estilos e mapas centrados nas coordenadas da foto.",
+      "Leaflet, OpenStreetMap e unpkg carregam scripts, estilos e mapas centrados nas coordenadas da foto.",
       "O gerador de EXIF Frame pode receber ou processar a imagem e metadados em WebView.",
       "Notion recebe somente as informações enviadas voluntariamente no formulário de feedback.",
+      "Sentry recebe eventos de erro e amostras de desempenho para diagnóstico técnico do aplicativo.",
       "Links externos passam a seguir as políticas do serviço acessado.",
     ],
   },
@@ -162,7 +164,7 @@ export const termsSections: LegalSection[] = [
   {
     title: "Serviços de terceiros",
     paragraphs: [
-      "Open-Meteo, BigDataCloud, Leaflet, Carto, unpkg, o gerador de EXIF Frame, Notion e links externos têm seus próprios termos e políticas. A equipe Komorebi não controla sua disponibilidade ou práticas.",
+      "Open-Meteo, BigDataCloud, Leaflet, OpenStreetMap, unpkg, o gerador de EXIF Frame, Notion e links externos têm seus próprios termos e políticas. A equipe Komorebi não controla sua disponibilidade ou práticas.",
     ],
   },
   {

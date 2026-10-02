@@ -102,7 +102,8 @@ em {
   border-bottom: 1px solid var(--line);
   background: #111310e8;
   backdrop-filter: blur(16px);
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 20;
 }
 .brand {
@@ -1622,7 +1623,7 @@ footer a:hover {
 .docs-sidebar-group {
   margin-top: 22px;
 }
-.docs-sidebar-group h2,
+.docs-sidebar-group summary,
 .docs-toc h2 {
   margin: 0 0 7px;
   padding: 0 11px;
@@ -2091,7 +2092,7 @@ html[data-docs-theme="dark"]
     .docs-search-results p,
     .docs-sidebar > a,
     .docs-sidebar-group a,
-    .docs-sidebar-group h2,
+    .docs-sidebar-group summary,
     .docs-toc h2,
     .docs-toc a,
     .docs-breadcrumbs,
@@ -2165,6 +2166,11 @@ html[data-docs-theme="dark"]
     padding: 18px 5%;
     border-bottom: 1px solid #d7d3c8;
     background: #f4f2ea;
+  }
+  .docs-mobile-nav {
+    max-height: calc(100dvh - 66px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .docs-mobile-nav.is-open {
     display: flex;
@@ -2324,4 +2330,61 @@ html[data-docs-theme="dark"]
   .header .brand {
     font-size: 24px;
   }
+}
+
+.docs-sidebar-group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 11px;
+  cursor: pointer;
+  list-style: none;
+  border-radius: 5px;
+}
+.docs-sidebar-group summary::-webkit-details-marker {
+  display: none;
+}
+.docs-sidebar-group summary::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+.docs-sidebar-group[open] > summary::after {
+  transform: rotate(45deg);
+}
+.docs-sidebar-group summary:hover {
+  background: #00000008;
+}
+.docs-section-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 16px;
+}
+.docs-section-links a,
+.docs-sources a {
+  color: #765000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.docs-sources {
+  margin-top: 32px;
+  border-top: 1px solid #d7d3c8;
+}
+.docs-sources li {
+  overflow-wrap: anywhere;
+}
+html[data-docs-theme="dark"] .docs-section-links a,
+html[data-docs-theme="dark"] .docs-sources a {
+  color: #ffaa00;
+}
+html[data-docs-theme="dark"] .docs-sources {
+  border-color: #ffffff19;
+}
+html[data-docs-theme="dark"] .docs-sidebar-group summary:hover {
+  background: #ffffff0c;
 }

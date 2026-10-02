@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Aperture, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { docsNavigation } from "@/lib/docs-navigation";
+import { docsGroups, docsNavigation } from "@/lib/docs-navigation";
 import DocsSearch from "./DocsSearch";
 import ThemeToggle from "./ThemeToggle";
 
@@ -42,14 +42,19 @@ export default function DocsHeader() {
 }
 
 function DocsMobileLinks({ onNavigate }: { onNavigate: () => void }) {
-  const links = [
-    ["Visão geral", "/docs"],
-    ...docsNavigation.map((item) => [item.title, `/docs/${item.slug}`]),
-  ];
-
-  return links.map(([label, href]) => (
-    <Link key={href} href={href} onClick={onNavigate}>
-      {label}
-    </Link>
-  ));
+  return (
+    <>
+      <Link href="/docs" onClick={onNavigate}>Visão geral</Link>
+      {docsGroups.map((group) => (
+        <details className="docs-sidebar-group" key={group}>
+          <summary>{group}</summary>
+          {docsNavigation.filter((item) => item.group === group).map((item) => (
+            <Link key={item.slug} href={`/docs/${item.slug}`} onClick={onNavigate}>
+              {item.title}
+            </Link>
+          ))}
+        </details>
+      ))}
+    </>
+  );
 }

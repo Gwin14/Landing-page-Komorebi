@@ -48,3 +48,32 @@ test("as páginas legais públicas estão presentes", async () => {
   assert.match(privacy, /privacySections/);
   assert.match(terms, /termsSections/);
 });
+
+// Execute the content exports to validate nested sections and contextual links.
+const ts = await import("typescript");
+async function contentModule(source) {
+  const output = ts.default.transpileModule(source, {
+    compilerOptions: { module: ts.default.ModuleKind.ESNext },
+  }).outputText;
+  return import(`data:text/javascript;base64,${Buffer.from(output).toString("base64")}`);
+}
+const { docsPages } = await contentModule(pages);
+const { docsNavigation } = await contentModule(navigation);
+
+test("as páginas têm âncoras únicas e links contextuais válidos", () => {
+  for (const page of docsPages) {
+    const ids = page.sections.map((section) => section.id);
+    assert.equal(ids.length, new Set(ids).size, page.slug);
+    assert.ok(!ids.includes("fontes") && !ids.includes("pre-requisitos"), page.slug);
+    assert.ok(page.sources?.length, `${page.slug}: faltam fontes`);
+    for (const section of page.sections) {
+      for (const link of section.links ?? []) {
+        const [route, anchor] = link.href.split("#");
+        const target = docsPages.find((item) => `/docs/${item.slug}` === route);
+        assert.ok(target, `${page.slug}: ${link.href}`);
+        if (anchor) assert.ok(target.sections.some((item) => item.id === anchor));
+      }
+    }
+  }
+  assert.deepEqual(new Set(docsPages.map((page) => page.slug)), new Set(docsNavigation.map((item) => item.slug)));
+});

@@ -20,7 +20,7 @@ const paths = [
   {
     title: "Use o Scanner de composição",
     text: "Guia local de reenquadramento em beta no iOS.",
-    href: "/docs/camera#scanner-de-composicao",
+    href: "/docs/scanner-de-composicao",
     icon: BookOpen,
   },
   {

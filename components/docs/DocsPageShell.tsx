@@ -71,8 +71,30 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
                 ))}
               </ul>
             )}
+            {section.links && (
+              <div className="docs-section-links">
+                {section.links.map((link) => (
+                  <Link key={link.href} href={link.href}>{link.label}</Link>
+                ))}
+              </div>
+            )}
           </section>
         ))}
+        {page.sources && (
+          <section className="docs-section docs-sources" aria-labelledby="fontes">
+            <h2 id="fontes">Fontes no aplicativo</h2>
+            <p>Referências da implementação no commit revisado. Notas técnicas podem descrever etapas anteriores; os guias acima também consideram o código atual.</p>
+            <ul>
+              {page.sources.map((source) => (
+                <li key={source}>
+                  <a href={`https://github.com/Gwin14/Komorebi/blob/${APP_VERIFIED_COMMIT}/${source}`} target="_blank" rel="noreferrer">
+                    {source}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         <a
           className="docs-edit-link"
           href={githubUrl}
@@ -114,6 +136,7 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
             {section.badge ? <small>{section.badge}</small> : null}
           </a>
         ))}
+        {page.sources && <a href="#fontes">Fontes no aplicativo</a>}
       </aside>
     </div>
   );

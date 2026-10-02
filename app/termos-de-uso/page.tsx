@@ -15,7 +15,7 @@ export default function TermsPage() {
   return (
     <LegalPage
       title="Termos de Uso"
-      updated="julho de 2026"
+      updated="2 de outubro de 2026"
       sections={termsSections}
     />
   );
