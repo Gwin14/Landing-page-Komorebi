@@ -11,8 +11,8 @@ export type Feature = {
   verifiedCommit: string;
 };
 
-export const APP_VERIFIED_COMMIT = "a24c4ab619cdb8f4d16dbb5586876957b5700f43";
-export const APP_VERIFIED_DATE = "2 de outubro de 2026";
+export const APP_VERIFIED_COMMIT = "eced539294323d2bcf19c6484769a7c2399683f9";
+export const APP_VERIFIED_DATE = "9 de outubro de 2026";
 
 export const featureMatrix: Feature[] = [
   {
@@ -78,8 +78,8 @@ export const featureMatrix: Feature[] = [
     title: "Live Photo",
     ios: "conditional",
     android: "unavailable",
-    condition: "Requer iOS, lente compatível e RAW e retrato desativados.",
-    sources: ["modules/camera-live-photo", "app/hooks/useLivePhotoCapture.js"],
+    condition: "Requer iOS, lente compatível e RAW e stacking desativados. Pode combinar com Retrato quando a lente anuncia suporte conjunto.",
+    sources: ["modules/camera-live-photo", "app/hooks/useLivePhotoCapture.js", "docs/portrait-and-live-photo.md"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -87,7 +87,7 @@ export const featureMatrix: Feature[] = [
     title: "Modo retrato",
     ios: "conditional",
     android: "unavailable",
-    condition: "Requer iOS e suporte a profundidade ou matte na câmera ativa.",
+    condition: "Requer iOS e suporte a profundidade ou matte na câmera ativa. Live Photo simultânea exige suporte combinado da lente; RAW e stacking são incompatíveis.",
     sources: [
       "modules/camera-portrait-capture",
       "app/hooks/usePortraitCapture.js",
@@ -151,8 +151,8 @@ export const featureMatrix: Feature[] = [
     ios: "supported",
     android: "supported",
     condition:
-      "Requer acesso à biblioteca de mídia; projetos usam álbuns locais.",
-    sources: ["app/components/Galery.jsx", "app/utils/projects.js"],
+      "Requer acesso à biblioteca de mídia; projetos usam álbuns locais. Avaliação, compartilhamento e exclusão funcionam individualmente ou em lote; a exclusão remove as fotos da biblioteca inteira.",
+    sources: ["app/components/Galery.jsx", "app/utils/projects.js", "app/utils/galleryActions.js"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -193,8 +193,14 @@ export const featureMatrix: Feature[] = [
   },
   {
     id: "apple-styles", title: "Edição no Fotos da Apple", ios: "validate", android: "unavailable",
-    condition: "Experimental, com módulo nativo iOS. Gera HEIF para edição no Fotos e pausa em Live Photo, Retrato, RAW e HEIF+.",
-    sources: ["app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts"],
+    condition: "Experimental, com módulo nativo iOS. Aplica estilos à saída HEIF comum, Retrato, stacking e HEIF+. Live Photo e RAW Bayer comum suspendem a opção; ProRAW aplica estilos somente ao derivado processado.",
+    sources: ["app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "docs/capture-file-formats.md"],
+    verifiedCommit: APP_VERIFIED_COMMIT,
+  },
+  {
+    id: "photo-depth", title: "Profundidade na galeria", ios: "validate", android: "unavailable",
+    condition: "Experimental em JPEG/HEIC elegíveis, inclusive Live Photos; RAW e fotos com profundidade existente são inelegíveis. Pode editar a original ou criar cópia. Controles de Retrato no Fotos ainda exigem validação mais ampla em aparelho.",
+    sources: ["modules/camera-photo-depth/index.ts", "modules/camera-photo-depth/ios/PhotosPortraitCompatibility.swift", "docs/gallery-actions.md"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
 ];
@@ -207,4 +213,4 @@ export const statusLabels: Record<FeatureStatus, string> = {
 };
 
 export const compatibilitySummary =
-  "O Komorebi requer iOS 18 ou Android 8. Controles manuais completos, RAW/ProRAW, Live Photo, retrato e Camera Control são recursos condicionais do iOS. Scanner de composição, HEIF+ e Image Stacking também exigem iOS e têm validações de qualidade ou desempenho pendentes em aparelho físico.";
+  "O Komorebi requer iOS 18 ou Android 8. Controles manuais completos, RAW/ProRAW, Live Photo, retrato e Camera Control são recursos condicionais do iOS. Scanner de composição, HEIF+, Image Stacking e geração de profundidade na galeria também exigem iOS e têm validações de qualidade ou desempenho pendentes em aparelho físico.";

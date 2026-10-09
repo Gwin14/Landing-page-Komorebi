@@ -17,6 +17,8 @@ export const privacySections: LegalSection[] = [
       "Latitude, longitude e altitude só podem ser gravadas no EXIF quando a permissão estiver concedida e a opção de localização estiver ativada.",
       "Preferências incluem grade, som, formato de imagem, cópia original e configuração da TopBar.",
       "Arquivos .cube importados e o modelo opcional de inteligência ficam armazenados localmente. A análise de composição, tags e nomes ocorre no aparelho.",
+      "A geração experimental de profundidade também é local, inclusive para Live Photos elegíveis. O modelo de profundidade vem no app; o modelo opcional do Scan é baixado separadamente.",
+      "Aplicar profundidade na original mantém arquivos de recuperação privados. Desinstalar o app remove esses backups; criar uma cópia preserva a foto de origem na biblioteca.",
       "Autor, direitos autorais, classificação e palavras-chave podem ser gravados nos metadados das imagens. Trabalhos HEIF+ pendentes conservam fontes temporárias no aparelho até conclusão ou descarte.",
     ],
   },
@@ -27,9 +29,8 @@ export const privacySections: LegalSection[] = [
     ],
     items: [
       "Câmera: preview e captura.",
-      "Biblioteca de mídia ou Fotos: salvar, mostrar a galeria, ler metadados e excluir quando solicitado.",
+      "Biblioteca de mídia ou Fotos: salvar, mostrar a galeria, ler metadados, classificar, compartilhar, editar profundidade e excluir quando solicitado.",
       "Localização durante o uso: GPS no EXIF e consulta de clima e localidade.",
-      "Microfone: declarado para compatibilidade de câmera ou vídeo, embora o app atual seja focado em fotografia.",
     ],
   },
   {
@@ -39,20 +40,25 @@ export const privacySections: LegalSection[] = [
     ],
   },
   {
-    title: "Fotos galeria e metadados",
+    title: "Fotos, galeria e metadados",
     paragraphs: [
-      "As fotos são salvas na biblioteca de mídia, geralmente no álbum Komorebi. A galeria integrada pode exibir EXIF, abrir um mapa e excluir a foto selecionada. O app não faz upload automático das suas fotos.",
+      "As fotos são salvas na biblioteca de mídia, geralmente no álbum Komorebi. A galeria integrada exibe EXIF e mapa e permite avaliar, compartilhar e excluir fotos individualmente ou em lote. No iOS, fotos elegíveis podem receber profundidade na original ou em uma cópia. Uma edição posterior em outro app pode impedir a reversão automática. O app não faz upload automático das suas fotos.",
     ],
   },
   {
     title: "Serviços de terceiros",
+    paragraphs: [
+      "O compartilhamento de diagnósticos começa ativado e pode ser desativado no onboarding beta ou em Configurações → Sobre → Compartilhar diagnósticos. A preferência fica no dispositivo. Ao desligar, o monitoramento é encerrado na sessão atual e não inicia nas próximas aberturas. Dados já enviados não são apagados.",
+      "Esses provedores têm políticas próprias, inclusive para dados técnicos de rede. O Komorebi não controla a retenção dos diagnósticos enviados ao Sentry.",
+    ],
     items: [
       "Open-Meteo recebe latitude e longitude aproximadas para dados meteorológicos.",
       "BigDataCloud recebe latitude e longitude aproximadas para geocodificação reversa.",
       "Leaflet, OpenStreetMap e unpkg carregam scripts, estilos e mapas centrados nas coordenadas da foto.",
       "O gerador de EXIF Frame pode receber ou processar a imagem e metadados em WebView.",
+      "Hugging Face fornece o download opcional do MiniCPM-V e recebe requisições e dados técnicos de rede; as imagens analisadas permanecem no aparelho.",
       "Notion recebe somente as informações enviadas voluntariamente no formulário de feedback.",
-      "Sentry recebe eventos de erro e amostras de desempenho para diagnóstico técnico do aplicativo.",
+      "Quando os diagnósticos estão ativados, Sentry recebe mensagens de erro, rastros de execução, versão do app e informações técnicas do dispositivo e das operações afetadas. O app não configura envio de fotos, RAW, LUTs ou GPS ao Sentry.",
       "Links externos passam a seguir as políticas do serviço acessado.",
     ],
   },
@@ -65,7 +71,7 @@ export const privacySections: LegalSection[] = [
   {
     title: "Segurança e retenção",
     paragraphs: [
-      "Os dados locais ficam sujeitos às proteções do dispositivo. Você controla a retenção ao excluir fotos, remover LUTs, revogar permissões ou desinstalar o app. A desinstalação não remove necessariamente fotos já salvas.",
+      "Os dados locais ficam sujeitos às proteções do dispositivo. Você controla a retenção ao excluir fotos, remover LUTs, revogar permissões ou desinstalar o app. A desinstalação remove os backups privados de profundidade e não remove necessariamente fotos já salvas. A reversão de edições compatíveis exige os backups disponíveis; diagnósticos enviados seguem a retenção do Sentry.",
     ],
   },
   {
@@ -76,6 +82,7 @@ export const privacySections: LegalSection[] = [
       "Remover LUTs personalizados.",
       "Revogar permissões.",
       "Não usar serviços externos como mapa, feedback ou EXIF Frame.",
+      "Desativar o compartilhamento de diagnósticos; dúvidas ou pedidos sobre dados já enviados podem ser encaminhados pelos canais de contato.",
     ],
   },
   {
@@ -116,6 +123,7 @@ export const termsSections: LegalSection[] = [
     items: [
       "RAW ou ProRAW, Live Photo, retrato e Camera Control dependem de iOS e hardware compatível.",
       "Projetos, captura dupla, sorriso automático, volume, GPS, clima e EXIF Frame também dependem das condições descritas na documentação.",
+      "Profundidade local na galeria é experimental no iOS. Compatibilidade com os controles de Retrato do Fotos depende do arquivo, aparelho e sistema.",
     ],
   },
   {
@@ -131,9 +139,8 @@ export const termsSections: LegalSection[] = [
     title: "Permissões",
     items: [
       "Câmera para preview e captura.",
-      "Fotos para salvar, organizar, ler e excluir quando solicitado.",
+      "Fotos para salvar, organizar, ler metadados, avaliar, compartilhar, editar profundidade e excluir quando solicitado.",
       "Localização durante o uso para GPS, clima e localidade.",
-      "Microfone declarado para compatibilidade de câmera ou vídeo.",
     ],
   },
   {
@@ -164,7 +171,7 @@ export const termsSections: LegalSection[] = [
   {
     title: "Serviços de terceiros",
     paragraphs: [
-      "Open-Meteo, BigDataCloud, Leaflet, OpenStreetMap, unpkg, o gerador de EXIF Frame, Notion e links externos têm seus próprios termos e políticas. A equipe Komorebi não controla sua disponibilidade ou práticas.",
+      "Open-Meteo, BigDataCloud, Leaflet, OpenStreetMap, unpkg, o gerador de EXIF Frame, Hugging Face, Notion, Sentry e links externos têm seus próprios termos e políticas. A equipe Komorebi não controla sua disponibilidade ou práticas.",
     ],
   },
   {
@@ -194,7 +201,7 @@ export const termsSections: LegalSection[] = [
   {
     title: "Encerramento de uso",
     paragraphs: [
-      "Você pode parar de usar o app e desinstalá-lo. Preferências podem ser removidas, mas fotos salvas podem permanecer na biblioteca.",
+      "Você pode parar de usar o app e desinstalá-lo. A desinstalação remove os backups privados de profundidade e pode remover preferências, mas fotos salvas podem permanecer na biblioteca.",
     ],
   },
   {

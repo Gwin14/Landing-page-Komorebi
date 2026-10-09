@@ -36,6 +36,10 @@ export const docsNavigation: DocsNavItem[] = [
       "composição",
       "heif",
       "jpeg",
+      "timer",
+      "gestos",
+      "volume",
+      "atalhos",
     ],
   },
   {
@@ -120,9 +124,16 @@ export const docsNavigation: DocsNavItem[] = [
   {
     slug: "galeria-e-projetos",
     title: "Galeria e projetos",
-    summary: "Álbuns, EXIF, mapa e organização das fotos.",
+    summary: "Álbuns, EXIF, avaliação, compartilhamento e exclusão em lote.",
     group: "Organizar",
-    keywords: ["galeria", "álbum", "exif", "gps", "mapa"],
+    keywords: ["galeria", "álbum", "exif", "gps", "mapa", "selecionar", "lote", "compartilhar", "apagar", "avaliar"],
+  },
+  {
+    slug: "profundidade-na-galeria",
+    title: "Profundidade na galeria",
+    summary: "Profundidade local no iOS, original ou cópia, Retrato no Fotos e recuperação.",
+    group: "Organizar",
+    keywords: ["profundidade", "depth", "retrato", "cópia", "reverter", "live photo", "depthanything"],
   },
   {
     slug: "metadados-e-autoria",
@@ -152,6 +163,9 @@ export const docsNavigation: DocsNavItem[] = [
       "localização",
       "inteligência",
       "minicpm",
+      "diagnósticos",
+      "sentry",
+      "gestos",
     ],
   },
   {

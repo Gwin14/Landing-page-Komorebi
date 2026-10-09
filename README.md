@@ -56,7 +56,7 @@ Os recursos e requisitos de hardware foram conferidos no código e na documenta�
 
 ## Documentação pública
 
-Os 15 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções, limites e links para os fontes do app no commit revisado. Páginas, busca e sitemap são gerados a partir desse conteúdo.
+Os 16 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções, limites e links para os fontes do app no commit revisado. A revisão de 9 de outubro de 2026 cobre Retrato + Live Photo, timer e gestos, ações em lote, profundidade na galeria, Estilos Fotográficos e controle de diagnósticos. Páginas, busca e sitemap são gerados a partir desse conteúdo.
 
 A sidebar permite recolher cada seção e abre a seção da página atual. No celular, o menu também agrupa as páginas em seções recolhíveis e tem rolagem própria. O header da landing page permanece visível durante a rolagem.
 

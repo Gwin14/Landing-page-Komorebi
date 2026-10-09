@@ -12,7 +12,7 @@ export const questions = [
   ],
   [
     "Minhas fotos ficam no dispositivo?",
-    "Sim. Fotos, preferências e LUTs personalizados ficam no dispositivo. Recursos específicos, como clima, mapa e EXIF Frame, usam serviços externos. A localização nas fotos é opcional.",
+    "Sim. Fotos, preferências e LUTs personalizados ficam no dispositivo. Scan e geração de profundidade analisam as imagens localmente. Clima, mapa, EXIF Frame e o download opcional do modelo do Scan usam serviços externos. Diagnósticos técnicos começam ativados e podem ser desligados no onboarding beta ou em Configurações → Sobre. A localização nas fotos é opcional.",
   ],
   [
     "Onde posso baixar o app?",

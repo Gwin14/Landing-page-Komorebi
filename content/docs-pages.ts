@@ -72,7 +72,7 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "camera",
-    sources: ["app/index.jsx", "app/components/TopBar.jsx", "app/utils/aspectRatios.js"],
+    sources: ["app/index.jsx", "app/components/TopBar.jsx", "app/utils/aspectRatios.js", "docs/controls-and-gestures.md", "docs/portrait-and-live-photo.md"],
     title: "Câmera e captura",
     description:
       "Entenda a interface, escolha lentes e use modos de captura sem assumir suporte universal.",
@@ -187,7 +187,7 @@ export const docsPages: DocsPage[] = [
         title: "Capture uma Live Photo",
         items: [
           "Disponível somente no iOS e em hardware compatível.",
-          "O modo exige RAW e Retrato desativados.",
+          "O modo exige RAW e Image Stacking desativados. Pode funcionar com Retrato se a lente informar suporte à combinação.",
           "A foto e o trecho de movimento são salvos como um par na biblioteca.",
         ],
       },
@@ -196,8 +196,9 @@ export const docsPages: DocsPage[] = [
         title: "Tire um retrato",
         items: [
           "Disponível somente no iOS quando a câmera fornece profundidade ou matte de retrato.",
-          "Trocar de lente pode alterar imediatamente a disponibilidade do modo.",
-          "RAW e Live Photo precisam estar desativados.",
+          "O preview não simula desfoque; permite ajustar exposição e tocar para focar. A foto final usa profundidade/matte e abertura inicial de f/4.5.",
+          "Trocar de lente pode alterar imediatamente a disponibilidade do modo e desligar Live Photo quando o suporte combinado faltar.",
+          "RAW e Image Stacking precisam estar desativados. Live Photo pode ficar ativa junto quando a lente oferecer suporte combinado.",
         ],
       },
       {
@@ -214,6 +215,20 @@ export const docsPages: DocsPage[] = [
         ],
       },
       {
+        id: "timer-e-gestos",
+        title: "Timer, gestos e atalhos",
+        badge: "Novo",
+        paragraphs: [
+          "Escolha desligado, 3 ou 10 segundos no controle Timer da TopBar. O timer geral não fica salvo: começa desligado e volta a zero quando o app entra em segundo plano.",
+          "Em Configurações → Controles e gestos, configure gestos verticais e horizontais e os dois botões de volume para captura, efeitos, lentes ou modos. Cima abre ou ativa; baixo fecha ou desativa. Direita avança e esquerda volta no seletor.",
+        ],
+        items: [
+          "Tirar foto usa o timer geral; Foto com timer de 3s/10s substitui o tempo apenas naquele disparo e mantém seu atalho salvo.",
+          "No iOS, diminuir volume, Camera Control e botão de Ação compartilham a ação primária quando acionam captura; aumentar volume usa a secundária.",
+          "Mudanças de modo, efeito e lente ficam bloqueadas durante captura, processamento e contagem. Finalizar Bulb ou Motion Blur continua imediato.",
+        ],
+      },
+      {
         id: "botoes-fisicos",
         title: "Dispare com os botões físicos",
         items: [
@@ -226,7 +241,7 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "cores-e-efeitos",
-    sources: ["app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "app/utils/lutCatalog.js", "app/utils/grainCatalog.js", "app/utils/halationCatalog.js"],
+    sources: ["docs/capture-file-formats.md", "app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "app/utils/lutCatalog.js", "app/utils/grainCatalog.js", "app/utils/halationCatalog.js"],
     title: "Cores e efeitos",
     description:
       "Aplique LUTs, grão e halation e escolha se quer guardar uma cópia original.",
@@ -264,7 +279,7 @@ export const docsPages: DocsPage[] = [
         title: "Edição no Fotos da Apple",
         paragraphs: [
           "A opção experimental nas configurações de metadados e edição cria um HEIF para edição no Fotos. Ativá-la retorna o formato processado a HEIF; exige o módulo nativo iOS.",
-          "Live Photo, Retrato, RAW e HEIF+ pausam essa opção. A preferência não comprova que toda lente e versão do Fotos aceitará a edição: confira o arquivo salvo no aparelho antes de depender desse fluxo.",
+          "Live Photo e RAW Bayer comum pausam essa opção. Retrato, Image Stacking e HEIF+ podem aplicar estilos à saída HEIF; em ProRAW, somente o derivado processado recebe estilos. A preferência não comprova que toda lente e versão do Fotos aceitará a edição: confira o arquivo salvo no aparelho antes de depender desse fluxo.",
         ],
       },
       {
@@ -285,10 +300,10 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "galeria-e-projetos",
-    sources: ["app/components/Galery.jsx", "app/utils/projects.js", "app/components/MapViewWeb.jsx"],
+    sources: ["app/components/Galery.jsx", "app/utils/projects.js", "app/components/MapViewWeb.jsx", "app/utils/galleryActions.js", "docs/gallery-actions.md"],
     title: "Galeria e projetos",
     description:
-      "Organize capturas em álbuns, consulte EXIF e use mapa e EXIF Frame com atenção à privacidade.",
+      "Organize álbuns, avalie e compartilhe fotos em lote e consulte EXIF, mapa e profundidade.",
     platform: "iOS e Android",
     status: "supported",
     prerequisites: [
@@ -323,6 +338,23 @@ export const docsPages: DocsPage[] = [
         ],
       },
       {
+        id: "acoes-e-selecao",
+        title: "Avalie, compartilhe e apague",
+        badge: "Novo",
+        paragraphs: [
+          "Abra uma foto e toque em … para acessar Ações: compartilhar, avaliar de 0 a 5 estrelas e consultar profundidade. Informações reúne EXIF e localização; só um painel fica aberto por vez.",
+          "Na grade, toque em Selecionar ou mantenha uma miniatura pressionada. Marque as fotos para Avaliar, Compartilhar ou Apagar. Trocar de projeto ou sair encerra a seleção.",
+        ],
+        items: [
+          "Avaliar aplica a mesma nota ao lote. A estrela cortada remove a classificação; cancelar mantém as notas já gravadas e deixa pendências selecionadas.",
+          "Compartilhar abre uma folha nativa para todas as imagens preparadas. No iOS, exporta a representação atual, incluindo edições; Live Photos são compartilhadas como imagem estática. Arquivos apenas no iCloud podem exigir download.",
+          "Se uma imagem não puder ser preparada, o lote não é compartilhado parcialmente.",
+          "Apagar exige confirmação e remove as fotos da biblioteca e de todos os álbuns, inclusive fora do projeto ativo.",
+          "Profundidade é uma ação individual e não aparece nas ações em lote.",
+        ],
+        links: [{ href: "/docs/profundidade-na-galeria", label: "Gere profundidade na original ou em uma cópia" }],
+      },
+      {
         id: "exif-frame",
         title: "EXIF Frame",
         paragraphs: [
@@ -332,8 +364,47 @@ export const docsPages: DocsPage[] = [
     ],
   },
   {
+    slug: "profundidade-na-galeria",
+    title: "Profundidade na galeria",
+    description: "Gere profundidade local em fotos elegíveis no iOS e escolha entre original e cópia.",
+    platform: "Varia por recurso",
+    status: "validate",
+    prerequisites: ["iOS com o módulo nativo instalado", "Fotos com leitura e escrita autorizadas", "JPEG/HEIC elegível sem profundidade existente; RAW não é aceito"],
+    sources: ["docs/gallery-actions.md", "modules/camera-photo-depth/index.ts", "modules/camera-photo-depth/ios/PhotosPortraitCompatibility.swift", "modules/camera-photo-depth/ios/PhotoDepthService.swift"],
+    sections: [
+      {
+        id: "gerar",
+        title: "Gere profundidade no aparelho",
+        badge: "Beta",
+        paragraphs: [
+          "Abra uma foto, toque em … e consulte a ação de profundidade. O modelo DepthAnythingV2SmallF16 vem no app e executa localmente, sem download no primeiro uso nem envio da foto a servidor. O Android não oferece essa ação.",
+          "Esse recurso estima profundidade relativa depois da captura e é separado do modo Retrato da câmera. Não mede distâncias físicas. Live Photos elegíveis conservam o vídeo na edição ou na cópia.",
+        ],
+      },
+      {
+        id: "original-ou-copia",
+        title: "Escolha original ou cópia",
+        items: [
+          "Aplicar profundidade na original mantém o item da biblioteca e cria uma edição reversível com backup privado. O ajuste de Retrato é acessado por Editar no Fotos.",
+          "Criar uma cópia salva um novo original com profundidade e conserva a foto de origem. A cópia recebe data, localização, favorito, visibilidade, classificação e álbuns compatíveis.",
+          "A cópia permite a alternância de Retrato no visualizador em casos já testados. A compatibilidade mais ampla dos controles do Fotos continua experimental e depende do arquivo, aparelho e iOS.",
+          "HEIF com Estilos Fotográficos exige cópia quando a orientação EXIF é diferente de 1 ou quando é Live Photo; a interface impede editar a original nesses casos.",
+        ],
+      },
+      {
+        id: "recuperacao",
+        title: "Reversão e recuperação",
+        paragraphs: [
+          "Reverter profundidade depende do backup privado e de uma edição reconhecida como pertencente ao Komorebi. Uma edição posterior em outro app pode bloquear a reversão para preservar essa alteração.",
+          "Fotos editadas pela versão anterior podem oferecer Salvar cópia para Retrato a partir do backup. Desinstalar o app remove os backups privados; a foto de origem preservada por uma cópia permanece na biblioteca.",
+        ],
+        links: [{ href: "/docs/galeria-e-projetos#acoes-e-selecao", label: "Compartilhamento e ações da galeria" }],
+      },
+    ],
+  },
+  {
     slug: "configuracoes",
-    sources: ["app/context/SettingsContext.js", "app/components/Settings.jsx"],
+    sources: ["app/context/SettingsContext.js", "app/components/Settings.jsx", "docs/controls-and-gestures.md", "app/utils/diagnostics.js"],
     title: "Configurações",
     description:
       "Consulte o efeito, a persistência e as dependências das preferências do Komorebi.",
@@ -371,9 +442,18 @@ export const docsPages: DocsPage[] = [
           "Salvar localização: grava GPS apenas em novas fotos e somente com permissão.",
           "Formato da foto (iOS): escolhe HEIF, HEIF+ ou JPEG; o atalho Formato de arquivo controla RAW e foto processada.",
           "Autoria: grava autor e direitos autorais nas próximas capturas, sem modificar fotos existentes.",
-          "Edição no Fotos da Apple (experimental, iOS): cria HEIF editável; pausa em Live Photo, Retrato, RAW e HEIF+.",
+          "Edição no Fotos da Apple (experimental, iOS): aplica Estilos 2/3 à saída HEIF, inclusive Retrato, stacking e HEIF+. Pausa em Live Photo e RAW Bayer comum; em ProRAW, só no derivado processado.",
           "LUTs personalizados: importa e remove arquivos .cube locais.",
         ],
+      },
+      {
+        id: "gestos-e-diagnosticos",
+        title: "Controles e diagnósticos",
+        paragraphs: [
+          "Controles e gestos guarda os atalhos verticais, horizontais e dos botões físicos. O timer geral é temporário e escolhido somente na TopBar.",
+          "Em Sobre → Compartilhar diagnósticos, desligue ou ligue o envio técnico ao Sentry. Ele começa ativado; ao desligar, o monitoramento é encerrado na sessão atual e não inicia na próxima abertura. Isso não apaga eventos já enviados.",
+        ],
+        links: [{ href: "/docs/camera#timer-e-gestos", label: "Configure timer e atalhos da câmera" }],
       },
       {
         id: "topbar-opcoes",
@@ -437,7 +517,8 @@ export const docsPages: DocsPage[] = [
         items: [
           "Execute npm install no repositório do aplicativo.",
           "No iOS, execute npm run setup:minicpm-ios para preparar o runtime local do Scan antes de instalar os pods.",
-          "Use npm start para iniciar o Expo.",
+          "Instale os pods depois do setup do Scan e use um build nativo de desenvolvimento; Expo Go não inclui os módulos locais.",
+          "Use npm start para iniciar o Metro para esse binário.",
           "Execute npm run ios ou npm run android para a plataforma desejada.",
           "Use aparelho físico para validar câmera, mídia e módulos nativos.",
         ],
@@ -447,7 +528,7 @@ export const docsPages: DocsPage[] = [
         links: [{href: "/docs/pipeline-de-imagem", label: "Fluxos de captura, processamento e salvamento"}],
         title: "Arquitetura",
         paragraphs: [
-          "As telas e componentes ficam em app, com hooks para comportamento, contexto para configurações e utilitários para EXIF, LUT e armazenamento. Os módulos Expo locais isolam controles manuais, RAW/HEIF+, Live Photo, retrato, Camera Control, Image Stacking, Estilos Apple e Scanner de composição, com API pública em index.ts e implementação iOS em modules/*/ios.",
+          "As telas e componentes ficam em app, com hooks para comportamento, contexto para configurações e utilitários para EXIF, LUT e armazenamento. Os módulos Expo locais isolam controles manuais, RAW/HEIF+, Live Photo, retrato, Camera Control, Image Stacking, Estilos Apple, profundidade na galeria e Scanner de composição, com API pública em index.ts e implementação iOS em modules/*/ios.",
         ],
       },
       {
@@ -899,6 +980,7 @@ export const docsPages: DocsPage[] = [
     sources: [
       "docs/photo-catalog-metadata.md",
       "app/utils/photoCatalogMetadata.js",
+      "docs/gallery-actions.md",
       "app/utils/photoIntelligence.js",
       "modules/shared/PhotoCatalogMetadata.swift",
     ],
@@ -914,11 +996,12 @@ export const docsPages: DocsPage[] = [
         id: "notas",
         title: "Classificação de 0 a 5 estrelas",
         paragraphs: [
-          "Abra a foto e seu painel de informações. Escolha a nota; a estrela cortada grava zero explicitamente. A interface confirma somente depois da escrita e apresenta falhas de permissão ou armazenamento.",
+          "Abra a foto, toque em … e entre no painel Ações. Escolha a nota; a estrela cortada grava zero explicitamente. A interface confirma somente depois da escrita e apresenta falhas de permissão ou armazenamento.",
           "No iOS 27 com SDK compatível, a transação atualiza o catálogo Fotos e o XMP da imagem. A leitura do catálogo, incluindo zero, respeita alterações feitas no Fotos. Nas outras plataformas, a miniatura usa a nota lida da imagem.",
         ],
         items: [
           "Zero significa sem classificação e não exibe indicador na miniatura.",
+          "Na grade, toque em Selecionar ou mantenha uma miniatura pressionada para aplicar a mesma nota a várias fotos. Cancelar mantém as gravações já concluídas; falhas e pendências continuam selecionadas.",
           "Notas antigas apenas no XMP precisam ser selecionadas novamente para entrar no catálogo; a leitura não as migra automaticamente.",
           "No iOS, a edição preserva o original. Para RAW, a classificação fica na representação renderizada e o DNG original é mantido.",
         ],
@@ -972,6 +1055,8 @@ export const docsPages: DocsPage[] = [
       "docs/heif-plus.md",
       "docs/image-stacking-engine.md",
       "docs/performance-audit.md",
+      "app/utils/diagnostics.js",
+      "docs/sentry.md",
     ],
     sections: [
       {
@@ -1019,6 +1104,7 @@ export const docsPages: DocsPage[] = [
         items: [
           "No aplicativo: npm run lint, npm run typecheck e npm test.",
           "Para foco: npm run test:focus-native em macOS com Xcode/Core Image/Metal.",
+          "Para profundidade: npm run test:depth-native em macOS com Xcode/Core ML; os checks não substituem conferir os controles do Fotos no iPhone.",
           "Para HEIF+: bash scripts/check-heif-plus-native.sh; a execução nativa depende de acesso à GPU.",
           "Recompile os módulos nativos e teste formatos, orientações, projetos, cancelamento e biblioteca com acesso limitado.",
           "Registre aparelho, versão do sistema, arquivos exportados e medições; diferencie teste sintético de captura real.",
@@ -1028,7 +1114,7 @@ export const docsPages: DocsPage[] = [
         id: "diagnostico",
         title: "Diagnóstico de erros",
         paragraphs: [
-          "Sentry é inicializado em app/_layout.tsx para erros e amostras de desempenho. A configuração usa todas as transações em desenvolvimento e 20% em distribuição. Mapas de código e releases ajudam a associar uma falha ao fonte.",
+          "Sentry é configurado em app/utils/diagnostics.js após ler a preferência local. O compartilhamento começa ativado e pode ser desligado no onboarding beta ou em Configurações → Sobre. Quando ativo, coleta erros e amostra 100% das transações em desenvolvimento/preview e 20% em produção. Mapas de código e releases ajudam a associar uma falha ao fonte.",
           "Tokens de upload ficam no ambiente de build, nunca em variáveis públicas. Um novo SDK nativo exige recompilar o aplicativo. Confira docs/sentry.md no repositório para o procedimento de integração.",
         ],
       }

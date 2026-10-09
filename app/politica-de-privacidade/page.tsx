@@ -15,7 +15,7 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Política de Privacidade"
-      updated="2 de outubro de 2026"
+      updated="9 de outubro de 2026"
       sections={privacySections}
     />
   );

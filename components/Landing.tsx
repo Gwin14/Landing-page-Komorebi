@@ -277,16 +277,16 @@ export default function Landing() {
               <Layers size={23} />
               <h3>Um pouco além da foto.</h3>
               <p>
-                Live Photo e modo retrato para explorar outras formas de guardar
-                o instante, em iPhones compatíveis.
+                Live Photo e modo retrato, inclusive juntos quando a lente
+                oferece suporte, em iPhones compatíveis.
               </p>
             </article>
             <article className="small-card" data-reveal>
               <ImageIcon size={23} />
               <h3>Cada foto tem uma história.</h3>
               <p>
-                Galeria integrada, dados EXIF e localização opcional. Volte aos
-                detalhes de cada captura.
+                Organize projetos, avalie e compartilhe fotos em lote. Consulte
+                EXIF e localização opcional de cada captura.
               </p>
             </article>
             <article className="small-card" data-reveal>
