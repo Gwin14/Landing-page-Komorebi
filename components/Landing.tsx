@@ -73,18 +73,14 @@ export default function Landing() {
           <a href="#recursos" onClick={() => setMenuOpen(false)}>
             Os detalhes
           </a>
+          <Link href="/lista-de-espera" onClick={() => setMenuOpen(false)}>Lista de espera</Link>
           <Link href="/docs" onClick={() => setMenuOpen(false)}>
             Documentação
           </Link>
         </nav>
-        <a
-          className="header-cta"
-          href={PROJECT_URL}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Conheça o projeto <ArrowUpRight size={17} />
-        </a>
+        <Link className="header-cta" href="/lista-de-espera">
+          Lista de espera · iPhone <ArrowUpRight size={17} />
+        </Link>
         <button
           className="menu-toggle"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
@@ -356,16 +352,11 @@ export default function Landing() {
           <p>
             O Komorebi está em desenvolvimento.
             <br />
-            Acompanhe o que vem a seguir.
+            Entre na lista de espera para iPhone.
           </p>
-          <a
-            className="button button-orange"
-            href={PROJECT_URL}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Acompanhar o Komorebi <ArrowUpRight size={20} />
-          </a>
+          <Link className="button button-orange" href="/lista-de-espera">
+            Entrar na lista de espera <ArrowUpRight size={20} />
+          </Link>
         </section>
       </main>
       <footer>
@@ -385,6 +376,7 @@ export default function Landing() {
           <a href={PROJECT_URL} target="_blank" rel="noreferrer">
             <Code2 size={16} /> GitHub
           </a>
+          <Link href="/lista-de-espera">Lista de espera · iPhone</Link>
           <Link href="/docs">Documentação</Link>
           <Link href="/politica-de-privacidade">Privacidade</Link>
           <Link href="/termos-de-uso">Termos</Link>

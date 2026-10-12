@@ -16,6 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
     },
     {
+      url: absoluteUrl("/lista-de-espera"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/docs"),
       changeFrequency: "monthly",
       priority: 0.8,

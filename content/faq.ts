@@ -16,6 +16,6 @@ export const questions = [
   ],
   [
     "Onde posso baixar o app?",
-    "O Komorebi está em desenvolvimento ativo. Acompanhe as novidades e a disponibilidade pelo repositório oficial do projeto.",
+    "O Komorebi está em desenvolvimento ativo. A lista de espera é para iPhone: cadastre seu e-mail para receber o convite futuramente. O e-mail será usado somente para esse convite.",
   ],
 ] as const;

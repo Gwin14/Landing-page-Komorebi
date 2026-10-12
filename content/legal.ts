@@ -9,6 +9,15 @@ export const privacySections: LegalSection[] = [
     ],
   },
   {
+    id: "lista-de-espera",
+    title: "Lista de espera para iPhone",
+    paragraphs: [
+      "Ao cadastrar seu e-mail na lista de espera do site, você autoriza seu uso somente para enviar o convite para o Komorebi no iPhone futuramente. O cadastro solicita apenas o e-mail, armazenado como título de uma página na base privada de lista de espera do Notion. Ele não será usado para newsletter, publicidade ou outras mensagens.",
+      "O envio é processado pelo servidor hospedado na Vercel. O token de integração fica no servidor e não é exposto no formulário. Vercel e Notion podem tratar dados técnicos necessários para hospedar o site e processar a solicitação, conforme suas próprias políticas.",
+      "O e-mail será mantido enquanto necessário para enviar o convite ou até você solicitar sua exclusão pelos canais de contato abaixo. O cadastro não exige uma conta do aplicativo e não anuncia uma data de lançamento.",
+    ],
+  },
+  {
     title: "Dados processados no dispositivo",
     paragraphs: [
       "A maior parte do funcionamento acontece localmente. O app pode criar, ler ou armazenar fotos e arquivos de captura, o álbum Komorebi, metadados EXIF, preferências e LUTs personalizados.",
@@ -57,7 +66,7 @@ export const privacySections: LegalSection[] = [
       "Leaflet, OpenStreetMap e unpkg carregam scripts, estilos e mapas centrados nas coordenadas da foto.",
       "O gerador de EXIF Frame pode receber ou processar a imagem e metadados em WebView.",
       "Hugging Face fornece o download opcional do MiniCPM-V e recebe requisições e dados técnicos de rede; as imagens analisadas permanecem no aparelho.",
-      "Notion recebe somente as informações enviadas voluntariamente no formulário de feedback.",
+      "Notion recebe as informações enviadas voluntariamente no formulário de feedback e os e-mails cadastrados na lista de espera do site.",
       "Quando os diagnósticos estão ativados, Sentry recebe mensagens de erro, rastros de execução, versão do app e informações técnicas do dispositivo e das operações afetadas. O app não configura envio de fotos, RAW, LUTs ou GPS ao Sentry.",
       "Links externos passam a seguir as políticas do serviço acessado.",
     ],
