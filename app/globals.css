@@ -1779,6 +1779,67 @@ footer a:hover {
 .legal-document li + li {
   margin-top: 7px;
 }
+.docs-screenshots {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}
+.docs-screenshot {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #d5d1c5;
+  border-radius: 12px;
+  background: #faf8f1;
+}
+.docs-screenshot-image {
+  display: block;
+  overflow: hidden;
+  background: #000;
+}
+.docs-screenshot-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.docs-screenshot figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 16px;
+  padding: 16px 18px;
+  border-top: 1px solid #d5d1c5;
+  color: #64675e;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.docs-screenshot figcaption > span {
+  flex: 1 1 280px;
+}
+.docs-screenshot figcaption > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #765000;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.docs-screenshot-image:focus-visible {
+  outline-offset: -4px;
+}
+html[data-docs-theme="dark"] .docs-screenshot {
+  border-color: #ffffff22;
+  background: #1a1d18;
+}
+html[data-docs-theme="dark"] .docs-screenshot figcaption {
+  border-color: #ffffff19;
+  color: #a7aa9f;
+}
+html[data-docs-theme="dark"] .docs-screenshot figcaption > a {
+  color: #ffaa00;
+}
 .docs-edit-link {
   display: inline-flex;
   align-items: center;

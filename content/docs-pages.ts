@@ -7,6 +7,13 @@ export type DocsSection = {
   paragraphs?: string[];
   items?: string[];
   links?: { href: string; label: string }[];
+  images?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption: string;
+  }[];
 };
 
 export type DocsPage = {
@@ -86,6 +93,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "conheca-a-camera",
+        images: [
+          {
+            src: "/images/docs/controles-topbar.jpg",
+            width: 1206,
+            height: 1074,
+            alt: "Barra superior com atalhos para ajustes, HEIF, proporção 4:3, configurações, captura, Live Photo, filtros e abertura.",
+            caption: "Os atalhos da TopBar ficam acima do preview; a ordem e os controles exibidos são configuráveis.",
+          },
+        ],
         title: "Conheça a câmera",
         paragraphs: [
           "O preview ocupa a área principal. A TopBar reúne atalhos configuráveis; os controles inferiores concentram obturador, galeria, troca de câmera, lentes e ajustes contextuais. Nível e histograma podem ser ativados nas configurações.",
@@ -127,6 +143,15 @@ export const docsPages: DocsPage[] = [
       },
       {
         id: "auxilios-de-enquadramento",
+        images: [
+          {
+            src: "/images/docs/histograma.jpg",
+            width: 999,
+            height: 1263,
+            alt: "Histograma LUMA LIVE no canto superior direito do preview, com grade e nível visíveis.",
+            caption: "Histograma de luminosidade em tempo real, acompanhado da grade e do nível.",
+          },
+        ],
         title: "Ative grade, nível e histograma",
         paragraphs: [
           "Grade, nível do aparelho e histograma em tempo real são auxílios visuais opcionais. Ative cada um em Configurações; eles não são gravados na foto.",
@@ -216,6 +241,15 @@ export const docsPages: DocsPage[] = [
       },
       {
         id: "timer-e-gestos",
+        images: [
+          {
+            src: "/images/docs/timer.jpg",
+            width: 1206,
+            height: 1087,
+            alt: "Menu Timer com Desligado selecionado e opções de 3 seg e 10 seg.",
+            caption: "O Timer da TopBar oferece disparo imediato ou contagem de 3 e 10 segundos.",
+          },
+        ],
         title: "Timer, gestos e atalhos",
         badge: "Novo",
         paragraphs: [
@@ -255,6 +289,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "luts",
+        images: [
+          {
+            src: "/images/docs/luts.jpg",
+            width: 1205,
+            height: 1053,
+            alt: "Aba Filtros com Desligado selecionado e LUTs Guaraná, Maracujá e Mirtilo.",
+            caption: "Escolha um LUT na aba Filtros. Na captura, Desligado mantém a foto sem LUT.",
+          },
+        ],
         title: "LUTs incluídos",
         paragraphs: [
           "O catálogo inclui Guaraná, Maracujá, Mirtilo, Pitaia, Damasco, Cinema, Ameixa e Banana. O efeito é aplicado no processamento da captura e pode ser registrado nos metadados próprios do Komorebi.",
@@ -284,6 +327,22 @@ export const docsPages: DocsPage[] = [
       },
       {
         id: "grao-halation",
+        images: [
+          {
+            src: "/images/docs/grao.jpg",
+            width: 1206,
+            height: 1152,
+            alt: "Aba Grão com as opções Desligado, Suave, Médio e Forte; Médio está selecionado.",
+            caption: "A aba Grão permite escolher a intensidade da textura; aqui, Médio está ativo.",
+          },
+          {
+            src: "/images/docs/halation.jpg",
+            width: 1206,
+            height: 1022,
+            alt: "Aba Halation com Desligado selecionado e opções Suave, Médio e Forte.",
+            caption: "A intensidade do halation é escolhida separadamente do grão e dos filtros.",
+          },
+        ],
         links: [{href: "/docs/pipeline-de-imagem", label: "Entenda o processamento e as cópias"}],
         title: "Aplique grão e halation",
         badge: "Novo",
@@ -414,6 +473,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "preview",
+        images: [
+          {
+            src: "/images/docs/estilo-retro.jpg",
+            width: 1206,
+            height: 1403,
+            alt: "Controles inferiores com seletor EV e ISO, escala de exposição, obturador amarelo e lentes de 0.5 a 8.",
+            caption: "Detalhe do viewfinder com estilo retrô: escala de exposição e controles de captura.",
+          },
+        ],
         title: "Preview e auxílio",
         items: [
           "Estilo retrô: altera a apresentação do viewfinder.",
@@ -560,6 +628,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "exposicao",
+        images: [
+          {
+            src: "/images/docs/controles-manuais.jpg",
+            width: 1206,
+            height: 1090,
+            alt: "Painel inferior com ISO, SS e WB; SS selecionado, escala marcada AUTO e lente 4 ativa.",
+            caption: "No painel manual, SS seleciona a velocidade do obturador; AUTO indica o ajuste automático.",
+          },
+        ],
         title: "ISO, obturador e compensação",
         paragraphs: [
           "ISO amplifica o sinal: valores maiores ajudam em pouca luz, mas podem aumentar ruído. Um obturador mais lento coleta luz por mais tempo e aumenta o risco de tremido e borrão de movimento. Um obturador rápido ajuda a congelar o assunto, exigindo mais luz ou ISO.",
@@ -619,6 +696,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "escolher",
+        images: [
+          {
+            src: "/images/docs/formatos-de-arquivo.jpg",
+            width: 1206,
+            height: 1244,
+            alt: "Menu Formato de arquivo com RAW Nenhum, ProRAW e RAW Bayer, e foto processada Nenhuma, HEIF, HEIF+ e JPEG; HEIF está selecionado.",
+            caption: "O seletor separa RAW e foto processada. Neste exemplo, somente a saída HEIF está ativa.",
+          },
+        ],
         title: "Escolha o formato e as saídas",
         paragraphs: [
           "Em Configurações → Captura, escolha HEIF, HEIF+ ou JPEG para a foto processada. Na TopBar, Formato de arquivo permite selecionar RAW, foto processada ou os dois. Se o atalho não aparecer, inclua-o na configuração da TopBar.",
@@ -767,6 +853,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "modos",
+        images: [
+          {
+            src: "/images/docs/image-stacking.jpg",
+            width: 1006,
+            height: 1418,
+            alt: "Menu Modo de captura com Desligado selecionado e opções Bulb, Motion Blur, Focus Bracketing e Dupla exposição.",
+            caption: "O menu de captura reúne os modos de Image Stacking e Focus Bracketing, conforme o suporte da lente.",
+          },
+        ],
         title: "Modos disponíveis",
         paragraphs: [
           "Abra Image Stacking na TopBar. O seletor atual oferece Bulb, Motion Blur, Dupla exposição e Focus Bracketing quando a lente anuncia suporte. Estratégias experimentais descritas em notas técnicas, como Night ou redução de ruído, não aparecem no seletor atual.",

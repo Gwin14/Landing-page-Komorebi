@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { DocsPage } from "@/content/docs-pages";
 import {
@@ -70,6 +71,36 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
+            )}
+            {section.images && (
+              <div className="docs-screenshots">
+                {section.images.map((screenshot) => (
+                  <figure className="docs-screenshot" key={screenshot.src}>
+                    <a
+                      className="docs-screenshot-image"
+                      href={screenshot.src}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Ampliar imagem: ${screenshot.alt} (abre em nova aba)`}
+                    >
+                      <Image
+                        src={screenshot.src}
+                        width={screenshot.width}
+                        height={screenshot.height}
+                        alt={screenshot.alt}
+                        loading="lazy"
+                      />
+                    </a>
+                    <figcaption>
+                      <span>{screenshot.caption}</span>
+                      <a href={screenshot.src} target="_blank" rel="noreferrer">
+                        Ampliar<span className="sr-only"> imagem: {screenshot.alt} (abre em nova aba)</span>
+                        <ExternalLink size={13} aria-hidden="true" />
+                      </a>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
             )}
             {section.links && (
               <div className="docs-section-links">
