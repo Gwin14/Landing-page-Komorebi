@@ -38,11 +38,11 @@ test("a matriz usa identificadores únicos e registra fontes", () => {
 
 test("as páginas legais públicas estão presentes", async () => {
   const privacy = await readFile(
-    new URL("../app/politica-de-privacidade/page.tsx", import.meta.url),
+    new URL("../app/[locale]/politica-de-privacidade/page.tsx", import.meta.url),
     "utf8",
   );
   const terms = await readFile(
-    new URL("../app/termos-de-uso/page.tsx", import.meta.url),
+    new URL("../app/[locale]/termos-de-uso/page.tsx", import.meta.url),
     "utf8",
   );
   assert.match(privacy, /privacySections/);

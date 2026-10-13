@@ -1,3 +1,5 @@
+import { getTranslator, translateContent } from "@/lib/i18n/translate";
+import { localizedPath, type Locale } from "@/lib/i18n/routing";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
@@ -10,17 +12,20 @@ import { getDocsNeighbors } from "@/lib/docs-navigation";
 import CompatibilityTable from "./CompatibilityTable";
 import DocsSidebar from "./DocsSidebar";
 
-export default function DocsPageShell({ page }: { page: DocsPage }) {
+export default function DocsPageShell({ page: sourcePage, locale }: { page: DocsPage; locale: Locale }) {
+  const t = getTranslator(locale);
+  const path = (href: string) => localizedPath(href, locale);
+  const page = translateContent(sourcePage, t);
   const { previous, next } = getDocsNeighbors(page.slug);
 
   return (
     <div className="docs-grid">
-      <DocsSidebar currentSlug={page.slug} />
+      <DocsSidebar currentSlug={page.slug} locale={locale} />
       <article className="docs-article" id="conteudo">
-        <nav className="docs-breadcrumbs" aria-label="Navegação estrutural">
-          <Link href="/">Início</Link>
+        <nav className="docs-breadcrumbs" aria-label={t("Navegação estrutural")}>
+          <Link href={path("/")}>{t("Início")}</Link>
           <span aria-hidden="true">/</span>
-          <Link href="/docs">Documentação</Link>
+          <Link href={path("/docs")}>{t("Documentação")}</Link>
           <span aria-hidden="true">/</span>
           <span>{page.title}</span>
         </nav>
@@ -30,23 +35,23 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
           <p>{page.description}</p>
           <div className="docs-meta">
             <span className={`status status-${page.status}`}>
-              {statusLabels[page.status]}
+              {t(statusLabels[page.status])}
             </span>
-            <span>Revisado em {APP_VERIFIED_DATE}</span>
+            <span>{t("Revisado em")} {t(APP_VERIFIED_DATE)}</span>
           </div>
         </header>
         <section
           className="docs-prerequisites"
           aria-labelledby="pre-requisitos"
         >
-          <h2 id="pre-requisitos">Pré requisitos</h2>
+          <h2 id="pre-requisitos">{t("Pré requisitos")}</h2>
           <ul>
             {page.prerequisites.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
-        {page.slug === "compatibilidade" && <CompatibilityTable />}
+        {page.slug === "compatibilidade" && <CompatibilityTable locale={locale} />}
         {page.sections.map((section) => (
           <section
             className="docs-section"
@@ -75,10 +80,10 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
                   <figure className="docs-screenshot" key={screenshot.src}>
                     <a
                       className="docs-screenshot-image"
-                      href={screenshot.src}
+                      href={path(screenshot.src)}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={`Ampliar imagem: ${screenshot.alt} (abre em nova aba)`}
+                      aria-label={t("Ampliar imagem: {alt} (abre em nova aba)").replace("{alt}", screenshot.alt)}
                     >
                       <Image
                         src={screenshot.src}
@@ -90,8 +95,7 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
                     </a>
                     <figcaption>
                       <span>{screenshot.caption}</span>
-                      <a href={screenshot.src} target="_blank" rel="noreferrer">
-                        Ampliar<span className="sr-only"> imagem: {screenshot.alt} (abre em nova aba)</span>
+                      <a href={path(screenshot.src)} target="_blank" rel="noreferrer">{t("Ampliar")}<span className="sr-only"> {t("imagem:")} {screenshot.alt} {t("(abre em nova aba)")}</span>
                         <ExternalLink size={13} aria-hidden="true" />
                       </a>
                     </figcaption>
@@ -102,41 +106,41 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
             {section.links && (
               <div className="docs-section-links">
                 {section.links.map((link) => (
-                  <Link key={link.href} href={link.href}>{link.label}</Link>
+                  <Link key={link.href} href={path(link.href)}>{link.label}</Link>
                 ))}
               </div>
             )}
           </section>
         ))}
-        <nav className="docs-pagination" aria-label="Páginas relacionadas">
+        <nav className="docs-pagination" aria-label={t("Páginas relacionadas")}>
           {previous ? (
-            <Link href={`/docs/${previous.slug}`}>
+            <Link href={path(`/docs/${previous.slug}`)}>
               <ArrowLeft size={17} />
               <span>
-                <small>Anterior</small>
-                {previous.title}
+                <small>{t("Anterior")}</small>
+                {t(previous.title)}
               </span>
             </Link>
           ) : (
             <span />
           )}
           {next && (
-            <Link href={`/docs/${next.slug}`}>
+            <Link href={path(`/docs/${next.slug}`)}>
               <span>
-                <small>Próximo</small>
-                {next.title}
+                <small>{t("Próximo")}</small>
+                {t(next.title)}
               </span>
               <ArrowRight size={17} />
             </Link>
           )}
         </nav>
       </article>
-      <aside className="docs-toc" aria-label="Nesta página">
-        <h2>Nesta página</h2>
-        <a href="#pre-requisitos">Pré requisitos</a>
-        {page.slug === "compatibilidade" && <a href="#matriz">Matriz</a>}
+      <aside className="docs-toc" aria-label={t("Nesta página")}>
+        <h2>{t("Nesta página")}</h2>
+        <a href="#pre-requisitos">{t("Pré requisitos")}</a>
+        {page.slug === "compatibilidade" && <a href="#matriz">{t("Matriz")}</a>}
         {page.sections.map((section) => (
-          <a key={section.id} href={`#${section.id}`}>
+          <a key={section.id} href={path(`#${section.id}`)}>
             <span>{section.title}</span>
             {section.badge ? <small>{section.badge}</small> : null}
           </a>

@@ -1,3 +1,6 @@
+import { getTranslator, translateContent } from "@/lib/i18n/translate";
+import { localizedPath, languageTag } from "@/lib/i18n/routing";
+import { pageMetadata, resolveLocale, type LocaleRouteProps } from "@/lib/i18n/metadata";
 import type { Metadata } from "next";
 import Landing from "@/components/Landing";
 import { questions } from "@/content/faq";
@@ -8,11 +11,11 @@ import {
 } from "@/lib/site";
 import { absoluteUrl } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: SITE_TITLE },
-  alternates: { canonical: "/", languages: { "pt-BR": "/", "x-default": "/" } },
-  openGraph: { title: SITE_TITLE, description: SITE_DESCRIPTION, url: "/" },
-};
+export async function generateMetadata({ params }: LocaleRouteProps): Promise<Metadata> {
+  const locale = await resolveLocale(params);
+  const t = getTranslator(locale);
+  return { ...pageMetadata(locale, "/", t(SITE_TITLE), t(SITE_DESCRIPTION)), title: { absolute: t(SITE_TITLE) } };
+}
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -58,13 +61,21 @@ const jsonLd = {
   ],
 };
 
-export default function Page() {
+export default async function Page({ params }: LocaleRouteProps) {
+  const locale = await resolveLocale(params);
+  const t = getTranslator(locale);
+  const localizedJsonLd = translateContent(jsonLd, t);
+  for (const entity of localizedJsonLd["@graph"]) {
+    entity.inLanguage = languageTag[locale];
+    if ("url" in entity) entity.url = absoluteUrl(localizedPath("/", locale));
+    entity["@id"] = entity["@id"].replace(absoluteUrl(), absoluteUrl(localizedPath("/", locale)));
+  }
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(localizedJsonLd).replace(/</g, "\\u003c"),
         }}
       />
       <Landing />

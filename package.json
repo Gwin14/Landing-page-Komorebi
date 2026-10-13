@@ -11,7 +11,8 @@
     "test:waitlist": "node --test tests/waitlist.test.mjs",
     "test:waitlist:live": "node scripts/check-waitlist-notion.mjs",
     "check:links": "node scripts/check-links.mjs",
-    "check:komorebi-drift": "node scripts/check-komorebi-drift.mjs"
+    "check:komorebi-drift": "node scripts/check-komorebi-drift.mjs",
+    "test:i18n": "node --test tests/i18n.test.mjs"
   },
   "dependencies": {
     "next": "16.3.5",

@@ -1,50 +1,23 @@
 "use client";
+import { useI18n } from "@/components/LocaleProvider";
 
 import Link from "next/link";
 import { Search, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
-import { getDocsPage } from "@/content/docs-pages";
-import { docsNavigation } from "@/lib/docs-navigation";
+import type { SearchEntry } from "@/lib/i18n/search";
 
-const searchEntries = docsNavigation.flatMap((item) => {
-  const page = getDocsPage(item.slug);
-  const pageEntry = {
-    id: item.slug,
-    title: item.title,
-    summary: item.summary,
-    href: `/docs/${item.slug}`,
-    searchText: [item.title, item.summary, item.group, ...item.keywords].join(
-      " ",
-    ),
-  };
-  const sectionEntries =
-    page?.sections.map((section) => ({
-      id: `${item.slug}-${section.id}`,
-      title: section.title,
-      summary: item.title,
-      href: `/docs/${item.slug}#${section.id}`,
-      searchText: [
-        section.title,
-        section.badge ?? "",
-        ...(section.paragraphs ?? []),
-        ...(section.items ?? []),
-      ].join(" "),
-    })) ?? [];
-
-  return [pageEntry, ...sectionEntries];
-});
-
-export default function DocsSearch() {
+export default function DocsSearch({ entries }: { entries: SearchEntry[] }) {
+  const { t, path, locale } = useI18n();
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(false);
   const inputId = useId();
   const containerRef = useRef<HTMLDivElement>(null);
-  const normalized = query.trim().toLocaleLowerCase("pt-BR");
+  const normalized = query.trim().toLocaleLowerCase(locale);
   const results = normalized
-    ? searchEntries
+    ? entries
         .filter((item) =>
           item.searchText
-          .toLocaleLowerCase("pt-BR")
+          .toLocaleLowerCase(locale)
           .includes(normalized),
         )
         .slice(0, 8)
@@ -61,15 +34,13 @@ export default function DocsSearch() {
 
   return (
     <div className="docs-search" ref={containerRef}>
-      <label htmlFor={inputId} className="sr-only">
-        Buscar na documentação
-      </label>
+      <label htmlFor={inputId} className="sr-only">{t("Buscar na documentação")} </label>
       <Search size={17} aria-hidden="true" />
       <input
         id={inputId}
         type="search"
         value={query}
-        placeholder="Buscar na documentação"
+        placeholder={t("Buscar na documentação")}
         autoComplete="off"
         onFocus={() => setActive(true)}
         onChange={(event) => {
@@ -80,7 +51,7 @@ export default function DocsSearch() {
       {query && (
         <button
           type="button"
-          aria-label="Limpar busca"
+          aria-label={t("Limpar busca")}
           onClick={() => setQuery("")}
         >
           <X size={16} />
@@ -90,13 +61,13 @@ export default function DocsSearch() {
         <div
           className="docs-search-results"
           role="listbox"
-          aria-label="Resultados da busca"
+          aria-label={t("Resultados da busca")}
         >
           {results.length ? (
             results.map((item) => (
               <Link
                 key={item.id}
-                href={item.href}
+                href={path(item.href)}
                 onClick={() => {
                   setActive(false);
                   setQuery("");
@@ -107,7 +78,7 @@ export default function DocsSearch() {
               </Link>
             ))
           ) : (
-            <p>Nenhuma página encontrada.</p>
+            <p>{t("Nenhuma página encontrada.")}</p>
           )}
         </div>
       )}

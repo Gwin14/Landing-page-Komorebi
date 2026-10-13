@@ -1,10 +1,12 @@
 "use client";
+import { useI18n } from "@/components/LocaleProvider";
 import { useEffect, useRef, useState } from "react";
 import NextImage from "next/image";
 import { ArrowLeftRight, ArrowUpRight } from "lucide-react";
 import { filters } from "@/lib/site";
 import { applyLut, parseCube } from "@/lib/lut";
 export default function ColorLab() {
+  const { t } = useI18n();
   const [active, setActive] = useState("guarana");
   const [split, setSplit] = useState(48);
   const [status, setStatus] = useState("Preparando a prévia…");
@@ -42,7 +44,7 @@ export default function ColorLab() {
           const response = await fetch(`/luts/${active}.cube`, {
             signal: abort.signal,
           });
-          if (!response.ok) throw new Error("LUT indisponível");
+          if (!response.ok) throw new Error("LUT unavailable");
           const lut = parseCube(await response.text());
           if (cancelled) return;
           cache.current.set(active, applyLut(original.current, lut));
@@ -75,7 +77,7 @@ export default function ColorLab() {
           width={2400}
           height={1602}
           src="/images/forest.jpg"
-          alt="Luz do sol atravessando uma floresta, usada para comparar os LUTs"
+          alt={t("Luz do sol atravessando uma floresta, usada para comparar os LUTs")}
         />
         <canvas
           width={1100}
@@ -88,7 +90,7 @@ export default function ColorLab() {
           height={640}
           ref={canvas}
           style={{ clipPath: `inset(0 0 0 ${split}%)` }}
-          aria-label={`Fotografia com o LUT ${filter.name}`}
+          aria-label={t("Fotografia com o LUT {name}").replace("{name}", filter.name)}
         />
         <span className="image-label original-label">ORIGINAL</span>
         <span className="image-label filtered-label">
@@ -105,18 +107,18 @@ export default function ColorLab() {
           max="100"
           value={split}
           onChange={(e) => setSplit(Number(e.target.value))}
-          aria-label="Comparar foto original e foto com LUT"
-          aria-valuetext={`${split}% original, ${100 - split}% com ${filter.name}`}
+          aria-label={t("Comparar foto original e foto com LUT")}
+          aria-valuetext={t("{original}% original, {filtered}% com {name}").replace("{original}", String(split)).replace("{filtered}", String(100 - split)).replace("{name}", filter.name)}
         />
         <div className="compare-caption">
-          <span>ARRASTE PARA SENTIR A DIFERENÇA</span>
-          <span>01 / LUZ ENTRE FOLHAS</span>
+          <span>{t("ARRASTE PARA SENTIR A DIFERENÇA")}</span>
+          <span>{t("01 / LUZ ENTRE FOLHAS")}</span>
         </div>
         <div className="lut-status" role="status">
-          {status}
+          {t(status)}
         </div>
       </div>
-      <div className="filter-options" role="group" aria-label="Escolha um LUT">
+      <div className="filter-options" role="group" aria-label={t("Escolha um LUT")}>
         {filters.map((f) => (
           <button
             key={f.id}
@@ -130,9 +132,8 @@ export default function ColorLab() {
         ))}
       </div>
       <div className="lab-footer">
-        <p>{filter.description}</p>
-        <span>
-          LUTs reais do app · prévia no navegador <ArrowUpRight size={15} />
+        <p>{t(filter.description)}</p>
+        <span>{t("LUTs reais do app · prévia no navegador")} <ArrowUpRight size={15} />
         </span>
       </div>
     </div>

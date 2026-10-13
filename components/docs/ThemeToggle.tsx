@@ -1,4 +1,5 @@
 "use client";
+import { useI18n } from "@/components/LocaleProvider";
 
 import { SunMoon } from "lucide-react";
 import { useEffect, useRef } from "react";
@@ -16,6 +17,7 @@ function applyTheme(preference: ThemePreference) {
 }
 
 export default function ThemeToggle() {
+  const { t } = useI18n();
   const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
@@ -37,9 +39,9 @@ export default function ThemeToggle() {
   return (
     <label className="theme-toggle">
       <SunMoon size={16} aria-hidden="true" />
-      <span className="sr-only">Tema da documentação</span>
+      <span className="sr-only">{t("Tema da documentação")}</span>
       <select
-        aria-label="Tema da documentação"
+        aria-label={t("Tema da documentação")}
         ref={selectRef}
         defaultValue="auto"
         onChange={(event) => {
@@ -49,9 +51,9 @@ export default function ThemeToggle() {
           applyTheme(next);
         }}
       >
-        <option value="auto">Automático</option>
-        <option value="dark">Escuro</option>
-        <option value="light">Claro</option>
+        <option value="auto">{t("Automático")}</option>
+        <option value="dark">{t("Escuro")}</option>
+        <option value="light">{t("Claro")}</option>
       </select>
     </label>
   );

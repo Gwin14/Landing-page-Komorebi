@@ -1,3 +1,6 @@
+import { getTranslator } from "@/lib/i18n/translate";
+import { localizedPath } from "@/lib/i18n/routing";
+import { resolveLocale, type LocaleRouteProps } from "@/lib/i18n/metadata";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Camera, Palette } from "lucide-react";
 import DocsSidebar from "@/components/docs/DocsSidebar";
@@ -31,56 +34,51 @@ const paths = [
   },
 ];
 
-export default function DocsOverviewPage() {
+export default async function DocsOverviewPage({ params }: LocaleRouteProps) {
+  const locale = await resolveLocale(params);
+  const t = getTranslator(locale);
+  const path = (href: string) => localizedPath(href, locale);
   return (
     <div className="docs-grid docs-grid-overview">
-      <DocsSidebar />
+      <DocsSidebar locale={locale} />
       <main className="docs-overview" id="conteudo">
         <div className="docs-overview-hero">
-          <p className="docs-kicker">Documentação oficial</p>
-          <h1>Fotografe com intenção e saiba o que cada recurso exige.</h1>
-          <p>
-            O Komorebi reúne controles de câmera, cores autorais e organização
-            local. Navegue por tópicos para encontrar instruções de uso,
-            recursos novos e limites por aparelho.
-          </p>
+          <p className="docs-kicker">{t("Documentação oficial")}</p>
+          <h1>{t("Fotografe com intenção e saiba o que cada recurso exige.")}</h1>
+          <p>{t("O Komorebi reúne controles de câmera, cores autorais e organização local. Navegue por tópicos para encontrar instruções de uso, recursos novos e limites por aparelho.")} </p>
           <div className="docs-meta">
-            <span>Revisado em {APP_VERIFIED_DATE}</span>
+            <span>{t("Revisado em")} {t(APP_VERIFIED_DATE)}</span>
           </div>
         </div>
         <section className="docs-paths" aria-labelledby="caminhos-rapidos">
-          <h2 id="caminhos-rapidos">Caminhos rápidos</h2>
+          <h2 id="caminhos-rapidos">{t("Caminhos rápidos")}</h2>
           <div>
             {paths.map(({ title, text, href, icon: Icon }) => (
-              <Link href={href} key={href}>
+              <Link href={path(href)} key={href}>
                 <Icon size={21} />
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <span>
-                  Ver guia <ArrowRight size={15} />
+                <h3>{t(title)}</h3>
+                <p>{t(text)}</p>
+                <span>{t("Ver guia")} <ArrowRight size={15} />
                 </span>
               </Link>
             ))}
           </div>
         </section>
         <section className="docs-index" aria-labelledby="todas-as-paginas">
-          <h2 id="todas-as-paginas">Todas as páginas</h2>
+          <h2 id="todas-as-paginas">{t("Todas as páginas")}</h2>
           {docsNavigation.map((item) => (
-            <Link href={`/docs/${item.slug}`} key={item.slug}>
+            <Link href={path(`/docs/${item.slug}`)} key={item.slug}>
               <span>
-                <strong>{item.title}</strong>
-                <small>{item.group}</small>
+                <strong>{t(item.title)}</strong>
+                <small>{t(item.group)}</small>
               </span>
-              <p>{item.summary}</p>
+              <p>{t(item.summary)}</p>
               <ArrowRight size={17} />
             </Link>
           ))}
         </section>
         <p className="docs-note">
-          <strong>Disponibilidade:</strong> recursos podem variar por aparelho,
-          lente, plataforma e permissões. Consulte a matriz de compatibilidade
-          antes de depender de um modo avançado.
-        </p>
+          <strong>{t("Disponibilidade:")}</strong> {t("recursos podem variar por aparelho, lente, plataforma e permissões. Consulte a matriz de compatibilidade antes de depender de um modo avançado.")} </p>
       </main>
     </div>
   );

@@ -2525,3 +2525,74 @@ html[data-docs-theme="dark"] .docs-sidebar-group summary:hover {
   .waitlist-submit { transition: none; }
   .waitlist-submit:active:not(:disabled) { transform: none; }
 }
+
+/* Language selection stays available on every page and at mobile widths. */
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding-left: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.language-switcher select {
+  min-height: 40px;
+  min-width: 90px;
+  padding: 0 6px 0 0;
+  border: 0;
+  border-radius: inherit;
+  background: inherit;
+  color: inherit;
+  font: 600 12px var(--font);
+  cursor: pointer;
+}
+.language-switcher:focus-within { outline: 2px solid var(--orange); outline-offset: 3px; }
+.docs-site .language-switcher,
+.legal-site .language-switcher { border-color: #cfccc1; background: #fffefa; color: #5e6157; }
+html[data-docs-theme="dark"] .language-switcher { border-color: #ffffff26; background: #242720; color: #e5e5da; }
+.header { gap: 16px; }
+.nav { gap: clamp(14px, 2vw, 28px); }
+.header-cta { white-space: nowrap; }
+@media (min-width: 761px) and (max-width: 1200px) {
+  .header > .header-cta { display: none; }
+}
+@media (max-width: 760px) {
+  .header { gap: 8px; }
+  .header > .language-switcher { margin-left: auto; }
+  .header > .header-cta { display: none; }
+  .language-switcher { gap: 4px; padding-left: 8px; }
+  .language-switcher select { min-width: 80px; font-size: 11px; }
+  .docs-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    gap: 8px;
+    padding: 10px 4%;
+  }
+  .docs-header-actions { display: contents; }
+  .docs-header .docs-brand { font-size: 18px; gap: 6px; }
+  .docs-header .language-switcher > svg { display: none; }
+  .docs-header .docs-search { order: 1; grid-column: 1 / -1; width: 100%; }
+  .docs-mobile-nav { top: 100%; }
+  .legal-header { gap: 12px; flex-wrap: wrap; }
+  .legal-header-actions { flex-wrap: wrap; gap: 8px; }
+  .waitlist-back { display: none; }
+}
+@media (max-width: 760px) {
+  .docs-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    gap: 8px;
+    padding-inline: 4%;
+  }
+  .docs-header-actions { display: contents; }
+  .docs-header .docs-brand { font-size: 18px; gap: 6px; }
+  .docs-header .language-switcher > svg { display: none; }
+  .docs-header .docs-search { grid-column: 1 / -1; }
+}
+@media (max-width: 359px) {
+  .docs-header .docs-brand .brand-icon { display: none; }
+}

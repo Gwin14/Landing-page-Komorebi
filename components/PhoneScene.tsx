@@ -1,4 +1,5 @@
 "use client";
+import { useI18n } from "./LocaleProvider";
 import { useEffect, useRef, useState } from "react";
 import NextImage from "next/image";
 import BrandIcon from "./BrandIcon";
@@ -107,6 +108,7 @@ async function screenTexture() {
 }
 
 export default function PhoneScene() {
+  const { t } = useI18n();
   const host = useRef<HTMLDivElement>(null);
   const desiredRotation = useRef(0);
   const pausedRef = useRef(false);
@@ -340,12 +342,12 @@ export default function PhoneScene() {
         ref={host}
         className="webgl-host"
         role="img"
-        aria-label="Modelo 3D interativo do iPhone com uma prévia ilustrativa do Komorebi"
+        aria-label={t("Modelo 3D interativo do iPhone com uma prévia ilustrativa do Komorebi")}
       />
       {status === "loading" && (
         <div className="scene-loading">
           <BrandIcon size={36} />
-          <span>Revelando os detalhes…</span>
+          <span>{t("Revelando os detalhes…")}</span>
         </div>
       )}
       {status === "error" && (
@@ -354,9 +356,9 @@ export default function PhoneScene() {
             src="/images/app-preview.png"
             width={1920}
             height={1080}
-            alt="Prévia do aplicativo Komorebi"
+            alt={t("Prévia do aplicativo Komorebi")}
           />
-          <span>Prévia do Komorebi</span>
+          <span>{t("Prévia do Komorebi")}</span>
         </div>
       )}
       {status === "ready" && (
@@ -365,13 +367,13 @@ export default function PhoneScene() {
             onClick={() => {
               desiredRotation.current += Math.PI;
             }}
-            aria-label="Girar iPhone 180 graus"
+            aria-label={t("Girar iPhone 180 graus")}
           >
             <Rotate3D size={16} />
-            <span>Gire para explorar</span>
+            <span>{t("Gire para explorar")}</span>
           </button>
           <button
-            aria-label={paused ? "Retomar animação" : "Pausar animação"}
+            aria-label={paused ? t("Retomar animação") : t("Pausar animação")}
             aria-pressed={paused}
             onClick={() => {
               pausedRef.current = !paused;
@@ -382,7 +384,7 @@ export default function PhoneScene() {
           </button>
         </div>
       )}
-      <span className="screen-disclaimer">TELA ILUSTRATIVA</span>
+      <span className="screen-disclaimer">{t("TELA ILUSTRATIVA")}</span>
     </div>
   );
 }

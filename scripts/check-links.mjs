@@ -41,6 +41,7 @@ for (const file of htmlFiles) {
           path.join(publicRoot, clean),
           path.join(root, clean),
           path.join(root, `${clean}.html`),
+          path.join(root, `${clean}.body`),
           path.join(root, clean, "index.html"),
         ]
       : [path.join(root, "index.html")];

@@ -1,3 +1,7 @@
+import { notFound } from "next/navigation";
+import LocaleProvider from "@/components/LocaleProvider";
+import { getTranslator, getUiMessages } from "@/lib/i18n/translate";
+import { isLocale, languageTag, locales } from "@/lib/i18n/routing";
 import type { Metadata, Viewport } from "next";
 import {
   SITE_DESCRIPTION,
@@ -5,12 +9,16 @@ import {
   SITE_TITLE,
 } from "@/lib/site";
 import { SITE_URL } from "@/lib/seo";
-import "./globals.css";
+import "../globals.css";
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const t = getTranslator(locale);
+  return {
   metadataBase: SITE_URL,
-  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
-  description: SITE_DESCRIPTION,
+  title: { default: t(SITE_TITLE), template: `%s | ${SITE_NAME}` },
+  description: t(SITE_DESCRIPTION),
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -27,21 +35,22 @@ export const metadata: Metadata = {
     "Live Photo",
     "iOS",
     "Android",
-  ],
+  ].map(t),
   referrer: "origin-when-cross-origin",
-  manifest: "/manifest.webmanifest",
+  manifest: `/${locale}/manifest.webmanifest`,
   formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
+    title: t(SITE_TITLE),
+    description: t(SITE_DESCRIPTION),
     siteName: SITE_NAME,
-    locale: "pt_BR",
+    locale: locale === "pt" ? "pt_BR" : "en",
+    alternateLocale: locale === "pt" ? "en" : "pt_BR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
+    title: t(SITE_TITLE),
+    description: t(SITE_DESCRIPTION),
   },
   robots: {
     index: true,
@@ -55,7 +64,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-};
+  };
+}
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
@@ -67,11 +77,17 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({
+  children, params,
+}: Readonly<{ children: React.ReactNode }> & { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang={languageTag[locale]} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -83,7 +99,7 @@ export default function RootLayout({
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
-        {children}
+        <LocaleProvider locale={locale} messages={getUiMessages(locale)}>{children}</LocaleProvider>
       </body>
     </html>
   );

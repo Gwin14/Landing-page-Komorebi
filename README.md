@@ -88,3 +88,15 @@ npm run check:links
 ```
 
 `npm run test:waitlist:live` é uma verificação explícita com o token do ambiente: cria um e-mail sintético em `example.com`, testa a rota real e a consulta de duplicatas e arquiva a página sintética ao finalizar. Não executa automaticamente no build normal nem envia mensagens.
+
+## Idiomas
+
+O site inteiro está disponível em português (`/pt`) e inglês (`/en`), incluindo documentação, busca, formulário, páginas legais, metadados e imagens de compartilhamento. Links antigos sem prefixo continuam funcionando: `proxy.ts` redireciona conforme a preferência salva ou o primeiro idioma preferido no cabeçalho `Accept-Language`. Variantes como `pt-BR` e `pt-PT` usam português; qualquer outro idioma, ou ausência do cabeçalho, usa inglês.
+
+O seletor de idioma aparece em todas as páginas, preserva a página atual, os parâmetros e a âncora e salva a escolha no cookie `komorebi-locale` por um ano. A URL explícita tem prioridade; a preferência salva prevalece sobre o navegador nos acessos sem prefixo. A detecção acontece no servidor, antes da renderização, mantendo as páginas pré-renderizadas.
+
+Os textos em português permanecem nos componentes e arquivos de conteúdo. `content/i18n/en.json` contém as traduções correspondentes; as chaves são os textos originais. Ao mudar um texto em português, atualize sua chave e tradução. `content/i18n/ui-keys.json` seleciona os textos enviados aos componentes de cliente; textos de guias e páginas legais são traduzidos somente no servidor. A busca recebe o índice traduzido no idioma atual.
+
+```bash
+npm run test:i18n
+```
