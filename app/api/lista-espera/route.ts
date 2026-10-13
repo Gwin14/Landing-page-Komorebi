@@ -8,7 +8,11 @@ const failure = (error: string, status: number) => Response.json({ ok: false, er
 
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
-  if (origin && origin !== new URL(request.url).origin) {
+  // Browsers supply this immutable header using the public URL, even when
+  // a reverse proxy gives the server an internal hostname or protocol.
+  const fetchSite = request.headers.get("sec-fetch-site");
+  if ((fetchSite && fetchSite !== "same-origin") ||
+    (!fetchSite && origin && origin !== new URL(request.url).origin)) {
     return failure("Não foi possível enviar este formulário.", 403);
   }
   if (request.headers.get("content-type")?.split(";")[0].trim() !== "application/json") {

@@ -41,8 +41,12 @@ export default function WaitlistForm() {
       <div aria-live="polite" aria-atomic="true">
         {state === "success" && (
           <div className="waitlist-success" role="status">
-            <span className="waitlist-success-icon"><Check size={27} /></span>
-            <h2>Você está na lista.</h2>
+            <div className="waitlist-reward" aria-hidden="true">
+              <span className="waitlist-reward-ring" />
+              {Array.from({ length: 6 }, (_, index) => <i key={index} style={{ transform: `rotate(${index * 60}deg)` }}><span /></i>)}
+              <span className="waitlist-success-icon"><Check size={27} /></span>
+            </div>
+            <h1>Você está na lista.</h1>
             <p>Seu cadastro foi confirmado. Usaremos seu e-mail somente para enviar o convite para o Komorebi no iPhone futuramente.</p>
             <Link href="/docs" className="waitlist-text-link">Enquanto isso, conheça o Komorebi <ArrowUpRight size={17} /></Link>
           </div>
@@ -50,22 +54,19 @@ export default function WaitlistForm() {
       </div>
       {state !== "success" && (
         <>
-          <p className="waitlist-card-kicker">UM CONVITE PARA O SEU OLHAR</p>
-          <h2>Deixe seu e-mail.</h2>
-          <p className="waitlist-card-description">Entre na lista de espera do Komorebi para iPhone.</p>
+          <h1>Lista de espera<br /><em>para iPhone.</em></h1>
           <form onSubmit={submit}>
             <label htmlFor="waitlist-email">Seu e-mail</label>
-            <input id="waitlist-email" name="email" type="email" autoComplete="email" inputMode="email" placeholder="voce@exemplo.com" maxLength={254} required disabled={state === "sending"} aria-invalid={state === "error" || undefined} aria-describedby={`waitlist-purpose${error ? " waitlist-error" : ""}`} />
+            <input id="waitlist-email" name="email" type="email" autoComplete="email" inputMode="email" placeholder="voce@exemplo.com" maxLength={254} required disabled={state === "sending"} aria-invalid={state === "error" || undefined} aria-describedby={`waitlist-terms${error ? " waitlist-error" : ""}`} />
             <div className="waitlist-honeypot" aria-hidden="true">
               <label htmlFor="waitlist-website">Website</label>
               <input id="waitlist-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
             </div>
-            <p id="waitlist-purpose" className="waitlist-purpose">Seu e-mail será usado somente para enviar o convite futuramente.</p>
             {error && <p id="waitlist-error" className="waitlist-error" role="alert">{error}</p>}
             <button className="button button-orange waitlist-submit" type="submit" disabled={state === "sending"}>
               {state === "sending" ? <>Enviando… <LoaderCircle size={19} className="waitlist-spinner" /></> : <>Entrar na lista de espera <ArrowUpRight size={20} /></>}
             </button>
-            <p className="waitlist-form-footnote">Ao se cadastrar, você autoriza esse contato. <Link href="/politica-de-privacidade#lista-de-espera">Saiba como cuidamos do seu e-mail.</Link></p>
+            <p id="waitlist-terms" className="waitlist-form-footnote">Ao se cadastrar, você autoriza o envio do convite por e-mail e concorda com os <Link href="/termos-de-uso">Termos de Uso</Link> e a <Link href="/politica-de-privacidade#lista-de-espera">Política de Privacidade</Link>.</p>
           </form>
           <noscript><p className="waitlist-error">Ative o JavaScript para enviar seu cadastro.</p></noscript>
         </>

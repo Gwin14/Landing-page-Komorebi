@@ -69,6 +69,17 @@ test("campo anti-spam preenchido é ignorado sem criar cadastro", async () => {
   assert.deepEqual(await response.json(), { ok: true });
 });
 
+test("origem do navegador funciona atrás de proxy sem aceitar sites externos", async () => {
+  const body = { email: "bot@example.com", website: "spam" };
+  const internalUrl = "http://localhost:3000/api/lista-espera";
+  const response = await POST(request(body, { Origin: "https://komorebi.test", "Sec-Fetch-Site": "same-origin" }, internalUrl));
+  assert.equal(response.status, 200);
+  for (const site of ["cross-site", "same-site", "none"]) {
+    assert.equal((await POST(request(body, { Origin: "https://other.test", "Sec-Fetch-Site": site }, internalUrl))).status, 403);
+  }
+  assert.equal((await POST(request(body, { Origin: "https://other.test" }, internalUrl))).status, 403);
+});
+
 test("API usa token do servidor e retorna somente confirmação", async (t) => {
   const originalFetch = globalThis.fetch;
   const originalToken = process.env.notion_api_token;
