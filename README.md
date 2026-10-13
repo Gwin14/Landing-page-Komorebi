@@ -52,11 +52,11 @@ A textura ocupa a tela frontal do modelo 3D. A imagem provisória é uma interfa
 - `public/images/forest.jpg`: Lucas van Oort, “Dark mystical forest”, Unsplash. https://unsplash.com/photos/green-trees-with-sun-rays-kfVwI-kShCw — Unsplash License.
 - Ícones: Lucide. Tipografia: DM Sans e Manrope, Google Fonts.
 
-Os recursos e requisitos de hardware foram conferidos no código e na documentação local do app. A landing page não altera o repositório do aplicativo. O botão principal de acompanhamento aponta para o repositório oficial; substitua `PROJECT_URL` em `lib/site.ts` quando houver uma página de lançamento.
+Os recursos e requisitos de hardware foram conferidos no código e na documentação local do app. O site direciona visitantes à lista de espera e aos guias de uso. A documentação pública não oferece acesso ao código nem edição pelo GitHub.
 
 ## Documentação pública
 
-Os 16 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções, limites e links para os fontes do app no commit revisado. A revisão de 12 de outubro de 2026 usa o Komorebi `f99a573` e inclui RAW Bayer/ProRAW, restrições de zoom e troca de lente, Estilos Fotográficos no companion dos dois modos, presets do onboarding, card de tutorial e o painel de ajustes. Os guias preservam as capturas de interface fornecidas; opções visíveis variam conforme a lente e a plataforma. Páginas, busca e sitemap são gerados a partir desse conteúdo.
+Os 14 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções e limites de uso, sem referências a arquivos internos ou commits. A revisão de 12 de outubro de 2026 usa o Komorebi `f99a573` e inclui RAW Bayer/ProRAW, restrições de zoom e troca de lente, Estilos Fotográficos no companion dos dois modos, presets do onboarding, card de tutorial e o painel de ajustes. Os guias preservam as capturas de interface fornecidas; opções visíveis variam conforme a lente e a plataforma. Páginas, busca e sitemap são gerados a partir desse conteúdo.
 
 A sidebar permite recolher cada seção e abre a seção da página atual. No celular, o menu também agrupa as páginas em seções recolhíveis e tem rolagem própria. O header da landing page permanece visível durante a rolagem.
 

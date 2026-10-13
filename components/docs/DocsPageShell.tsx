@@ -3,7 +3,6 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { DocsPage } from "@/content/docs-pages";
 import {
-  APP_VERIFIED_COMMIT,
   APP_VERIFIED_DATE,
   statusLabels,
 } from "@/lib/feature-matrix";
@@ -13,7 +12,6 @@ import DocsSidebar from "./DocsSidebar";
 
 export default function DocsPageShell({ page }: { page: DocsPage }) {
   const { previous, next } = getDocsNeighbors(page.slug);
-  const githubUrl = `https://github.com/Gwin14/Landing-page-Komorebi/blob/main/content/docs-pages.ts`;
 
   return (
     <div className="docs-grid">
@@ -35,7 +33,6 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
               {statusLabels[page.status]}
             </span>
             <span>Revisado em {APP_VERIFIED_DATE}</span>
-            <span>App {APP_VERIFIED_COMMIT.slice(0, 7)}</span>
           </div>
         </header>
         <section
@@ -111,29 +108,6 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
             )}
           </section>
         ))}
-        {page.sources && (
-          <section className="docs-section docs-sources" aria-labelledby="fontes">
-            <h2 id="fontes">Fontes no aplicativo</h2>
-            <p>Referências da implementação no commit revisado. Notas técnicas podem descrever etapas anteriores; os guias acima também consideram o código atual.</p>
-            <ul>
-              {page.sources.map((source) => (
-                <li key={source}>
-                  <a href={`https://github.com/Gwin14/Komorebi/blob/${APP_VERIFIED_COMMIT}/${source}`} target="_blank" rel="noreferrer">
-                    {source}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-        <a
-          className="docs-edit-link"
-          href={githubUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Editar esta página no GitHub <ExternalLink size={15} />
-        </a>
         <nav className="docs-pagination" aria-label="Páginas relacionadas">
           {previous ? (
             <Link href={`/docs/${previous.slug}`}>
@@ -167,7 +141,6 @@ export default function DocsPageShell({ page }: { page: DocsPage }) {
             {section.badge ? <small>{section.badge}</small> : null}
           </a>
         ))}
-        {page.sources && <a href="#fontes">Fontes no aplicativo</a>}
       </aside>
     </div>
   );

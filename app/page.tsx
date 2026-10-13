@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Landing from "@/components/Landing";
 import { questions } from "@/content/faq";
 import {
-  PROJECT_URL,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_TITLE,
@@ -36,7 +35,6 @@ const jsonLd = {
       applicationCategory: "PhotographyApplication",
       operatingSystem: "iOS 18 ou posterior; Android 8 ou posterior",
       softwareVersion: "Em desenvolvimento",
-      codeRepository: PROJECT_URL,
       featureList: [
         "Controles manuais de câmera",
         "Captura RAW e ProRAW em aparelhos compatíveis",

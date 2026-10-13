@@ -7,8 +7,7 @@ export type DocsNavItem = {
     | "Fotografar"
     | "Cores e efeitos"
     | "Organizar"
-    | "Referência"
-    | "Desenvolvimento";
+    | "Referência";
   keywords: string[];
 };
 
@@ -184,26 +183,6 @@ export const docsNavigation: DocsNavItem[] = [
     summary: "Matriz pública de suporte por plataforma.",
     group: "Referência",
     keywords: ["ios", "android", "hardware", "requisitos"],
-  },
-  {
-    slug: "desenvolvimento",
-    title: "Desenvolvimento",
-    summary: "Ambiente, arquitetura, módulos nativos e contribuição.",
-    group: "Desenvolvimento",
-    keywords: ["expo", "react native", "módulos", "contribuir"],
-  },
-  {
-    slug: "pipeline-de-imagem",
-    title: "Pipeline de imagem",
-    summary: "Entenda os caminhos de captura, efeitos, metadados e salvamento para contribuir com o app.",
-    group: "Desenvolvimento",
-    keywords: [
-      "arquitetura",
-      "fila",
-      "sentry",
-      "gpu",
-      "cancelamento",
-    ],
   },
 ];
 

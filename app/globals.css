@@ -1840,15 +1840,6 @@ html[data-docs-theme="dark"] .docs-screenshot figcaption {
 html[data-docs-theme="dark"] .docs-screenshot figcaption > a {
   color: #ffaa00;
 }
-.docs-edit-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 26px;
-  color: #765000;
-  font-size: 13px;
-  font-weight: 650;
-}
 .docs-pagination {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2094,7 +2085,6 @@ html[data-docs-theme="dark"] .docs-toc {
 html[data-docs-theme="dark"] .docs-brand svg,
 html[data-docs-theme="dark"] .docs-kicker,
 html[data-docs-theme="dark"] .docs-paths svg,
-html[data-docs-theme="dark"] .docs-edit-link,
 html[data-docs-theme="dark"] .legal-header a:last-child {
   color: #ffaa00;
 }
@@ -2426,25 +2416,13 @@ html[data-docs-theme="dark"]
   gap: 10px 20px;
   margin-top: 16px;
 }
-.docs-section-links a,
-.docs-sources a {
+.docs-section-links a {
   color: #765000;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.docs-sources {
-  margin-top: 32px;
-  border-top: 1px solid #d7d3c8;
-}
-.docs-sources li {
-  overflow-wrap: anywhere;
-}
-html[data-docs-theme="dark"] .docs-section-links a,
-html[data-docs-theme="dark"] .docs-sources a {
+html[data-docs-theme="dark"] .docs-section-links a {
   color: #ffaa00;
-}
-html[data-docs-theme="dark"] .docs-sources {
-  border-color: #ffffff19;
 }
 html[data-docs-theme="dark"] .docs-sidebar-group summary:hover {
   background: #ffffff0c;

@@ -15,10 +15,8 @@ import {
   Plus,
   X,
   Menu,
-  Code2,
   Focus,
 } from "lucide-react";
-import { PROJECT_URL } from "@/lib/site";
 import { questions } from "@/content/faq";
 import ColorLab from "./ColorLab";
 const PhoneScene = dynamic(() => import("./PhoneScene"), {
@@ -331,10 +329,7 @@ export default function Landing() {
                   {q === "Onde posso baixar o app?" && (
                     <>
                       {" "}
-                      <a href={PROJECT_URL} target="_blank" rel="noreferrer">
-                        Visitar o projeto <ArrowUpRight size={15} />
-                      </a>
-                    </>
+                                </>
                   )}
                 </p>
               </details>
@@ -372,9 +367,6 @@ export default function Landing() {
             rel="noreferrer"
           >
             Instagram <MoveUpRight size={14} />
-          </a>
-          <a href={PROJECT_URL} target="_blank" rel="noreferrer">
-            <Code2 size={16} /> GitHub
           </a>
           <Link href="/lista-de-espera">Lista de espera · iPhone</Link>
           <Link href="/docs">Documentação</Link>

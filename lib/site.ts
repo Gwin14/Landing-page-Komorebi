@@ -1,6 +1,5 @@
 /** Replace this single path with the official screenshot when supplied. */
 export const PHONE_SCREEN: string | null = null;
-export const PROJECT_URL = "https://github.com/Gwin14/Komorebi";
 export const SITE_NAME = "Komorebi";
 export const SITE_TITLE = "Komorebi — Câmera manual com RAW e LUTs";
 export const SITE_DESCRIPTION =

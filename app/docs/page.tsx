@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Camera, Code2, Palette } from "lucide-react";
+import { ArrowRight, BookOpen, Camera, Palette } from "lucide-react";
 import DocsSidebar from "@/components/docs/DocsSidebar";
 import { docsNavigation } from "@/lib/docs-navigation";
-import { APP_VERIFIED_COMMIT, APP_VERIFIED_DATE } from "@/lib/feature-matrix";
+import { APP_VERIFIED_DATE } from "@/lib/feature-matrix";
 
 const paths = [
   {
@@ -24,10 +24,10 @@ const paths = [
     icon: BookOpen,
   },
   {
-    title: "Contribua com o projeto",
-    text: "Arquitetura, módulos nativos e validação.",
-    href: "/docs/desenvolvimento",
-    icon: Code2,
+    title: "Confira a compatibilidade",
+    text: "Disponibilidade dos recursos e requisitos por aparelho.",
+    href: "/docs/compatibilidade",
+    icon: BookOpen,
   },
 ];
 
@@ -42,11 +42,10 @@ export default function DocsOverviewPage() {
           <p>
             O Komorebi reúne controles de câmera, cores autorais e organização
             local. Navegue por tópicos para encontrar instruções de uso,
-            recursos novos, limites por aparelho e a arquitetura do projeto.
+            recursos novos e limites por aparelho.
           </p>
           <div className="docs-meta">
             <span>Revisado em {APP_VERIFIED_DATE}</span>
-            <span>App {APP_VERIFIED_COMMIT.slice(0, 7)}</span>
           </div>
         </div>
         <section className="docs-paths" aria-labelledby="caminhos-rapidos">

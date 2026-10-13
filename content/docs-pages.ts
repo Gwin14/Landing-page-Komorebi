@@ -20,17 +20,15 @@ export type DocsPage = {
   slug: string;
   title: string;
   description: string;
-  platform: "iOS e Android" | "Varia por recurso" | "Desenvolvimento";
+  platform: "iOS e Android" | "Varia por recurso";
   status: FeatureStatus;
   prerequisites: string[];
-  sources?: string[];
   sections: DocsSection[];
 };
 
 export const docsPages: DocsPage[] = [
   {
     slug: "primeiros-passos",
-    sources: ["app/index.jsx", "app/components/Welcome.jsx", "app/components/OnboardingControls.jsx", "app/utils/onboardingControlPresets.js", "app/utils/topBarControls.js"],
     title: "Primeiros passos",
     description:
       "Prepare o Komorebi, conceda apenas as permissões necessárias e faça a primeira foto.",
@@ -93,7 +91,6 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "camera",
-    sources: ["app/index.jsx", "app/components/TopBar.jsx", "app/utils/aspectRatios.js", "docs/controls-and-gestures.md", "docs/portrait-and-live-photo.md"],
     title: "Câmera e captura",
     description:
       "Entenda a interface, escolha lentes e use modos de captura sem assumir suporte universal.",
@@ -290,7 +287,6 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "cores-e-efeitos",
-    sources: ["docs/capture-file-formats.md", "app/components/Settings.jsx", "app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "app/utils/lutCatalog.js", "app/utils/grainCatalog.js", "app/utils/halationCatalog.js"],
     title: "Cores e efeitos",
     description:
       "Aplique LUTs, grão e halation e escolha se quer guardar uma cópia original.",
@@ -359,7 +355,6 @@ export const docsPages: DocsPage[] = [
             caption: "A intensidade do halation é escolhida separadamente do grão e dos filtros.",
           },
         ],
-        links: [{href: "/docs/pipeline-de-imagem", label: "Entenda o processamento e as cópias"}],
         title: "Aplique grão e halation",
         badge: "Novo",
         paragraphs: [
@@ -375,7 +370,6 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "galeria-e-projetos",
-    sources: ["app/components/Galery.jsx", "app/utils/projects.js", "app/components/MapViewWeb.jsx", "app/utils/galleryActions.js", "docs/gallery-actions.md"],
     title: "Galeria e projetos",
     description:
       "Organize álbuns, avalie e compartilhe fotos em lote e consulte EXIF, mapa e profundidade.",
@@ -445,7 +439,6 @@ export const docsPages: DocsPage[] = [
     platform: "Varia por recurso",
     status: "validate",
     prerequisites: ["iOS com o módulo nativo instalado", "Fotos com leitura e escrita autorizadas", "JPEG/HEIC elegível sem profundidade existente; RAW não é aceito"],
-    sources: ["docs/gallery-actions.md", "modules/camera-photo-depth/index.ts", "modules/camera-photo-depth/ios/PhotosPortraitCompatibility.swift", "modules/camera-photo-depth/ios/PhotoDepthService.swift"],
     sections: [
       {
         id: "gerar",
@@ -479,7 +472,6 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "configuracoes",
-    sources: ["app/context/SettingsContext.js", "app/components/Settings.jsx", "app/components/SettingsTutorialCard.jsx", "app/utils/photographicStylesPolicy.js", "docs/controls-and-gestures.md", "app/utils/diagnostics.js"],
     title: "Configurações",
     description:
       "Consulte o efeito, a persistência e as dependências das preferências do Komorebi.",
@@ -560,7 +552,6 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "compatibilidade",
-    sources: ["app.json", "modules/camera-image-stacking/index.ts", "modules/camera-raw-capture/index.ts"],
     title: "Compatibilidade",
     description:
       "Consulte a referência pública de suporte e as condições que determinam cada recurso.",
@@ -576,10 +567,10 @@ export const docsPages: DocsPage[] = [
         id: "como-ler",
         title: "Como ler a matriz",
         items: [
-          "Suportado: comportamento confirmado no código para a plataforma.",
+          "Suportado: recurso disponível na plataforma.",
           "Condicional: depende de hardware, lente, API ou permissão detectada durante o uso.",
-          "Indisponível: a implementação não existe na plataforma.",
-          "A validar: o código existe, mas ainda falta evidência suficiente em aparelho físico.",
+          "Indisponível: recurso não oferecido na plataforma.",
+          "A validar: recurso ainda depende de confirmação em aparelho físico.",
         ],
       },
       {
@@ -587,52 +578,6 @@ export const docsPages: DocsPage[] = [
         title: "Validação em aparelho",
         paragraphs: [
           "Use um dispositivo físico para testar câmera, biblioteca, GPS, sensores, RAW, Live Photo, retrato, botão de volume e Camera Control. Simuladores não reproduzem todas as capacidades nem o processamento final.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "desenvolvimento",
-    sources: ["package.json", "docs/composition-scan.md", "docs/sentry.md"],
-    title: "Desenvolvimento",
-    description:
-      "Entenda a arquitetura do aplicativo e prepare uma contribuição verificável.",
-    platform: "Desenvolvimento",
-    status: "supported",
-    prerequisites: [
-      "Node.js e npm",
-      "Expo SDK 54",
-      "Xcode para iOS ou Android Studio para Android",
-    ],
-    sections: [
-      {
-        id: "ambiente",
-        title: "Prepare o ambiente",
-        items: [
-          "Execute npm install no repositório do aplicativo.",
-          "No iOS, execute npm run setup:minicpm-ios para preparar o runtime local do Scan antes de instalar os pods.",
-          "Instale os pods depois do setup do Scan e use um build nativo de desenvolvimento; Expo Go não inclui os módulos locais.",
-          "Use npm start para iniciar o Metro para esse binário.",
-          "Execute npm run ios ou npm run android para a plataforma desejada.",
-          "Use aparelho físico para validar câmera, mídia e módulos nativos.",
-        ],
-      },
-      {
-        id: "arquitetura",
-        links: [{href: "/docs/pipeline-de-imagem", label: "Fluxos de captura, processamento e salvamento"}],
-        title: "Arquitetura",
-        paragraphs: [
-          "As telas e componentes ficam em app, com hooks para comportamento, contexto para configurações e utilitários para EXIF, LUT e armazenamento. Os módulos Expo locais isolam controles manuais, RAW/HEIF+, Live Photo, retrato, Camera Control, Image Stacking, Estilos Apple, profundidade na galeria e Scanner de composição, com API pública em index.ts e implementação iOS em modules/*/ios.",
-        ],
-      },
-      {
-        id: "contribuir",
-        title: "Contribua",
-        items: [
-          "Crie uma branch focada e use commits curtos com prefixos como feat, fix ou chore.",
-          "Rode npm run lint, npm run typecheck e npm test no repositório do aplicativo.",
-          "Teste o fluxo alterado em cada plataforma relevante.",
-          "No Pull Request, registre aparelhos, sistemas, comandos executados e imagens quando houver mudança visual.",
         ],
       },
     ],
@@ -646,13 +591,6 @@ export const docsPages: DocsPage[] = [
     prerequisites: [
       "iOS e câmera com os controles manuais anunciados como disponíveis",
       "Aparelho físico; capacidades mudam ao trocar de lente",
-    ],
-    sources: [
-      "app/hooks/useManualCameraControls.js",
-      "app/components/CameraAdjustmentControls.jsx",
-      "app/components/ManualControlsPanel.jsx",
-      "app/components/ExposureSlider.jsx",
-      "modules/camera-manual-controls",
     ],
     sections: [
       {
@@ -725,15 +663,6 @@ export const docsPages: DocsPage[] = [
       "Fotos autorizado para salvar",
       "iOS e lente com RAW para DNG ou pares RAW",
       "Android mantém a saída JPEG",
-    ],
-    sources: [
-      "docs/capture-file-formats.md",
-      "app/utils/fileFormatSelection.js",
-      "app/components/FileFormatSelector.jsx",
-      "app/hooks/useRawCapture.js",
-      "app/utils/photographicStylesPolicy.js",
-      "patches/react-native-vision-camera+4.7.3.patch",
-      "modules/camera-raw-capture/index.ts",
     ],
     sections: [
       {
@@ -824,14 +753,6 @@ export const docsPages: DocsPage[] = [
       "Live Photo, Retrato e Image Stacking desativados",
       "Espaço para DNG temporário, revelação e salvamento",
     ],
-    sources: [
-      "docs/heif-plus.md",
-      "app/utils/heifPlusSettings.js",
-      "app/components/FileFormatSelector.jsx",
-      "app/components/Settings.jsx",
-      "docs/capture-file-formats.md",
-      "modules/camera-raw-capture/ios/HeifPlusEngine.swift",
-    ],
     sections: [
       {
         id: "revelacao",
@@ -902,11 +823,6 @@ export const docsPages: DocsPage[] = [
       "Modo anunciado nas capacidades da lente",
       "Apoio ou tripé para sequências longas",
     ],
-    sources: [
-      "docs/image-stacking-engine.md",
-      "modules/camera-image-stacking/index.ts",
-      "app/components/ImageStackingSelector.jsx",
-    ],
     sections: [
       {
         id: "modos",
@@ -956,17 +872,13 @@ export const docsPages: DocsPage[] = [
         id: "resultado",
         title: "Salvamento, efeitos e cancelamento",
         paragraphs: [
-          "A composição entra na fila normal como captureMode stacking e pode receber LUT, grão, halation, recorte e organização no projeto. O resultado sai em HEIF ou JPEG.",
+          "A composição pode receber LUT, grão, halation, recorte e organização no projeto. O resultado sai em HEIF ou JPEG.",
           "Salvar original sem efeitos preserva a composição antes dos efeitos, não os frames usados para montá-la. RAW, Live Photo, Retrato, flash e controles manuais gerais seguem os bloqueios do modo. Os arquivos intermediários são removidos ao terminar, falhar ou cancelar.",
         ],
         links: [
           {
             href: "/docs/focus-bracketing",
             label: "Passo a passo do Focus Bracketing"
-          },
-          {
-            href: "/docs/pipeline-de-imagem",
-            label: "Como a composição chega à galeria"
           },
         ]
       },
@@ -991,11 +903,6 @@ export const docsPages: DocsPage[] = [
       "iOS, Metal e lente física com foco manual e bloqueio de exposição/balanço de branco",
       "Cena parada e aparelho apoiado ou em tripé",
       "Não disponível em câmeras virtuais, Android ou web",
-    ],
-    sources: [
-      "docs/image-stacking-engine.md",
-      "modules/camera-image-stacking/ios/FocusBracketing.swift",
-      "app/hooks/useImageStacking.js",
     ],
     sections: [
       {
@@ -1061,11 +968,6 @@ export const docsPages: DocsPage[] = [
       "Preview normal, manual ou RAW/ProRAW compatível",
       "MiniCPM-V opcional, aproximadamente 1,6 GB no aparelho",
     ],
-    sources: [
-      "docs/composition-scan.md",
-      "app/hooks/useCompositionScan.js",
-      "app/utils/compositionScanSession.js",
-    ],
     sections: [
       {
         id: "usar",
@@ -1090,7 +992,7 @@ export const docsPages: DocsPage[] = [
         title: "Modelo opcional e privacidade",
         paragraphs: [
           "Baixe ou remova o modelo nas configurações de inteligência. Os pesos ficam no aparelho; a análise de frames é local. Frames, caixas e sugestões não são enviados a servidor nem gravados na foto.",
-          "Sem o modelo pronto, o Scan mantém sua análise básica. Tags e nomes inteligentes são opções separadas e precisam do modelo pronto. Um runtime ausente exige um novo build nativo preparado pelo desenvolvedor; baixar pesos não instala esse runtime.",
+          "Sem o modelo pronto, o Scan mantém sua análise básica. Tags e nomes inteligentes são opções separadas e precisam do modelo pronto. Se a análise inteligente continuar indisponível após o download do modelo, verifique se há uma atualização do aplicativo.",
         ],
       },
       {
@@ -1108,12 +1010,6 @@ export const docsPages: DocsPage[] = [
           "A sessão reserva um único frame, converte orientação e produz uma cópia reduzida nativa. O JavaScript recebe um token opaco; a análise consome esse token numa fila serial. O controlador percorre captura, análise, resultados e retorno ao estado ocioso.",
           "Cancelamento invalida a sessão e ignora callbacks antigos. O detector de sorriso é pausado durante o Scan. Os testes de coordenadas e controlador não substituem medir latência, FPS, memória e temperatura em iPhone.",
         ],
-        links: [
-          {
-            href: "/docs/desenvolvimento",
-            label: "Prepare o runtime e um novo build"
-          },
-        ]
       },
     ]
   },
@@ -1128,13 +1024,6 @@ export const docsPages: DocsPage[] = [
       "Biblioteca de mídia com permissão de leitura/escrita",
       "Modelo local pronto para tags e nomes inteligentes",
       "iOS 27 e build com SDK compatível para sincronização da nota com o catálogo Fotos",
-    ],
-    sources: [
-      "docs/photo-catalog-metadata.md",
-      "app/utils/photoCatalogMetadata.js",
-      "docs/gallery-actions.md",
-      "app/utils/photoIntelligence.js",
-      "modules/shared/PhotoCatalogMetadata.swift",
     ],
     sections: [
       {
@@ -1191,102 +1080,6 @@ export const docsPages: DocsPage[] = [
     ]
   },
 
-  {
-    slug: "pipeline-de-imagem",
-    title: "Pipeline de imagem",
-    description: "Entenda os caminhos de captura, efeitos, metadados e salvamento para contribuir com o app.",
-    platform: "Desenvolvimento",
-    status: "supported",
-    prerequisites: [
-      "Familiaridade com hooks React, módulos Expo e arquivos de imagem",
-      "Novo build após alterações nativas",
-      "Dispositivo físico para confirmar qualidade e desempenho",
-    ],
-    sources: [
-      "app/hooks/usePhotoProcessingQueue.js",
-      "app/utils/cameraUtils.js",
-      "app/hooks/useRawCapture.js",
-      "app/utils/photographicStylesPolicy.js",
-      "patches/react-native-vision-camera+4.7.3.patch",
-      "docs/capture-file-formats.md",
-      "docs/heif-plus.md",
-      "docs/image-stacking-engine.md",
-      "docs/performance-audit.md",
-      "app/utils/diagnostics.js",
-      "docs/sentry.md",
-    ],
-    sections: [
-      {
-        id: "caminhos",
-        title: "Três caminhos principais",
-        paragraphs: [
-          "A foto padrão passa pela captura e fila de processamento JavaScript. Módulos especializados retornam arquivos e recursos de RAW, Live Photo e Retrato. Image Stacking compõe nativamente e entrega uma URI para a fila existente.",
-          "HEIF+ possui uma fila nativa persistente: copia o DNG, revela, aplica efeitos, enriquece metadados e salva com checkpoints. A integração JavaScript acompanha estados e solicita análise inteligente quando ativada.",
-        ],
-      },
-      {
-        id: "raw-nativo",
-        title: "Capacidades e captura RAW",
-        paragraphs: [
-          "O hook useRawCapture vincula as capacidades à lente ativa e filtra Bayer quando há zoom digital ou câmera virtual. Na captura do VisionCamera, o patch consulta os tipos RAW separadamente para Bayer e ProRAW; Bayer usa prioridade de velocidade e exige zoom do sensor e da conexão em 1×.",
-          "Se a saída de uma câmera física não anunciar Bayer, a configuração tenta o preset fotográfico e uma dimensão normal suportada de até 12,2 MP. O limite menor só é mantido se Bayer aparecer; caso contrário, o anterior é restaurado. Essas consultas não garantem suporte em toda lente. O preview é configurado depois da saída fotográfica.",
-          "Photo RAW support e RAW normal-output probe registram capacidades e tentativas nativas. Falhas de captura RAW aparecem na TopBar. Alterar o patch exige reinstalar/aplicar patches e recompilar o iOS; uma atualização JavaScript não instala a correção nativa.",
-        ],
-      },
-      {
-        id: "efeitos",
-        title: "Ordem e espaço de cor",
-        paragraphs: [
-          "No HEIF+, a ordem é revelação RAW → recorte → LUT tetraédrico → halation → grão → HEIF. O processamento intermediário é half-float; o grão é determinístico por captura e executado na GPU.",
-          "LUTs na WebView usam outro caminho em sRGB. A exportação nativa converte para Display P3, mas isso não recupera cores limitadas anteriormente. Testar presets exige comparar fotos reais: o pipeline nativo não reproduz a sequência aleatória do Canvas.",
-        ],
-      },
-      {
-        id: "originais",
-        title: "O significado de original sem efeitos",
-        paragraphs: [
-          "Na captura comum, a cópia elimina os efeitos criativos quando o fluxo permite. Em Image Stacking, ela guarda a composição sem efeitos. Em HEIF+, mantém a revelação RAW sem LUT, grão ou halation.",
-          "DNG, foto processada e cópia sem efeitos são recursos diferentes. No par RAW + foto processada, o app importa dois originais em um único asset; outros fluxos podem salvar versões separadas.",
-        ],
-        links: [
-          {
-            href: "/docs/formatos-de-arquivo",
-            label: "Recursos originais do par RAW"
-          },
-        ]
-      },
-      {
-        id: "filas",
-        title: "Filas, cancelamento e desempenho",
-        paragraphs: [
-          "AVFoundation é serializado na sessionQueue; pixel buffers contínuos usam videoQueue; registro/composição/exportação do stacking usam analysisQueue. Pixels intermediários permanecem no nativo, evitando atravessar a bridge.",
-          "O HEIF+ guarda até três trabalhos persistentes e registra checkpoints de salvamento/álbum. Os frames temporários de stacking têm outro ciclo de vida e são removidos ao cancelar ou terminar; não herdam a recuperação persistente do HEIF+.",
-          "Ao alterar esses caminhos, verifique cancelamento, desmontagem, background, pouco espaço, metadados e a próxima captura. Meça memória e latência no aparelho; testes de arquivos não comprovam estabilidade do preview.",
-        ],
-      },
-      {
-        id: "verificar",
-        title: "Como validar uma contribuição",
-        items: [
-          "No aplicativo: npm run lint, npm run typecheck e npm test.",
-          "Para RAW: npm run test:raw-native em macOS com Xcode verifica tipos do Core Swift do VisionCamera; não executa captura nem confirma suporte do sensor.",
-          "Para foco: npm run test:focus-native em macOS com Xcode/Core Image/Metal.",
-          "Para profundidade: npm run test:depth-native em macOS com Xcode/Core ML; os checks não substituem conferir os controles do Fotos no iPhone.",
-          "Para HEIF+: bash scripts/check-heif-plus-native.sh; a execução nativa depende de acesso à GPU.",
-          "Recompile os módulos nativos e teste formatos, orientações, projetos, cancelamento e biblioteca com acesso limitado.",
-          "Registre aparelho, versão do sistema, arquivos exportados e medições; diferencie teste sintético de captura real.",
-        ],
-      },
-      {
-        id: "diagnostico",
-        title: "Diagnóstico de erros",
-        paragraphs: [
-          "Sentry é configurado em app/utils/diagnostics.js após ler a preferência local. O compartilhamento começa ativado e pode ser desligado no onboarding beta ou em Configurações → Sobre. Quando ativo, coleta erros e amostra 100% das transações em desenvolvimento/preview e 20% em produção. Mapas de código e releases ajudam a associar uma falha ao fonte.",
-          "Tokens de upload ficam no ambiente de build, nunca em variáveis públicas. Um novo SDK nativo exige recompilar o aplicativo. Confira docs/sentry.md no repositório para o procedimento de integração.",
-        ],
-      }
-    ],
-  },
 ];
 
 export function getDocsPage(slug: string) {

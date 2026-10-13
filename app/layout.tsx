@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import {
-  PROJECT_URL,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_TITLE,
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
   title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  authors: [{ name: SITE_NAME, url: PROJECT_URL }],
+  authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   category: "photography",

@@ -65,7 +65,6 @@ test("as páginas têm âncoras únicas e links contextuais válidos", () => {
     const ids = page.sections.map((section) => section.id);
     assert.equal(ids.length, new Set(ids).size, page.slug);
     assert.ok(!ids.includes("fontes") && !ids.includes("pre-requisitos"), page.slug);
-    assert.ok(page.sources?.length, `${page.slug}: faltam fontes`);
     for (const section of page.sections) {
       for (const link of section.links ?? []) {
         const [route, anchor] = link.href.split("#");

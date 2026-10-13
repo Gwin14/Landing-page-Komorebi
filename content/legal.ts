@@ -112,7 +112,6 @@ export const privacySections: LegalSection[] = [
       "Desenvolvedor: Fábio Santos",
       "Site: fotoessencia.fabiosantos.dev.br",
       "Instagram: @fotoessencia_",
-      "GitHub: github.com/Gwin14",
     ],
   },
 ];
@@ -158,7 +157,6 @@ export const termsSections: LegalSection[] = [
       "Capturar, processar e organizar fotos pessoais ou profissionais.",
       "Aplicar LUTs incluídos e importar arquivos .cube devidamente licenciados.",
       "Gerar EXIF Frame e compartilhar imagens.",
-      "Estudar, modificar e distribuir o código conforme a licença MIT.",
     ],
   },
   {
@@ -184,9 +182,9 @@ export const termsSections: LegalSection[] = [
     ],
   },
   {
-    title: "Propriedade intelectual e licença",
+    title: "Propriedade intelectual",
     paragraphs: [
-      "O código-fonte é distribuído sob a Licença MIT. Nome, ícones, imagens, textos, identidade visual e materiais autorais pertencem aos respectivos autores. LUTs importados são responsabilidade do usuário.",
+      "Nome, ícones, imagens, textos, identidade visual e materiais autorais pertencem aos respectivos autores. LUTs importados são responsabilidade do usuário.",
     ],
   },
   {
@@ -224,7 +222,6 @@ export const termsSections: LegalSection[] = [
     items: [
       "Desenvolvedor: Fábio Santos",
       "Site: fotoessencia.fabiosantos.dev.br",
-      "Repositório: github.com/Gwin14/Komorebi",
       "Instagram: @fotoessencia_",
       "Feedback: Configurações, Dê seu feedback",
     ],
