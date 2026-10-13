@@ -1,5 +1,5 @@
+import BrandIcon from "@/components/BrandIcon";
 import Link from "next/link";
-import { Aperture } from "lucide-react";
 import ThemeToggle from "@/components/docs/ThemeToggle";
 
 export type LegalSection = {
@@ -25,7 +25,7 @@ export default function LegalPage({
       </a>
       <header className="legal-header">
         <Link href="/">
-          <Aperture size={24} /> komorebi.
+          <BrandIcon size={24} /> komorebi.
         </Link>
         <div className="legal-header-actions">
           <ThemeToggle />

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import NextImage from "next/image";
+import BrandIcon from "./BrandIcon";
 import { Rotate3D, Pause, Play } from "lucide-react";
 import { PHONE_SCREEN } from "@/lib/site";
 import * as THREE from "three";
@@ -343,7 +344,7 @@ export default function PhoneScene() {
       />
       {status === "loading" && (
         <div className="scene-loading">
-          <span className="loading-aperture">◎</span>
+          <BrandIcon size={36} />
           <span>Revelando os detalhes…</span>
         </div>
       )}

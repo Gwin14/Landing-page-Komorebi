@@ -29,10 +29,6 @@ export const metadata: Metadata = {
     "Android",
   ],
   referrer: "origin-when-cross-origin",
-  icons: {
-    icon: "/icon.svg",
-    apple: [{ url: "/images/app-icon.png", sizes: "1024x1024" }],
-  },
   manifest: "/manifest.webmanifest",
   formatDetection: { email: false, address: false, telephone: false },
   openGraph: {

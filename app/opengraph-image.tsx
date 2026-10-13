@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt =
@@ -6,7 +8,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const dynamic = "force-static";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await readFile(join(process.cwd(), "public/images/app-icon-512.png"));
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
   return new ImageResponse(
     <div
       style={{
@@ -44,25 +48,14 @@ export default function OpenGraphImage() {
           display: "flex",
         }}
       />
-      <div
-        style={{
-          position: "absolute",
-          width: 260,
-          height: 260,
-          background: "#f6a800",
-          borderRadius: "50%",
-          right: 85,
-          top: 185,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#171815",
-          fontSize: 92,
-          fontWeight: 700,
-        }}
-      >
-        K
-      </div>
+      {/* ImageResponse requires native image elements. */}
+      <img
+        src={logoSrc}
+        alt=""
+        width={260}
+        height={260}
+        style={{ position: "absolute", right: 85, top: 185 }}
+      />
       <div
         style={{
           padding: "70px 76px",
@@ -73,15 +66,7 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div
-            style={{
-              width: 34,
-              height: 34,
-              border: "2px solid #f6a800",
-              borderRadius: "50%",
-              display: "flex",
-            }}
-          />
+          <img src={logoSrc} alt="" width={40} height={40} />
           <span style={{ fontSize: 30, fontWeight: 700 }}>komorebi.</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

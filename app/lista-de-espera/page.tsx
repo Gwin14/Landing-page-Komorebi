@@ -1,6 +1,7 @@
+import BrandIcon from "@/components/BrandIcon";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Aperture, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import WaitlistForm from "@/components/WaitlistForm";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default function WaitlistPage() {
       <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
       <header className="header waitlist-header">
         <Link className="brand" href="/" aria-label="Komorebi, início">
-          <Aperture size={29} strokeWidth={1.7} />
+          <BrandIcon size={29} />
           <span>komorebi<span className="brand-period">.</span></span>
         </Link>
         <Link href="/" className="waitlist-back"><ArrowLeft size={16} /> Conheça o Komorebi</Link>

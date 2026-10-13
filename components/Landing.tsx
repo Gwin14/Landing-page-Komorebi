@@ -1,4 +1,5 @@
 "use client";
+import BrandIcon from "@/components/BrandIcon";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -23,7 +24,7 @@ const PhoneScene = dynamic(() => import("./PhoneScene"), {
   ssr: false,
   loading: () => (
     <div className="scene-loading">
-      <Aperture size={32} />
+      <BrandIcon size={32} />
       <span>Revelando os detalhes…</span>
     </div>
   ),
@@ -53,7 +54,7 @@ export default function Landing() {
       </a>
       <header className="header">
         <a className="brand" href="#" aria-label="Komorebi, início">
-          <Aperture size={29} strokeWidth={1.7} />
+          <BrandIcon size={29} />
           <span>
             komorebi<span className="brand-period">.</span>
           </span>
@@ -167,7 +168,7 @@ export default function Landing() {
             </h2>
             <div className="manifesto-bottom">
               <span className="light-mark">
-                <Aperture size={66} strokeWidth={0.7} />
+                <BrandIcon size={66} />
               </span>
               <p>
                 Komorebi é a luz do sol que atravessa as folhas.
@@ -338,7 +339,7 @@ export default function Landing() {
         </section>
         <section className="final-cta section-pad" id="projeto" data-reveal>
           <div className="eyebrow">05 / O PRÓXIMO INSTANTE É SEU</div>
-          <Aperture className="cta-aperture" size={57} strokeWidth={1} />
+          <BrandIcon className="cta-logo" size={57} />
           <h2>
             Saia. Olhe.
             <br />
@@ -356,7 +357,7 @@ export default function Landing() {
       </main>
       <footer>
         <a className="brand" href="#">
-          <Aperture size={25} />
+          <BrandIcon size={25} />
           <span>komorebi.</span>
         </a>
         <span>Feito por quem gosta de fotografar.</span>

@@ -17,8 +17,14 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["photography", "utilities"],
     icons: [
       {
-        src: "/images/app-icon.png",
-        sizes: "1024x1024",
+        src: "/images/app-icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/images/app-icon-512.png",
+        sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },

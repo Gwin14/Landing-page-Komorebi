@@ -1,7 +1,8 @@
 "use client";
+import BrandIcon from "@/components/BrandIcon";
 
 import Link from "next/link";
-import { Aperture, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { docsGroups, docsNavigation } from "@/lib/docs-navigation";
 import DocsSearch from "./DocsSearch";
@@ -17,7 +18,7 @@ export default function DocsHeader() {
         href="/"
         aria-label="Komorebi, página inicial"
       >
-        <Aperture size={25} strokeWidth={1.7} />
+        <BrandIcon size={25} />
         <span>komorebi.</span>
         <small>documentação</small>
       </Link>
