@@ -2447,7 +2447,6 @@ html[data-docs-theme="dark"] .docs-sidebar-group summary:hover {
 .waitlist-form-column { min-width: 0; }
 .waitlist-form-card { position: relative; overflow: hidden; padding: clamp(28px, 3vw, 42px); border: 1px solid #ffaa003d; border-radius: 12px; background: radial-gradient(ellipse at top right, #ffaa000a, transparent 65%), var(--surface); box-shadow: 0 24px 70px #0003; }
 .waitlist-form-card::before { content: ""; display: block; height: 76px; margin: calc(-1 * clamp(28px, 3vw, 42px)) calc(-1 * clamp(28px, 3vw, 42px)) 28px; border-bottom: 1px solid #ffaa002b; background: linear-gradient(90deg, #171a13a6, #171a1320), url("/images/forest.jpg") center 48% / cover; }
-.waitlist-form-card::after { content: "木漏れ日"; position: absolute; top: 27px; left: clamp(28px, 3vw, 42px); color: #f1ead4; font-size: 16px; letter-spacing: 0.22em; pointer-events: none; }
 .waitlist-form-card h1 em { color: var(--orange); font-style: normal; }
 .waitlist-form-card input:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 .waitlist-card-kicker { margin: 0 0 24px; color: #b3b6aa; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; }
@@ -2488,7 +2487,6 @@ html[data-docs-theme="dark"] .docs-sidebar-group summary:hover {
   .waitlist-back svg { width: 22px; height: 22px; }
   .waitlist-form-card { padding: 26px; }
   .waitlist-form-card::before { margin: -26px -26px 24px; }
-  .waitlist-form-card::after { left: 26px; }
   .waitlist-footer { align-items: flex-start; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
