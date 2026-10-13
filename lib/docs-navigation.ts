@@ -18,7 +18,7 @@ export const docsNavigation: DocsNavItem[] = [
     title: "Primeiros passos",
     summary: "Permissões, primeira captura e configuração inicial.",
     group: "Começar",
-    keywords: ["instalação", "onboarding", "permissões"],
+    keywords: ["instalação", "onboarding", "permissões", "presets", "profissionais", "criativos", "atalhos"],
   },
   {
     slug: "camera",
@@ -52,6 +52,10 @@ export const docsNavigation: DocsNavItem[] = [
       "ev",
       "obturador",
       "zebra",
+      "ss",
+      "wb",
+      "af",
+      "auto",
     ],
   },
   {
@@ -62,6 +66,9 @@ export const docsNavigation: DocsNavItem[] = [
     keywords: [
       "raw",
       "proraw",
+      "bayer",
+      "zoom",
+      "nenhum",
       "heic",
       "jpeg",
       "display p3",
@@ -157,6 +164,9 @@ export const docsNavigation: DocsNavItem[] = [
     group: "Referência",
     keywords: [
       "topbar",
+      "tutorial",
+      "guia",
+      "prévia de efeitos",
       "histograma",
       "nível",
       "som",

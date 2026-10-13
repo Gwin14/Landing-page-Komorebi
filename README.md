@@ -23,7 +23,7 @@ npm run typecheck
 npm run build
 ```
 
-O build estático fica em `out/`, pronto para hospedagem estática. Para desenvolvimento, use `npm run dev`. Para inspecionar o build, `npx serve out -l 3017` (o `next start` não é usado com exportação estática).
+O build fica em `.next/`. O site usa Next.js na Vercel: as páginas continuam pré-renderizadas e a rota de lista de espera executa no servidor. Para desenvolvimento, use `npm run dev`; para conferir o build, `npm run build` e `npx next start --hostname 127.0.0.1 --port 3017`. A exportação estática foi removida para permitir o POST ao Notion.
 
 ## Substituir pela tela oficial
 
@@ -56,7 +56,7 @@ Os recursos e requisitos de hardware foram conferidos no código e na documenta�
 
 ## Documentação pública
 
-Os 16 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções, limites e links para os fontes do app no commit revisado. A revisão de 9 de outubro de 2026 cobre Retrato + Live Photo, timer e gestos, ações em lote, profundidade na galeria, Estilos Fotográficos e controle de diagnósticos. Páginas, busca e sitemap são gerados a partir desse conteúdo.
+Os 16 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções, limites e links para os fontes do app no commit revisado. A revisão de 12 de outubro de 2026 usa o Komorebi `f99a573` e inclui RAW Bayer/ProRAW, restrições de zoom e troca de lente, Estilos Fotográficos no companion dos dois modos, presets do onboarding, card de tutorial e o painel de ajustes. Os guias preservam as capturas de interface fornecidas; opções visíveis variam conforme a lente e a plataforma. Páginas, busca e sitemap são gerados a partir desse conteúdo.
 
 A sidebar permite recolher cada seção e abre a seção da página atual. No celular, o menu também agrupa as páginas em seções recolhíveis e tem rolagem própria. O header da landing page permanece visível durante a rolagem.
 
@@ -70,3 +70,21 @@ npm run check:links
 ```
 
 Use `KOMOREBI_REPOSITORY=/caminho/do/app npm run check:komorebi-drift` se o app estiver em outro diretório. Esse comando compara commits; ele não confirma sozinho a exatidão do texto nem testa hardware.
+
+## Lista de espera para iPhone
+
+`/lista-de-espera` envia somente o e-mail para `POST /api/lista-espera`. A rota lê `notion_api_token` apenas no servidor, resolve a fonte de dados da database `3f738f6e-9296-8094-aa28-d717fd5a10f5`, descobre a propriedade de título e cria uma página cujo nome é o e-mail normalizado. Antes de criar, consulta o mesmo título para evitar cadastros repetidos em envios sequenciais. Notion não oferece restrição única: envios simultâneos ainda podem gerar duplicatas. Nenhum convite é enviado nesta etapa.
+
+Configure `notion_api_token` em Preview e Production na Vercel e conceda à integração acesso de leitura e inserção à database original. O token nunca deve ter prefixo `NEXT_PUBLIC_`. A database deve conter uma única fonte de dados; o servidor recusa uma seleção ambígua. Para desenvolvimento local, use uma credencial de Development em `.env.local` (ignorada pelo Git).
+
+O endpoint valida origem, formato e tamanho do corpo, valida e-mail no servidor e ignora o campo anti-spam oculto. Respostas não retornam e-mails, IDs de páginas ou erros internos do Notion; logs não registram o e-mail. O formulário informa que a lista é para iPhone e que o e-mail será usado somente para o convite futuro.
+
+```bash
+npm run test:waitlist
+npm run test:docs
+npm run typecheck
+npm run build
+npm run check:links
+```
+
+`npm run test:waitlist:live` é uma verificação explícita com o token do ambiente: cria um e-mail sintético em `example.com`, testa a rota real e a consulta de duplicatas e arquiva a página sintética ao finalizar. Não executa automaticamente no build normal nem envia mensagens.

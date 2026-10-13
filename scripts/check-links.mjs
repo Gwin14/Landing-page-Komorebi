@@ -1,9 +1,10 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
-const root = path.resolve("out");
+const root = path.resolve(".next/server/app");
+const publicRoot = path.resolve("public");
 await access(root).catch(() => {
-  throw new Error("Diretório out ausente. Execute npm run build primeiro.");
+  throw new Error("Build Next.js ausente. Execute npm run build primeiro.");
 });
 
 async function walk(directory) {
@@ -37,6 +38,7 @@ for (const file of htmlFiles) {
       .replace(/\/$/, "");
     const candidates = clean
       ? [
+          path.join(publicRoot, clean),
           path.join(root, clean),
           path.join(root, `${clean}.html`),
           path.join(root, clean, "index.html"),

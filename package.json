@@ -8,6 +8,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:docs": "node --test tests/docs.test.mjs",
+    "test:waitlist": "node --test tests/waitlist.test.mjs",
+    "test:waitlist:live": "node scripts/check-waitlist-notion.mjs",
     "check:links": "node scripts/check-links.mjs",
     "check:komorebi-drift": "node scripts/check-komorebi-drift.mjs"
   },

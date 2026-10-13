@@ -3,6 +3,7 @@ import { Aperture } from "lucide-react";
 import ThemeToggle from "@/components/docs/ThemeToggle";
 
 export type LegalSection = {
+  id?: string;
   title: string;
   paragraphs?: string[];
   items?: string[];
@@ -43,7 +44,7 @@ export default function LegalPage({
           <p>Última atualização: {updated} · Versão do app: 1.0.0</p>
         </header>
         {sections.map((section, index) => (
-          <section key={section.title}>
+          <section key={section.title} id={section.id}>
             <h2>
               {index + 1}. {section.title}
             </h2>

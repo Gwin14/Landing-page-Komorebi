@@ -7,6 +7,13 @@ export type DocsSection = {
   paragraphs?: string[];
   items?: string[];
   links?: { href: string; label: string }[];
+  images?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption: string;
+  }[];
 };
 
 export type DocsPage = {
@@ -23,7 +30,7 @@ export type DocsPage = {
 export const docsPages: DocsPage[] = [
   {
     slug: "primeiros-passos",
-    sources: ["app/index.jsx", "app/utils/topBarControls.js"],
+    sources: ["app/index.jsx", "app/components/Welcome.jsx", "app/components/OnboardingControls.jsx", "app/utils/onboardingControlPresets.js", "app/utils/topBarControls.js"],
     title: "Primeiros passos",
     description:
       "Prepare o Komorebi, conceda apenas as permissões necessárias e faça a primeira foto.",
@@ -35,6 +42,20 @@ export const docsPages: DocsPage[] = [
       "Espaço disponível na biblioteca de mídia",
     ],
     sections: [
+      {
+        id: "configuracao-inicial",
+        title: "Escolha seu ponto de partida",
+        badge: "Novo",
+        paragraphs: [
+          "Na primeira abertura, o onboarding permite escolher as guias do viewfinder e a posição dos controles. Na etapa Como você quer fotografar?, escolha um conjunto de atalhos ou Quero uma experiência personalizada para adicionar, remover e reordenar controles. O conjunto criativo é a seleção inicial.",
+        ],
+        items: [
+          "Quero controles profissionais: controles manuais, formato de arquivo, proporção, timer, flash e configurações.",
+          "Quero controles criativos: LUTs, proporção, captura dupla, Live Photo no iOS, timer e configurações.",
+          "Quero o diferencial do app: LUTs, captura dupla, Image Stacking no iOS, projetos, tempo e configurações.",
+          "Configurações permanece na barra. Os presets organizam atalhos; recursos continuam sujeitos ao suporte do aparelho e da plataforma.",
+        ],
+      },
       {
         id: "permissoes",
         title: "Permissões",
@@ -61,7 +82,7 @@ export const docsPages: DocsPage[] = [
         id: "topbar",
         title: "Organize os atalhos da câmera",
         paragraphs: [
-          "Nas configurações, escolha quais controles aparecem e altere a ordem. A TopBar aceita até oito controles e também pode ser exibida abaixo do preview.",
+          "Em Configurações → Barra de controles, escolha quais controles aparecem e altere a ordem. A TopBar aceita até oito controles, incluindo Configurações, que não pode ser removido. Em Configurações → Câmera, Controles na parte inferior muda a posição da barra para abaixo do preview.",
         ],
         items: [
           "Controles incompatíveis com a câmera ativa podem não aparecer ou ficar indisponíveis.",
@@ -86,6 +107,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "conheca-a-camera",
+        images: [
+          {
+            src: "/images/docs/controles-topbar.jpg",
+            width: 1206,
+            height: 1074,
+            alt: "Barra superior com atalhos para ajustes, HEIF, proporção 4:3, configurações, captura, Live Photo, filtros e abertura.",
+            caption: "Os atalhos da TopBar ficam acima do preview; a ordem e os controles exibidos são configuráveis.",
+          },
+        ],
         title: "Conheça a câmera",
         paragraphs: [
           "O preview ocupa a área principal. A TopBar reúne atalhos configuráveis; os controles inferiores concentram obturador, galeria, troca de câmera, lentes e ajustes contextuais. Nível e histograma podem ser ativados nas configurações.",
@@ -127,9 +157,18 @@ export const docsPages: DocsPage[] = [
       },
       {
         id: "auxilios-de-enquadramento",
+        images: [
+          {
+            src: "/images/docs/histograma.jpg",
+            width: 999,
+            height: 1263,
+            alt: "Histograma LUMA LIVE no canto superior direito do preview, com grade e nível visíveis.",
+            caption: "Histograma de luminosidade em tempo real, acompanhado da grade e do nível.",
+          },
+        ],
         title: "Ative grade, nível e histograma",
         paragraphs: [
-          "Grade, nível do aparelho e histograma em tempo real são auxílios visuais opcionais. Ative cada um em Configurações; eles não são gravados na foto.",
+          "Grade, nível do aparelho e histograma em tempo real são auxílios visuais opcionais. Ative cada um em Configurações → Câmera; eles não são gravados na foto.",
         ],
       },
       {
@@ -175,9 +214,10 @@ export const docsPages: DocsPage[] = [
       {
         id: "raw-proraw",
         links: [{href: "/docs/formatos-de-arquivo", label: "Entenda RAW, DNG e foto processada"}],
-        title: "Capture em RAW ou ProRAW",
+        title: "Capture em RAW Bayer ou ProRAW",
         items: [
-          "Disponível somente no iOS quando a lente informa um formato compatível.",
+          "Na câmera traseira do iOS, escolha ProRAW ou RAW Bayer em Formato de arquivo; só aparecem os modos anunciados pela lente. ProRAW disponível não garante suporte a Bayer.",
+          "RAW Bayer exige lente física sem zoom digital ou recorte. O modo é desligado se esse requisito deixar de ser atendido; ProRAW segue as capacidades da câmera.",
           "RAW e ProRAW não podem ser combinados com Live Photo ou Retrato.",
           "O DNG preserva a área do sensor; a foto processada do par respeita a proporção selecionada. A captura RAW pede resolução normal, aproximadamente 12 MP, conforme a lente.",
         ],
@@ -207,7 +247,7 @@ export const docsPages: DocsPage[] = [
         title: "Escolha entre HEIF, HEIF+ e JPEG",
         badge: "Novo",
         paragraphs: [
-          "No iPhone, novas fotos são salvas em HEIF por padrão. Em Configurações → Captura, escolha HEIF, HEIF+ ou JPEG. JPEG amplia a compatibilidade; HEIF+ revela um DNG no aparelho antes de exportar a foto.",
+          "No iPhone, novas fotos são salvas em HEIF por padrão. No controle Formato de arquivo da TopBar, escolha HEIF, HEIF+ ou JPEG na área Foto processada. JPEG amplia a compatibilidade; HEIF+ revela um DNG no aparelho antes de exportar a foto.",
         ],
         items: [
           "A preferência também é aplicada a Live Photos, retratos, capturas duplas e cópias sem efeitos quando o fluxo permitir.",
@@ -216,6 +256,15 @@ export const docsPages: DocsPage[] = [
       },
       {
         id: "timer-e-gestos",
+        images: [
+          {
+            src: "/images/docs/timer.jpg",
+            width: 1206,
+            height: 1087,
+            alt: "Menu Timer com Desligado selecionado e opções de 3 seg e 10 seg.",
+            caption: "O Timer da TopBar oferece disparo imediato ou contagem de 3 e 10 segundos.",
+          },
+        ],
         title: "Timer, gestos e atalhos",
         badge: "Novo",
         paragraphs: [
@@ -241,7 +290,7 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "cores-e-efeitos",
-    sources: ["docs/capture-file-formats.md", "app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "app/utils/lutCatalog.js", "app/utils/grainCatalog.js", "app/utils/halationCatalog.js"],
+    sources: ["docs/capture-file-formats.md", "app/components/Settings.jsx", "app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "app/utils/lutCatalog.js", "app/utils/grainCatalog.js", "app/utils/halationCatalog.js"],
     title: "Cores e efeitos",
     description:
       "Aplique LUTs, grão e halation e escolha se quer guardar uma cópia original.",
@@ -255,12 +304,21 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "luts",
+        images: [
+          {
+            src: "/images/docs/luts.jpg",
+            width: 1205,
+            height: 1053,
+            alt: "Aba Filtros com Desligado selecionado e LUTs Guaraná, Maracujá e Mirtilo.",
+            caption: "Escolha um LUT na aba Filtros. Na captura, Desligado mantém a foto sem LUT.",
+          },
+        ],
         title: "LUTs incluídos",
         paragraphs: [
           "O catálogo inclui Guaraná, Maracujá, Mirtilo, Pitaia, Damasco, Cinema, Ameixa e Banana. O efeito é aplicado no processamento da captura e pode ser registrado nos metadados próprios do Komorebi.",
         ],
         items: [
-          "Use Original para não aplicar LUT.",
+          "Escolha Desligado na aba Filtros para não aplicar LUT.",
           "O preview serve como referência e pode variar da imagem final.",
         ],
       },
@@ -278,12 +336,29 @@ export const docsPages: DocsPage[] = [
         id: "edicao-apple",
         title: "Edição no Fotos da Apple",
         paragraphs: [
-          "A opção experimental nas configurações de metadados e edição cria um HEIF para edição no Fotos. Ativá-la retorna o formato processado a HEIF; exige o módulo nativo iOS.",
-          "Live Photo e RAW Bayer comum pausam essa opção. Retrato, Image Stacking e HEIF+ podem aplicar estilos à saída HEIF; em ProRAW, somente o derivado processado recebe estilos. A preferência não comprova que toda lente e versão do Fotos aceitará a edição: confira o arquivo salvo no aparelho antes de depender desse fluxo.",
+          "Em Configurações → Captura e arquivos → Estilos Fotográficos, Edição no Fotos da Apple cria um HEIF com estilos editáveis. Ativá-la retorna o formato processado a HEIF; exige o módulo nativo iOS. Escolher JPEG em Formato de arquivo desliga essa preferência.",
+          "Live Photo pausa essa opção. Retrato, Image Stacking e HEIF+ podem aplicar estilos à saída HEIF; tanto RAW Bayer quanto ProRAW aplicam estilos somente ao companion ou derivado processado selecionado. O DNG permanece intacto e não recebe estilos. A preferência não comprova que toda lente e versão do Fotos aceitará a edição: confira o arquivo salvo no aparelho antes de depender desse fluxo.",
+          "O texto de ajuda do ajuste ainda menciona RAW comum como indisponível. Na versão revisada, a política de captura permite estilos no derivado HEIF de Bayer; a suspensão continua aplicada à Live Photo.",
         ],
       },
       {
         id: "grao-halation",
+        images: [
+          {
+            src: "/images/docs/grao.jpg",
+            width: 1206,
+            height: 1152,
+            alt: "Aba Grão com as opções Desligado, Suave, Médio e Forte; Médio está selecionado.",
+            caption: "A aba Grão permite escolher a intensidade da textura; aqui, Médio está ativo.",
+          },
+          {
+            src: "/images/docs/halation.jpg",
+            width: 1206,
+            height: 1022,
+            alt: "Aba Halation com Desligado selecionado e opções Suave, Médio e Forte.",
+            caption: "A intensidade do halation é escolhida separadamente do grão e dos filtros.",
+          },
+        ],
         links: [{href: "/docs/pipeline-de-imagem", label: "Entenda o processamento e as cópias"}],
         title: "Aplique grão e halation",
         badge: "Novo",
@@ -291,7 +366,7 @@ export const docsPages: DocsPage[] = [
           "Grão e halation foram recalibrados e agora oferecem três intensidades diretas: Suave, Médio e Forte. O grão simula textura fotográfica; o halation cria um halo avermelhado difuso ao redor de altas luzes com contraste local.",
         ],
         items: [
-          "Escolha Sem Grão ou Sem Halation para desligar cada efeito.",
+          "Escolha Desligado na aba Grão ou Halation para desligar cada efeito.",
           "LUT, grão e halation podem ser combinados no mesmo processamento.",
           "Ative a cópia original para salvar também uma versão sem LUT e efeitos quando o fluxo permitir.",
         ],
@@ -404,7 +479,7 @@ export const docsPages: DocsPage[] = [
   },
   {
     slug: "configuracoes",
-    sources: ["app/context/SettingsContext.js", "app/components/Settings.jsx", "docs/controls-and-gestures.md", "app/utils/diagnostics.js"],
+    sources: ["app/context/SettingsContext.js", "app/components/Settings.jsx", "app/components/SettingsTutorialCard.jsx", "app/utils/photographicStylesPolicy.js", "docs/controls-and-gestures.md", "app/utils/diagnostics.js"],
     title: "Configurações",
     description:
       "Consulte o efeito, a persistência e as dependências das preferências do Komorebi.",
@@ -413,16 +488,36 @@ export const docsPages: DocsPage[] = [
     prerequisites: ["As preferências são mantidas localmente com AsyncStorage"],
     sections: [
       {
+        id: "guias-no-app",
+        title: "Abra os guias pelo aplicativo",
+        badge: "Novo",
+        paragraphs: [
+          "No início de Configurações, um card de tutorial abre um guia desta documentação no navegador do aparelho. O guia varia entre câmera, efeitos, projetos e, no iOS, RAW e controles manuais. A consulta usa internet; abrir o guia não envia uma foto.",
+        ],
+      },
+      {
         id: "preview",
-        title: "Preview e auxílio",
+        images: [
+          {
+            src: "/images/docs/estilo-retro.jpg",
+            width: 1206,
+            height: 1403,
+            alt: "Controles inferiores com seletor EV e ISO, escala de exposição, obturador amarelo e lentes de 0.5 a 8.",
+            caption: "Detalhe do viewfinder com estilo retrô: escala de exposição e controles de captura.",
+          },
+        ],
+        title: "Câmera e prévia de efeitos",
+        paragraphs: [
+          "Configurações → Câmera reúne as guias e a aparência do viewfinder. Configurações → Prévia de efeitos controla LUT, Halation e Grain na imagem ao vivo; no iOS, também a prévia de Dupla exposição e Stacking. O resultado salvo usa o processamento de alta resolução e pode diferir do preview.",
+        ],
         items: [
-          "Estilo retrô: altera a apresentação do viewfinder.",
+          "Estilo retrô: altera a apresentação do viewfinder. Desligado, a interface usa bordas suaves no preview; essa aparência não altera a foto salva.",
           "Grade: adiciona linhas de composição.",
           "Nível: mostra o alinhamento do aparelho.",
           "Histograma: mostra a distribuição de luminosidade em tempo real quando o pipeline ativo oferece suporte.",
-          "Scanner de composição (beta): mostra uma guia de reenquadramento no iOS. Zebra de altas luzes e sombras sinaliza extremos de exposição no preview.",
-          "Prévia de LUT, grão, halation e stacking: habilita visualização conforme o pipeline; não substitui a conferência da foto final.",
-          "Controles invertidos: altera a posição da TopBar.",
+          "Indicador de altas luzes e Indicador de sombras: sinalizam extremos de exposição no preview do iOS.",
+          "Som do obturador: ativa ou desativa o som próprio do app, sem substituir regras do sistema.",
+          "Controles na parte inferior: coloca a TopBar abaixo do preview.",
         ],
       },
       {
@@ -437,12 +532,11 @@ export const docsPages: DocsPage[] = [
         id: "captura-opcoes",
         title: "Captura e metadados",
         items: [
-          "Som do obturador: ativa ou desativa o som próprio do app, sem substituir regras do sistema.",
           "Salvar cópia sem efeitos: mantém uma versão sem LUT, grão ou halation quando aplicável.",
           "Salvar localização: grava GPS apenas em novas fotos e somente com permissão.",
-          "Formato da foto (iOS): escolhe HEIF, HEIF+ ou JPEG; o atalho Formato de arquivo controla RAW e foto processada.",
+          "O formato é escolhido no atalho Formato de arquivo da TopBar. Captura e arquivos reúne cópia sem efeitos, autoria, localização, Estilos Fotográficos e ajustes de Revelação HEIF+ no iOS.",
           "Autoria: grava autor e direitos autorais nas próximas capturas, sem modificar fotos existentes.",
-          "Edição no Fotos da Apple (experimental, iOS): aplica Estilos 2/3 à saída HEIF, inclusive Retrato, stacking e HEIF+. Pausa em Live Photo e RAW Bayer comum; em ProRAW, só no derivado processado.",
+          "Edição no Fotos da Apple (experimental, iOS): aplica Estilos 2/3 à saída HEIF, inclusive Retrato, stacking e HEIF+. Pausa em Live Photo; RAW Bayer e ProRAW aplicam estilos somente ao companion ou derivado processado selecionado, sem modificar o DNG.",
           "LUTs personalizados: importa e remove arquivos .cube locais.",
         ],
       },
@@ -459,7 +553,7 @@ export const docsPages: DocsPage[] = [
         id: "topbar-opcoes",
         title: "TopBar",
         paragraphs: [
-          "Escolha até oito controles, defina a ordem e altere a posição. Opções incompatíveis continuam sujeitas à capacidade da lente, ao sistema operacional e às permissões.",
+          "Em Barra de controles, escolha até oito atalhos e defina a ordem; Configurações permanece disponível e não pode ser removido. A posição é alterada em Câmera → Controles na parte inferior. Opções incompatíveis continuam sujeitas à capacidade da lente, ao sistema operacional e às permissões.",
         ],
       },
     ],
@@ -555,11 +649,32 @@ export const docsPages: DocsPage[] = [
     ],
     sources: [
       "app/hooks/useManualCameraControls.js",
+      "app/components/CameraAdjustmentControls.jsx",
+      "app/components/ManualControlsPanel.jsx",
+      "app/components/ExposureSlider.jsx",
       "modules/camera-manual-controls",
     ],
     sections: [
       {
+        id: "painel",
+        title: "Use o painel de ajustes",
+        paragraphs: [
+          "Ative Controles manuais na TopBar. O painel inferior substitui a régua de exposição no mesmo espaço e oferece EV, ISO, SS (obturador), WB (balanço de branco) e AF (foco). Selecione o ajuste no seletor à esquerda e arraste a régua à direita para alterar o valor.",
+          "AUTO indica que aquele controle está automático. Um toque breve na régua devolve ISO, SS, WB ou AF ao automático; em EV, o toque retorna a 0,0 EV. Sair do modo manual restaura os ajustes automáticos; ao abrir de novo, o painel começa em EV.",
+        ],
+        links: [{ href: "/docs/camera#exposicao-e-controles-manuais", label: "Disponibilidade dos ajustes na câmera" }],
+      },
+      {
         id: "exposicao",
+        images: [
+          {
+            src: "/images/docs/controles-manuais.jpg",
+            width: 1206,
+            height: 1090,
+            alt: "Painel inferior com ISO, SS e WB; SS selecionado, escala marcada AUTO e lente 4 ativa.",
+            caption: "No painel manual, SS seleciona a velocidade do obturador; AUTO indica o ajuste automático.",
+          },
+        ],
         title: "ISO, obturador e compensação",
         paragraphs: [
           "ISO amplifica o sinal: valores maiores ajudam em pouca luz, mas podem aumentar ruído. Um obturador mais lento coleta luz por mais tempo e aumenta o risco de tremido e borrão de movimento. Um obturador rápido ajuda a congelar o assunto, exigindo mais luz ou ISO.",
@@ -614,14 +729,28 @@ export const docsPages: DocsPage[] = [
     sources: [
       "docs/capture-file-formats.md",
       "app/utils/fileFormatSelection.js",
+      "app/components/FileFormatSelector.jsx",
+      "app/hooks/useRawCapture.js",
+      "app/utils/photographicStylesPolicy.js",
+      "patches/react-native-vision-camera+4.7.3.patch",
       "modules/camera-raw-capture/index.ts",
     ],
     sections: [
       {
         id: "escolher",
+        images: [
+          {
+            src: "/images/docs/formatos-de-arquivo.jpg",
+            width: 1206,
+            height: 1244,
+            alt: "Menu Formato de arquivo com RAW Nenhum, ProRAW e RAW Bayer, e foto processada Nenhuma, HEIF, HEIF+ e JPEG; HEIF está selecionado.",
+            caption: "O seletor separa RAW e foto processada. Neste exemplo, somente a saída HEIF está ativa.",
+          },
+        ],
         title: "Escolha o formato e as saídas",
         paragraphs: [
-          "Em Configurações → Captura, escolha HEIF, HEIF+ ou JPEG para a foto processada. Na TopBar, Formato de arquivo permite selecionar RAW, foto processada ou os dois. Se o atalho não aparecer, inclua-o na configuração da TopBar.",
+          "Na TopBar, abra Formato de arquivo. A área RAW oferece Nenhum e os modos ProRAW e RAW Bayer disponíveis na lente; Foto processada oferece Nenhuma e HEIF, HEIF+ ou JPEG no iOS. No Android, a saída processada é JPEG. Se o atalho não aparecer, inclua-o em Configurações → Barra de controles.",
+          "Mantenha pelo menos uma saída. Para salvar só DNG, selecione um RAW e depois Nenhuma em Foto processada. Para salvar só HEIF/JPEG, selecione a foto processada e depois Nenhum em RAW. A última saída não pode ser desligada pelo seletor.",
         ],
         items: [
           "HEIF: foto processada com armazenamento eficiente; confirme se o destino aceita .heic.",
@@ -629,6 +758,17 @@ export const docsPages: DocsPage[] = [
           "HEIF+: foto revelada a partir de DNG no pipeline nativo do Komorebi.",
           "RAW sozinho: salva somente DNG, com RAW Bayer ou ProRAW conforme a lente.",
           "RAW + foto processada: salva um único item na biblioteca, com dois recursos originais, DNG e HEIC/JPEG.",
+        ],
+      },
+      {
+        id: "bayer-proraw",
+        title: "RAW Bayer, ProRAW e zoom",
+        badge: "Novo",
+        paragraphs: [
+          "ProRAW e RAW Bayer são opções distintas. O app consulta o suporte da câmera traseira ativa e mostra cada modo disponível, mesmo quando existe apenas um. Escolher Bayer não o substitui silenciosamente por ProRAW.",
+          "RAW Bayer exige uma lente física com zoom nativo do sensor, sem recorte ou zoom digital. Os números do seletor são relativos ao conjunto de lentes: 0,5×, 1× ou 4× podem corresponder a lentes físicas sem zoom digital; paradas como 2× ou 8× podem ser recortes. A disponibilidade depende do aparelho, não apenas do número exibido.",
+          "Ao usar zoom digital, uma câmera virtual ou uma lente sem suporte, Bayer é desligado e a saída processada volta a ficar ativa. ProRAW continua condicionado às capacidades da lente e pode admitir zoom. Para voltar ao Bayer, retorne a uma lente física compatível sem recorte e selecione RAW Bayer novamente.",
+          "Os dois modos permitem DNG sozinho, par com HEIF/JPEG ou revelação HEIF+, conforme as saídas selecionadas. Os Estilos Fotográficos atuam somente no companion ou derivado HEIF; o DNG não recebe estilos.",
         ],
       },
       {
@@ -648,7 +788,7 @@ export const docsPages: DocsPage[] = [
         id: "restricoes",
         title: "Troca de lente e modos incompatíveis",
         paragraphs: [
-          "Desligar a última saída ativa a outra: a captura nunca fica sem formato de saída. Sem RAW disponível, a foto processada permanece selecionada. Trocar de lente pode remover RAW.",
+          "O seletor bloqueia desligar a última saída. Ao trocar de lente, mantém o RAW escolhido e a seleção de foto processada enquanto a nova sessão informa suas capacidades. Confirmar que o modo não é suportado, mudar para a câmera frontal ou usar zoom digital em Bayer desliga RAW e ativa a foto processada.",
           "Live Photo e Retrato exigem RAW desligado. Image Stacking suspende RAW e restaura a seleção ao sair. HEIF+ fica pausado em Live Photo, Retrato, stacking ou câmera sem RAW.",
         ],
         links: [
@@ -687,6 +827,9 @@ export const docsPages: DocsPage[] = [
     sources: [
       "docs/heif-plus.md",
       "app/utils/heifPlusSettings.js",
+      "app/components/FileFormatSelector.jsx",
+      "app/components/Settings.jsx",
+      "docs/capture-file-formats.md",
       "modules/camera-raw-capture/ios/HeifPlusEngine.swift",
     ],
     sections: [
@@ -695,7 +838,7 @@ export const docsPages: DocsPage[] = [
         title: "O que acontece na captura",
         paragraphs: [
           "HEIF+ captura um DNG e o revela com CIRAWFilter. A imagem processada acompanhante da câmera não é a fonte desse fluxo. O app recorta, aplica LUT, halation e grão e exporta HEIF.",
-          "Escolha HEIF+ nas configurações. Se RAW também estiver selecionado em Formato de arquivo, o DNG pode acompanhar o HEIC no mesmo item da biblioteca. Sem essa seleção, o DNG é uma fonte temporária para a revelação.",
+          "Escolha HEIF+ em Foto processada no controle Formato de arquivo da TopBar. Ajuste a revelação em Configurações → Captura e arquivos → Revelação HEIF+. Se RAW Bayer ou ProRAW também estiver selecionado, esse DNG acompanha o HEIC no mesmo item da biblioteca. Com RAW em Nenhum, o app usa ProRAW quando disponível, ou Bayer como alternativa, somente como fonte temporária da revelação.",
         ],
         links: [
           {
@@ -742,7 +885,7 @@ export const docsPages: DocsPage[] = [
         id: "validacao",
         title: "O que ainda merece atenção",
         paragraphs: [
-          "Testes nativos com imagens sintéticas verificam exportação, efeitos, metadados e recuperação. A qualidade de ProRAW real, diferenças dos controles, tempos, memória e interrupções ainda precisam ser conferidos em iPhone físico. A implementação não comprova por si só a qualidade em todas as lentes.",
+          "Testes nativos com imagens sintéticas verificam exportação, efeitos, metadados e recuperação. A qualidade de RAW Bayer e ProRAW reais, diferenças dos controles, tempos, memória e interrupções ainda precisam ser conferidos em iPhone físico. A implementação não comprova por si só a qualidade em todas as lentes.",
         ],
       }
     ],
@@ -767,6 +910,15 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "modos",
+        images: [
+          {
+            src: "/images/docs/image-stacking.jpg",
+            width: 1006,
+            height: 1418,
+            alt: "Menu Modo de captura com Desligado selecionado e opções Bulb, Motion Blur, Focus Bracketing e Dupla exposição.",
+            caption: "O menu de captura reúne os modos de Image Stacking e Focus Bracketing, conforme o suporte da lente.",
+          },
+        ],
         title: "Modos disponíveis",
         paragraphs: [
           "Abra Image Stacking na TopBar. O seletor atual oferece Bulb, Motion Blur, Dupla exposição e Focus Bracketing quando a lente anuncia suporte. Estratégias experimentais descritas em notas técnicas, como Night ou redução de ruído, não aparecem no seletor atual.",
@@ -1052,6 +1204,11 @@ export const docsPages: DocsPage[] = [
     ],
     sources: [
       "app/hooks/usePhotoProcessingQueue.js",
+      "app/utils/cameraUtils.js",
+      "app/hooks/useRawCapture.js",
+      "app/utils/photographicStylesPolicy.js",
+      "patches/react-native-vision-camera+4.7.3.patch",
+      "docs/capture-file-formats.md",
       "docs/heif-plus.md",
       "docs/image-stacking-engine.md",
       "docs/performance-audit.md",
@@ -1065,6 +1222,15 @@ export const docsPages: DocsPage[] = [
         paragraphs: [
           "A foto padrão passa pela captura e fila de processamento JavaScript. Módulos especializados retornam arquivos e recursos de RAW, Live Photo e Retrato. Image Stacking compõe nativamente e entrega uma URI para a fila existente.",
           "HEIF+ possui uma fila nativa persistente: copia o DNG, revela, aplica efeitos, enriquece metadados e salva com checkpoints. A integração JavaScript acompanha estados e solicita análise inteligente quando ativada.",
+        ],
+      },
+      {
+        id: "raw-nativo",
+        title: "Capacidades e captura RAW",
+        paragraphs: [
+          "O hook useRawCapture vincula as capacidades à lente ativa e filtra Bayer quando há zoom digital ou câmera virtual. Na captura do VisionCamera, o patch consulta os tipos RAW separadamente para Bayer e ProRAW; Bayer usa prioridade de velocidade e exige zoom do sensor e da conexão em 1×.",
+          "Se a saída de uma câmera física não anunciar Bayer, a configuração tenta o preset fotográfico e uma dimensão normal suportada de até 12,2 MP. O limite menor só é mantido se Bayer aparecer; caso contrário, o anterior é restaurado. Essas consultas não garantem suporte em toda lente. O preview é configurado depois da saída fotográfica.",
+          "Photo RAW support e RAW normal-output probe registram capacidades e tentativas nativas. Falhas de captura RAW aparecem na TopBar. Alterar o patch exige reinstalar/aplicar patches e recompilar o iOS; uma atualização JavaScript não instala a correção nativa.",
         ],
       },
       {
@@ -1103,6 +1269,7 @@ export const docsPages: DocsPage[] = [
         title: "Como validar uma contribuição",
         items: [
           "No aplicativo: npm run lint, npm run typecheck e npm test.",
+          "Para RAW: npm run test:raw-native em macOS com Xcode verifica tipos do Core Swift do VisionCamera; não executa captura nem confirma suporte do sensor.",
           "Para foco: npm run test:focus-native em macOS com Xcode/Core Image/Metal.",
           "Para profundidade: npm run test:depth-native em macOS com Xcode/Core ML; os checks não substituem conferir os controles do Fotos no iPhone.",
           "Para HEIF+: bash scripts/check-heif-plus-native.sh; a execução nativa depende de acesso à GPU.",

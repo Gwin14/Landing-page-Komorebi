@@ -11,8 +11,8 @@ export type Feature = {
   verifiedCommit: string;
 };
 
-export const APP_VERIFIED_COMMIT = "eced539294323d2bcf19c6484769a7c2399683f9";
-export const APP_VERIFIED_DATE = "9 de outubro de 2026";
+export const APP_VERIFIED_COMMIT = "f99a573d2a615eaa7cbb08071fd1222f2e532dfb";
+export const APP_VERIFIED_DATE = "12 de outubro de 2026";
 
 export const featureMatrix: Feature[] = [
   {
@@ -65,12 +65,12 @@ export const featureMatrix: Feature[] = [
   },
   {
     id: "raw-proraw",
-    title: "RAW e ProRAW",
+    title: "RAW Bayer e ProRAW",
     ios: "conditional",
     android: "unavailable",
     condition:
-      "Requer módulo nativo iOS e formato RAW informado pela câmera ativa.",
-    sources: ["modules/camera-raw-capture", "app/hooks/useRawCapture.js"],
+      "Requer iOS, câmera traseira e suporte ao modo escolhido. Bayer exige lente física sem recorte/zoom digital; ProRAW tem capacidades próprias. Trocar para um modo incompatível ativa a saída processada.",
+    sources: ["modules/camera-raw-capture", "app/hooks/useRawCapture.js", "app/components/FileFormatSelector.jsx", "patches/react-native-vision-camera+4.7.3.patch"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -157,7 +157,7 @@ export const featureMatrix: Feature[] = [
   },
   {
     id: "heif-plus", title: "Revelação HEIF+", ios: "validate", android: "unavailable",
-    condition: "Exige RAW na lente ativa. Pausado em Live Photo, Retrato e stacking. Qualidade e desempenho em iPhone ainda precisam de validação.",
+    condition: "Exige RAW Bayer ou ProRAW na lente ativa; Bayer respeita a restrição de zoom nativo. Pausado em Live Photo, Retrato e stacking. Qualidade e desempenho em iPhone ainda precisam de validação.",
     sources: ["app/utils/heifPlusSettings.js", "modules/camera-raw-capture/ios/HeifPlusEngine.swift"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
@@ -193,7 +193,7 @@ export const featureMatrix: Feature[] = [
   },
   {
     id: "apple-styles", title: "Edição no Fotos da Apple", ios: "validate", android: "unavailable",
-    condition: "Experimental, com módulo nativo iOS. Aplica estilos à saída HEIF comum, Retrato, stacking e HEIF+. Live Photo e RAW Bayer comum suspendem a opção; ProRAW aplica estilos somente ao derivado processado.",
+    condition: "Experimental, com módulo nativo iOS. Aplica estilos à saída HEIF comum, Retrato, stacking e HEIF+. Live Photo suspende a opção; RAW Bayer e ProRAW aplicam estilos somente ao companion ou derivado processado selecionado, sem modificar o DNG.",
     sources: ["app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "docs/capture-file-formats.md"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
