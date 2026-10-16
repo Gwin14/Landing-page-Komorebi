@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { detectLocale, isLocale, localeCookie } from "@/lib/i18n/routing";
 
 export function proxy(request: NextRequest) {
-  if (/^\/(pt|en)(\/|$)/.test(request.nextUrl.pathname)) return NextResponse.next();
+  if (isLocale(request.nextUrl.pathname.split("/")[1])) return NextResponse.next();
   const saved = request.cookies.get(localeCookie)?.value;
   const locale = isLocale(saved) ? saved : detectLocale(request.headers.get("accept-language"));
   const url = request.nextUrl.clone();

@@ -515,7 +515,8 @@ export const docsPages: DocsPage[] = [
         id: "idioma",
         title: "Idioma do aplicativo",
         paragraphs: [
-          "Em Configurações → Idioma, escolha português, inglês, japonês, alemão, espanhol ou francês. Automático segue o idioma principal do aparelho; idiomas não disponíveis usam inglês. A escolha manual fica salva no dispositivo. Nomes de projetos, LUTs e autoria são preservados."
+          "Em Configurações → Idioma, escolha português, inglês, japonês, alemão, espanhol ou francês. Automático segue o idioma principal do aparelho; idiomas não disponíveis usam inglês. A escolha manual fica salva no dispositivo. Nomes de projetos, LUTs e autoria são preservados.",
+          "O site oferece os mesmos seis idiomas. Use o seletor de idioma no cabeçalho para mudar sem perder a página atual. A escolha fica salva neste navegador por um ano; na primeira visita, seguimos o idioma principal do navegador quando disponível e usamos inglês nos demais casos. O idioma do site e o do aplicativo são escolhidos separadamente."
         ]
       },
       {

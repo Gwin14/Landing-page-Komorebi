@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 
 export default function WaitlistForm() {
-  const { t, path } = useI18n();
+  const { t, path, locale } = useI18n();
   const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState("");
   const submitting = useRef(false);
@@ -64,7 +64,7 @@ export default function WaitlistForm() {
       </div>
       {state !== "success" && (
         <>
-          <h1>{t("Lista de espera")}<br /><em>{t("para iPhone.")}</em></h1>
+          <h1>{t("Lista de espera para iPhone")}</h1>
           <form onSubmit={submit} noValidate>
             <label htmlFor="waitlist-email">{t("Seu e-mail")}</label>
             <input id="waitlist-email" name="email" type="email" autoComplete="email" inputMode="email" placeholder={t("voce@exemplo.com")} maxLength={254} required disabled={state === "sending"} aria-invalid={state === "error" || undefined} aria-describedby={`waitlist-terms${error ? " waitlist-error" : ""}`} />
@@ -76,7 +76,7 @@ export default function WaitlistForm() {
             <button className="button button-orange waitlist-submit" type="submit" disabled={state === "sending"}>
               {state === "sending" ? <>{t("Enviando…")} <LoaderCircle size={19} className="waitlist-spinner" /></> : <>{t("Entrar na lista de espera")} <ArrowUpRight size={20} /></>}
             </button>
-            <p id="waitlist-terms" className="waitlist-form-footnote">{t("Ao se cadastrar, você autoriza o envio do convite por e-mail e concorda com os")} <Link href={path("/termos-de-uso")}>{t("Termos de Uso")}</Link> {t("e a")} <Link href={path("/politica-de-privacidade#lista-de-espera")}>{t("Política de Privacidade")}</Link>.</p>
+            <p id="waitlist-terms" className="waitlist-form-footnote">{t("Ao se cadastrar, você autoriza o envio do convite por e-mail e concorda com os")} <Link href={path("/termos-de-uso")}>{t("Termos de Uso")}</Link> {t("e a")} <Link href={path("/politica-de-privacidade#lista-de-espera")}>{t("Política de Privacidade")}</Link>{locale === "ja" ? "。" : "."}</p>
           </form>
           <noscript><p className="waitlist-error">{t("Ative o JavaScript para enviar seu cadastro.")}</p></noscript>
         </>

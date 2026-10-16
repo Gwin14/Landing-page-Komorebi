@@ -1,0 +1,58 @@
+{
+  "es": {
+    "Configurações": "Ajustes",
+    "Captura e arquivos": "Captura y archivos",
+    "Barra de controles": "Barra de controles",
+    "Controles e gestos": "Controles y gestos",
+    "Rastros de luz": "Estelas de luz",
+    "Dupla exposição": "Doble exposición",
+    "Focus Bracketing": "Horquillado de enfoque",
+    "Motion Blur": "Desenfoque de movimiento",
+    "Sobre e suporte": "Acerca de y soporte",
+    "Compartilhar uso e diagnósticos": "Compartir uso y diagnósticos",
+    "Widgets e Atalhos": "Widgets y atajos",
+    "Focus peaking": "Resalte de enfoque"
+  },
+  "fr": {
+    "Configurações": "Réglages",
+    "Captura e arquivos": "Prise de vue et fichiers",
+    "Barra de controles": "Barre de commandes",
+    "Controles e gestos": "Commandes et gestes",
+    "Rastros de luz": "Traînées lumineuses",
+    "Dupla exposição": "Double exposition",
+    "Focus Bracketing": "Bracketing de mise au point",
+    "Motion Blur": "Flou de mouvement",
+    "Sobre e suporte": "À propos et assistance",
+    "Compartilhar uso e diagnósticos": "Partager l’utilisation et les diagnostics",
+    "Widgets e Atalhos": "Widgets et raccourcis",
+    "Focus peaking": "Surlignage de mise au point"
+  },
+  "de": {
+    "Configurações": "Einstellungen",
+    "Captura e arquivos": "Aufnahme und Dateien",
+    "Barra de controles": "Bedienleiste",
+    "Controles e gestos": "Steuerung und Gesten",
+    "Rastros de luz": "Lichtspuren",
+    "Dupla exposição": "Doppelbelichtung",
+    "Focus Bracketing": "Fokus-Bracketing",
+    "Motion Blur": "Bewegungsunschärfe",
+    "Sobre e suporte": "Info und Support",
+    "Compartilhar uso e diagnósticos": "Nutzung und Diagnosedaten teilen",
+    "Widgets e Atalhos": "Widgets & Kurzbefehle",
+    "Focus peaking": "Fokus-Peaking"
+  },
+  "ja": {
+    "Configurações": "設定",
+    "Captura e arquivos": "撮影とファイル",
+    "Barra de controles": "コントロールバー",
+    "Controles e gestos": "操作とジェスチャー",
+    "Rastros de luz": "光跡",
+    "Dupla exposição": "二重露光",
+    "Focus Bracketing": "フォーカスブラケット",
+    "Motion Blur": "モーションブラー",
+    "Sobre e suporte": "情報とサポート",
+    "Compartilhar uso e diagnósticos": "使用状況と診断情報を共有",
+    "Widgets e Atalhos": "ウィジェットとショートカット",
+    "Focus peaking": "フォーカスピーキング"
+  }
+}
