@@ -56,7 +56,7 @@ Os recursos e requisitos de hardware foram conferidos no código e na documenta�
 
 ## Documentação pública
 
-Os 14 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções e limites de uso, sem referências a arquivos internos ou commits. A revisão de 12 de outubro de 2026 usa o Komorebi `f99a573` e inclui RAW Bayer/ProRAW, restrições de zoom e troca de lente, Estilos Fotográficos no companion dos dois modos, presets do onboarding, card de tutorial e o painel de ajustes. Os guias preservam as capturas de interface fornecidas; opções visíveis variam conforme a lente e a plataforma. Páginas, busca e sitemap são gerados a partir desse conteúdo.
+Os 13 guias ficam em `content/docs-pages.ts`. A navegação, os grupos e as palavras-chave da busca ficam em `lib/docs-navigation.ts`. Cada guia traz instruções e limites de uso, sem referências a arquivos internos ou commits. A revisão de 16 de outubro de 2026 usa o Komorebi `3936ee8` e inclui megapixels por formato, Focus peaking, Rastros de luz, tour inicial, widgets e atalhos, seis idiomas no app, Estilos Fotográficos na galeria e a preferência conjunta de PostHog/Sentry. Os guias e traduções apresentam somente as opções disponíveis na interface atual. Páginas, busca e sitemap são gerados a partir desse conteúdo.
 
 A sidebar permite recolher cada seção e abre a seção da página atual. No celular, o menu também agrupa as páginas em seções recolhíveis e tem rolagem própria. O header da landing page permanece visível durante a rolagem.
 

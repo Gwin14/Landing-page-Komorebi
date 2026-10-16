@@ -21,9 +21,9 @@ const paths = [
     icon: Palette,
   },
   {
-    title: "Use o Scanner de composição",
-    text: "Guia local de reenquadramento em beta no iOS.",
-    href: "/docs/scanner-de-composicao",
+    title: "Explore os modos de captura",
+    text: "Rastros de luz, Motion Blur e Dupla exposição no iOS.",
+    href: "/docs/image-stacking",
     icon: BookOpen,
   },
   {

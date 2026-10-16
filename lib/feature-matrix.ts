@@ -11,8 +11,8 @@ export type Feature = {
   verifiedCommit: string;
 };
 
-export const APP_VERIFIED_COMMIT = "f99a573d2a615eaa7cbb08071fd1222f2e532dfb";
-export const APP_VERIFIED_DATE = "12 de outubro de 2026";
+export const APP_VERIFIED_COMMIT = "3936ee83605b684bc8aea546995afa1b595bfc32";
+export const APP_VERIFIED_DATE = "16 de outubro de 2026";
 
 export const featureMatrix: Feature[] = [
   {
@@ -108,20 +108,6 @@ export const featureMatrix: Feature[] = [
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
-    id: "composition-scan",
-    title: "Scanner de composição",
-    ios: "validate",
-    android: "unavailable",
-    condition:
-      "Beta no iOS. A análise básica é local; o modelo semântico opcional ocupa cerca de 1,6 GB. Validação final em aparelho físico está pendente.",
-    sources: [
-      "modules/composition-scan",
-      "app/hooks/useCompositionScan.js",
-      "docs/composition-scan.md",
-    ],
-    verifiedCommit: APP_VERIFIED_COMMIT,
-  },
-  {
     id: "heif-jpeg",
     title: "Seleção entre HEIF e JPEG",
     ios: "supported",
@@ -168,7 +154,7 @@ export const featureMatrix: Feature[] = [
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
-    id: "image-stacking", title: "Bulb, Motion Blur e Dupla exposição", ios: "validate", android: "unavailable",
+    id: "image-stacking", title: "Rastros de luz, Motion Blur e Dupla exposição", ios: "validate", android: "unavailable",
     condition: "Requer capacidade nativa anunciada pela lente. Composição, interrupção e desempenho precisam de validação física.",
     sources: ["modules/camera-image-stacking/index.ts", "app/components/ImageStackingSelector.jsx"],
     verifiedCommit: APP_VERIFIED_COMMIT,
@@ -186,15 +172,36 @@ export const featureMatrix: Feature[] = [
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
-    id: "photo-intelligence", title: "Tags e nomes inteligentes", ios: "conditional", android: "unavailable",
-    condition: "Opções independentes, desligadas por padrão. Requerem modelo local pronto; falha na análise não impede a captura.",
-    sources: ["app/utils/photoIntelligence.js", "app/hooks/usePhotoProcessingQueue.js"],
-    verifiedCommit: APP_VERIFIED_COMMIT,
-  },
-  {
     id: "apple-styles", title: "Edição no Fotos da Apple", ios: "validate", android: "unavailable",
     condition: "Experimental, com módulo nativo iOS. Aplica estilos à saída HEIF comum, Retrato, stacking e HEIF+. Live Photo suspende a opção; RAW Bayer e ProRAW aplicam estilos somente ao companion ou derivado processado selecionado, sem modificar o DNG.",
     sources: ["app/utils/photographicStylesPolicy.js", "modules/camera-photographic-styles/index.ts", "docs/capture-file-formats.md"],
+    verifiedCommit: APP_VERIFIED_COMMIT,
+  },
+  {
+    id: "photo-resolution",
+    title: "Megapixels por formato",
+    ios: "conditional",
+    android: "conditional",
+    condition: "Preferências de 12, 24 ou 48 MP; padrões de 48 MP para RAW e 24 MP para HEIF/JPEG. A lente, o modo e o recorte podem reduzir a resolução final; fotos menores nunca são ampliadas.",
+    sources: ["app/utils/photoResolution.js", "modules/shared/PhotoResolution.swift", "docs/camera-options-2026-10.md"],
+    verifiedCommit: APP_VERIFIED_COMMIT,
+  },
+  {
+    id: "focus-peaking",
+    title: "Focus peaking",
+    ios: "conditional",
+    android: "unavailable",
+    condition: "Ativado em Configurações → Câmera no iOS. Destaca bordas no preview para ajudar no foco; não altera a foto salva.",
+    sources: ["app/components/Settings.jsx", "app/components/NativePeakingPreview.jsx", "app/components/NativeCapturePreview.jsx"],
+    verifiedCommit: APP_VERIFIED_COMMIT,
+  },
+  {
+    id: "widgets-shortcuts",
+    title: "Widgets e Atalhos",
+    ios: "conditional",
+    android: "unavailable",
+    condition: "Requer iOS e integração nativa disponível. Presets abrem e configuram a câmera sem disparar; os ajustes duram na sessão e respeitam as capacidades da lente.",
+    sources: ["app/components/CameraLaunchSettings.jsx", "modules/camera-launch", "docs/ios-widgets-shortcuts.md"],
     verifiedCommit: APP_VERIFIED_COMMIT,
   },
   {
@@ -213,4 +220,4 @@ export const statusLabels: Record<FeatureStatus, string> = {
 };
 
 export const compatibilitySummary =
-  "O Komorebi requer iOS 18 ou Android 8. Controles manuais completos, RAW/ProRAW, Live Photo, retrato e Camera Control são recursos condicionais do iOS. Scanner de composição, HEIF+, Image Stacking e geração de profundidade na galeria também exigem iOS e têm validações de qualidade ou desempenho pendentes em aparelho físico.";
+  "O Komorebi requer iOS 18 ou Android 8. Controles manuais completos, RAW/ProRAW, Live Photo, retrato, Camera Control, widgets e atalhos dependem do iOS e de suporte do aparelho. HEIF+, Image Stacking, Estilos Fotográficos e geração de profundidade na galeria também exigem iOS; qualidade e desempenho variam conforme a lente e precisam de validação em aparelho físico.";

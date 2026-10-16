@@ -16,7 +16,7 @@ const translateUrl = moduleUrl(translateSource);
 const { getTranslator, translateContent, getUiMessages } = await import(translateUrl);
 const docsUrl = moduleUrl(await read("content/docs-pages.ts"));
 const navigationUrl = moduleUrl(await read("lib/docs-navigation.ts"));
-const { docsPages } = await import(docsUrl);
+const { docsPages, getDocsPage } = await import(docsUrl);
 const { docsNavigation } = await import(navigationUrl);
 const { privacySections, termsSections } = await import(moduleUrl(await read("content/legal.ts")));
 const { featureMatrix, statusLabels } = await import(moduleUrl(await read("lib/feature-matrix.ts")));
@@ -86,6 +86,25 @@ test("search indexes English guide bodies and section names", () => {
   assert.ok(entries.some((entry) => entry.title === "Focus and white balance" && entry.searchText.includes("lens position")));
   assert.ok(entries.some((entry) => entry.searchText.includes("depth") && entry.href.startsWith("/docs/")));
   assert.equal(getSearchEntries("pt")[0].title, "Primeiros passos");
+});
+
+test("hidden app features stay out of public pages, search and shipped dictionaries", () => {
+  const hidden = /scanner|\bscan\b|minicpm|intelig[eê]n|intelligent|capturas? duplas?|double capture|sorriso|smil|\bbulb\b|controles na parte inferior|controls below|posi[çc][aã]o invertida|inverted position/i;
+  for (const content of [docsPages, docsNavigation, featureMatrix, privacySections, termsSections, english, uiKeys, getSearchEntries("pt"), getSearchEntries("en")]) {
+    assert.doesNotMatch(JSON.stringify(content), hidden);
+  }
+  assert.equal(getDocsPage("scanner-de-composicao"), undefined);
+  assert.ok(!docsNavigation.some((item) => item.slug === "scanner-de-composicao"));
+  for (const [locale, keyword, anchor] of [
+    ["pt", "megapixels", "megapixels"],
+    ["en", "megapixels", "megapixels"],
+    ["pt", "rastros de luz", "rastros-de-luz"],
+    ["en", "light trails", "rastros-de-luz"],
+    ["en", "widgets", "widgets-e-atalhos"],
+    ["en", "focus peaking", "focus-peaking"],
+  ]) {
+    assert.ok(getSearchEntries(locale).some((entry) => entry.href.endsWith(`#${anchor}`) && entry.searchText.toLowerCase().includes(keyword)));
+  }
 });
 
 test("client dictionaries cover interface strings and keep guide bodies on the server", async () => {
