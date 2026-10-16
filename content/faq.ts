@@ -12,7 +12,7 @@ export const questions = [
   ],
   [
     "Minhas fotos ficam no dispositivo?",
-    "Sim. Fotos, preferências e LUTs personalizados ficam no dispositivo. Scan e geração de profundidade analisam as imagens localmente. Clima, mapa, EXIF Frame e o download opcional do modelo do Scan usam serviços externos. Diagnósticos técnicos começam ativados e podem ser desligados no onboarding beta ou em Configurações → Sobre. A localização nas fotos é opcional.",
+    "Sim. Fotos, preferências, LUTs personalizados e a geração de profundidade ficam no dispositivo. Clima, mapa e EXIF Frame usam serviços externos. O compartilhamento de uso com PostHog e de diagnósticos com Sentry começa ativado e pode ser desligado no onboarding beta ou em Configurações → Sobre e suporte. Essas integrações não enviam fotos ou localização; gravar GPS nas fotos é opcional.",
   ],
   [
     "Onde posso baixar o app?",

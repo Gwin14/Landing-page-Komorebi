@@ -45,14 +45,22 @@ export const docsPages: DocsPage[] = [
         title: "Escolha seu ponto de partida",
         badge: "Novo",
         paragraphs: [
-          "Na primeira abertura, o onboarding permite escolher as guias do viewfinder e a posição dos controles. Na etapa Como você quer fotografar?, escolha um conjunto de atalhos ou Quero uma experiência personalizada para adicionar, remover e reordenar controles. O conjunto criativo é a seleção inicial.",
+          "Na primeira abertura, o onboarding permite escolher as guias do viewfinder. Na etapa Como você quer fotografar?, escolha um conjunto de atalhos ou Quero uma experiência personalizada para adicionar, remover e reordenar controles. O conjunto criativo é a seleção inicial.",
         ],
         items: [
           "Quero controles profissionais: controles manuais, formato de arquivo, proporção, timer, flash e configurações.",
-          "Quero controles criativos: LUTs, proporção, captura dupla, Live Photo no iOS, timer e configurações.",
-          "Quero o diferencial do app: LUTs, captura dupla, Image Stacking no iOS, projetos, tempo e configurações.",
+          "Quero controles criativos: LUTs, proporção, Live Photo no iOS, timer e configurações.",
+          "Quero o diferencial do app: LUTs, Image Stacking no iOS, projetos, tempo e configurações.",
           "Configurações permanece na barra. Os presets organizam atalhos; recursos continuam sujeitos ao suporte do aparelho e da plataforma.",
         ],
+      },
+      {
+        id: "tour",
+        title: "Faça um tour pela câmera",
+        badge: "Novo",
+        paragraphs: [
+          "Na última etapa do onboarding, Quer fazer um tour pelo app? vem ligado. Ao concluir, o tour apresenta os atalhos disponíveis e os controles principais da câmera. Desligue a opção se preferir explorar por conta própria. Para rever a apresentação, use Configurações → Sobre e suporte → Rever apresentação."
+        ]
       },
       {
         id: "permissoes",
@@ -80,7 +88,7 @@ export const docsPages: DocsPage[] = [
         id: "topbar",
         title: "Organize os atalhos da câmera",
         paragraphs: [
-          "Em Configurações → Barra de controles, escolha quais controles aparecem e altere a ordem. A TopBar aceita até oito controles, incluindo Configurações, que não pode ser removido. Em Configurações → Câmera, Controles na parte inferior muda a posição da barra para abaixo do preview.",
+          "Em Configurações → Barra de controles, escolha quais controles aparecem e altere a ordem. A TopBar aceita até oito controles, incluindo Configurações, que não pode ser removido.",
         ],
         items: [
           "Controles incompatíveis com a câmera ativa podem não aparecer ou ficar indisponíveis.",
@@ -140,7 +148,7 @@ export const docsPages: DocsPage[] = [
         items: [
           "O seletor de lentes aparece somente quando o aparelho informa mais de uma câmera física.",
           "Faça o gesto de pinça ou use o controle dedicado para ajustar o zoom dentro dos limites da lente.",
-          "Toque em um ponto do preview para definir foco e o assunto de referência do próximo Scan.",
+          "Toque em um ponto do preview para definir o foco em câmeras compatíveis.",
         ],
       },
       {
@@ -182,31 +190,15 @@ export const docsPages: DocsPage[] = [
         ],
       },
       {
-        id: "captura-dupla-e-sorriso",
-        links: [{href: "/docs/image-stacking", label: "Conheça Bulb, Motion Blur e Dupla exposição"}],
-        title: "Use captura dupla e disparo por sorriso",
+        id: "megapixels",
+        title: "Escolha os megapixels",
+        badge: "Novo",
         paragraphs: [
-          "A captura dupla produz composições complementares a partir do enquadramento ativo. O disparo por sorriso analisa o primeiro rosto detectado e fotografa automaticamente quando há iluminação e expressão suficientes.",
+          "Em Configurações → Captura e arquivos → Megapixels, escolha 12, 24 ou 48 MP separadamente para RAW e HEIF/JPEG. Os padrões são 48 MP para RAW e 24 MP para HEIF/JPEG. A lente e o modo podem entregar uma resolução menor; fotos menores nunca são ampliadas."
         ],
         items: [
-          "O detector de sorriso entra em pausa durante o Scanner de composição.",
-          "Resultado e disponibilidade podem variar conforme a cena e o aparelho.",
-        ],
-      },
-      {
-        id: "scanner-de-composicao",
-        links: [{href: "/docs/scanner-de-composicao", label: "Guia completo do Scanner de composição"}],
-        title: "Use o Scanner de composição",
-        badge: "Beta",
-        paragraphs: [
-          "No iOS, o Scan analisa um frame sob demanda, identifica um assunto e exibe uma moldura para orientar o reenquadramento. Ao alinhar a moldura, o app ajusta o zoom dentro do limite da lente; o recurso não dispara nem salva uma foto sozinho.",
-        ],
-        items: [
-          "Funciona na câmera traseira nos modos normal, manual e RAW/ProRAW; não aparece em Live Photo, Retrato ou Android.",
-          "Toque primeiro no assunto para orientar o próximo Scan. Sem seleção, o app escolhe uma região da cena.",
-          "A análise básica usa recursos do aparelho. Em Configurações, o modelo MiniCPM-V opcional adiciona análise semântica local e ocupa cerca de 1,6 GB.",
-          "Frames, sugestões e caixas detectadas não são enviados a um servidor nem gravados na foto.",
-        ],
+          "No par RAW + foto processada, as duas preferências são respeitadas. Live Photo e Retrato seguem os limites nativos; Image Stacking mantém a resolução da estratégia. O recorte de proporção pode reduzir os pixels finais."
+        ]
       },
       {
         id: "raw-proraw",
@@ -216,7 +208,7 @@ export const docsPages: DocsPage[] = [
           "Na câmera traseira do iOS, escolha ProRAW ou RAW Bayer em Formato de arquivo; só aparecem os modos anunciados pela lente. ProRAW disponível não garante suporte a Bayer.",
           "RAW Bayer exige lente física sem zoom digital ou recorte. O modo é desligado se esse requisito deixar de ser atendido; ProRAW segue as capacidades da câmera.",
           "RAW e ProRAW não podem ser combinados com Live Photo ou Retrato.",
-          "O DNG preserva a área do sensor; a foto processada do par respeita a proporção selecionada. A captura RAW pede resolução normal, aproximadamente 12 MP, conforme a lente.",
+          "O DNG preserva a área do sensor; a foto processada do par respeita a proporção selecionada. Em Megapixels, escolha a resolução RAW desejada entre 12, 24 e 48 MP; a lente e o modo podem entregar menos pixels.",
         ],
       },
       {
@@ -247,7 +239,7 @@ export const docsPages: DocsPage[] = [
           "No iPhone, novas fotos são salvas em HEIF por padrão. No controle Formato de arquivo da TopBar, escolha HEIF, HEIF+ ou JPEG na área Foto processada. JPEG amplia a compatibilidade; HEIF+ revela um DNG no aparelho antes de exportar a foto.",
         ],
         items: [
-          "A preferência também é aplicada a Live Photos, retratos, capturas duplas e cópias sem efeitos quando o fluxo permitir.",
+          "A preferência também é aplicada a Live Photos, retratos e cópias sem efeitos quando o fluxo permitir.",
           "RAW e ProRAW mantêm seus formatos próprios; a imagem derivada pode seguir a preferência escolhida.",
         ],
       },
@@ -271,7 +263,7 @@ export const docsPages: DocsPage[] = [
         items: [
           "Tirar foto usa o timer geral; Foto com timer de 3s/10s substitui o tempo apenas naquele disparo e mantém seu atalho salvo.",
           "No iOS, diminuir volume, Camera Control e botão de Ação compartilham a ação primária quando acionam captura; aumentar volume usa a secundária.",
-          "Mudanças de modo, efeito e lente ficam bloqueadas durante captura, processamento e contagem. Finalizar Bulb ou Motion Blur continua imediato.",
+          "Mudanças de modo, efeito e lente ficam bloqueadas durante captura, processamento e contagem. Finalizar Rastros de luz ou Motion Blur continua imediato.",
         ],
       },
       {
@@ -334,8 +326,16 @@ export const docsPages: DocsPage[] = [
         paragraphs: [
           "Em Configurações → Captura e arquivos → Estilos Fotográficos, Edição no Fotos da Apple cria um HEIF com estilos editáveis. Ativá-la retorna o formato processado a HEIF; exige o módulo nativo iOS. Escolher JPEG em Formato de arquivo desliga essa preferência.",
           "Live Photo pausa essa opção. Retrato, Image Stacking e HEIF+ podem aplicar estilos à saída HEIF; tanto RAW Bayer quanto ProRAW aplicam estilos somente ao companion ou derivado processado selecionado. O DNG permanece intacto e não recebe estilos. A preferência não comprova que toda lente e versão do Fotos aceitará a edição: confira o arquivo salvo no aparelho antes de depender desse fluxo.",
-          "O texto de ajuda do ajuste ainda menciona RAW comum como indisponível. Na versão revisada, a política de captura permite estilos no derivado HEIF de Bayer; a suspensão continua aplicada à Live Photo.",
+          "Na mesma tela, Estilos Fotográficos 3 acrescenta textura e grão aos estilos editáveis em iPhones e versões do iOS compatíveis. Confira as opções disponíveis ao abrir a foto no Fotos da Apple.",
         ],
+      },
+      {
+        id: "estilos-na-galeria",
+        title: "Prepare estilos pela galeria",
+        badge: "Novo",
+        paragraphs: [
+          "No iOS, abra uma foto, toque em Informações e expanda Estilos Fotográficos em Criar e editar. Quando a imagem for elegível, Criar cópia com Estilos salva uma cópia HEIF da versão atual e mantém a original. Abra a cópia no Fotos da Apple para editar os estilos. A opção Estilos Fotográficos 3 acrescenta textura e grão em aparelhos e versões do iOS compatíveis."
+        ]
       },
       {
         id: "grao-halation",
@@ -411,7 +411,7 @@ export const docsPages: DocsPage[] = [
         title: "Avalie, compartilhe e apague",
         badge: "Novo",
         paragraphs: [
-          "Abra uma foto e toque em … para acessar Ações: compartilhar, avaliar de 0 a 5 estrelas e consultar profundidade. Informações reúne EXIF e localização; só um painel fica aberto por vez.",
+          "Abra uma foto e toque em Informações para consultar EXIF e localização, organizar projetos, avaliar e compartilhar. Em Criar e editar, expanda Desfoque ou Estilos Fotográficos para ver suas opções; apenas um desses recursos fica expandido por vez.",
           "Na grade, toque em Selecionar ou mantenha uma miniatura pressionada. Marque as fotos para Avaliar, Compartilhar ou Apagar. Trocar de projeto ou sair encerra a seleção.",
         ],
         items: [
@@ -445,7 +445,7 @@ export const docsPages: DocsPage[] = [
         title: "Gere profundidade no aparelho",
         badge: "Beta",
         paragraphs: [
-          "Abra uma foto, toque em … e consulte a ação de profundidade. O modelo DepthAnythingV2SmallF16 vem no app e executa localmente, sem download no primeiro uso nem envio da foto a servidor. O Android não oferece essa ação.",
+          "Abra uma foto, toque em Informações e expanda Desfoque em Criar e editar. A geração de profundidade usa um modelo incluído no app e executa localmente, sem download no primeiro uso nem envio da foto a servidor. O Android não oferece essa ação.",
           "Esse recurso estima profundidade relativa depois da captura e é separado do modo Retrato da câmera. Não mede distâncias físicas. Live Photos elegíveis conservam o vídeo na edição ou na cópia.",
         ],
       },
@@ -507,18 +507,30 @@ export const docsPages: DocsPage[] = [
           "Grade: adiciona linhas de composição.",
           "Nível: mostra o alinhamento do aparelho.",
           "Histograma: mostra a distribuição de luminosidade em tempo real quando o pipeline ativo oferece suporte.",
-          "Indicador de altas luzes e Indicador de sombras: sinalizam extremos de exposição no preview do iOS.",
+          "Indicador de altas luzes e Indicador de sombras: sinalizam extremos de exposição no preview do iOS. Focus peaking destaca bordas para ajudar no foco. Esses indicadores não aparecem na foto salva.",
           "Som do obturador: ativa ou desativa o som próprio do app, sem substituir regras do sistema.",
-          "Controles na parte inferior: coloca a TopBar abaixo do preview.",
         ],
       },
       {
-        id: "inteligencia-do-scan",
-        title: "Inteligência local",
+        id: "idioma",
+        title: "Idioma do aplicativo",
+        paragraphs: [
+          "Em Configurações → Idioma, escolha português, inglês, japonês, alemão, espanhol ou francês. Automático segue o idioma principal do aparelho; idiomas não disponíveis usam inglês. A escolha manual fica salva no dispositivo. Nomes de projetos, LUTs e autoria são preservados."
+        ]
+      },
+      {
+        id: "widgets-e-atalhos",
+        title: "Widgets e Atalhos",
         badge: "Novo",
         paragraphs: [
-          "No iOS, você pode baixar ou remover o modelo MiniCPM-V usado pelo Scanner de composição. O download ocupa cerca de 1,6 GB, fica no aparelho e é opcional: sem ele, o Scan continua com a análise básica fornecida pelo sistema. Tags inteligentes e nomes descritivos são opções independentes, desativadas por padrão, e exigem o modelo pronto.",
+          "No iOS, abra Configurações → Widgets e Atalhos e crie presets com nome, ícone e cor. Defina filtro, formato, proporção, câmera, flash, timer, grão e halation ou mantenha os ajustes atuais. Você também pode escolher uma imagem de fundo da biblioteca."
         ],
+        items: [
+          "Um painel reúne até oito presets. O widget médio mostra os quatro primeiros; o grande mostra até oito. Na galeria de widgets do iOS, procure Komorebi, adicione Preset da câmera ou Painel da câmera e edite o widget para escolher o item salvo.",
+          "O controle Preset Komorebi abre a câmera completa após desbloquear o iPhone. Pode ser usado na tela bloqueada, na Central de Controle e no Botão de Ação compatível.",
+          "No app Atalhos, Abrir preset e Abrir câmera configurada apenas abrem e configuram a câmera; você escolhe quando fotografar. Opções incompatíveis com a lente são ignoradas com aviso.",
+          "Os ajustes de um preset duram na sessão, inclusive ao navegar ou voltar do segundo plano. Encerrar o app restaura as preferências salvas. Presets e imagens de fundo ficam locais, sem sincronização por iCloud."
+        ]
       },
       {
         id: "captura-opcoes",
@@ -526,10 +538,10 @@ export const docsPages: DocsPage[] = [
         items: [
           "Salvar cópia sem efeitos: mantém uma versão sem LUT, grão ou halation quando aplicável.",
           "Salvar localização: grava GPS apenas em novas fotos e somente com permissão.",
-          "O formato é escolhido no atalho Formato de arquivo da TopBar. Captura e arquivos reúne cópia sem efeitos, autoria, localização, Estilos Fotográficos e ajustes de Revelação HEIF+ no iOS.",
+          "O formato é escolhido no atalho Formato de arquivo da TopBar. Captura e arquivos reúne Megapixels, cópia sem efeitos, autoria, localização, Estilos Fotográficos e ajustes de Revelação HEIF+ no iOS.",
           "Autoria: grava autor e direitos autorais nas próximas capturas, sem modificar fotos existentes.",
           "Edição no Fotos da Apple (experimental, iOS): aplica Estilos 2/3 à saída HEIF, inclusive Retrato, stacking e HEIF+. Pausa em Live Photo; RAW Bayer e ProRAW aplicam estilos somente ao companion ou derivado processado selecionado, sem modificar o DNG.",
-          "LUTs personalizados: importa e remove arquivos .cube locais.",
+          "Megapixels: escolha 12, 24 ou 48 MP separadamente para RAW e HEIF/JPEG, respeitando os limites da lente e do modo. LUTs personalizados permite importar e remover arquivos .cube locais.",
         ],
       },
       {
@@ -537,7 +549,7 @@ export const docsPages: DocsPage[] = [
         title: "Controles e diagnósticos",
         paragraphs: [
           "Controles e gestos guarda os atalhos verticais, horizontais e dos botões físicos. O timer geral é temporário e escolhido somente na TopBar.",
-          "Em Sobre → Compartilhar diagnósticos, desligue ou ligue o envio técnico ao Sentry. Ele começa ativado; ao desligar, o monitoramento é encerrado na sessão atual e não inicia na próxima abertura. Isso não apaga eventos já enviados.",
+          "Em Sobre e suporte → Compartilhar uso e diagnósticos, controle o envio de uso ao PostHog e de erros ao Sentry. A opção começa ativada. Desligar bloqueia novos envios e descarta eventos de uso pendentes; os serviços não iniciam na próxima abertura. Requisições já iniciadas podem terminar e dados já enviados não são apagados. Fotos e localização não são enviadas por essas integrações.",
         ],
         links: [{ href: "/docs/camera#timer-e-gestos", label: "Configure timer e atalhos da câmera" }],
       },
@@ -545,7 +557,7 @@ export const docsPages: DocsPage[] = [
         id: "topbar-opcoes",
         title: "TopBar",
         paragraphs: [
-          "Em Barra de controles, escolha até oito atalhos e defina a ordem; Configurações permanece disponível e não pode ser removido. A posição é alterada em Câmera → Controles na parte inferior. Opções incompatíveis continuam sujeitas à capacidade da lente, ao sistema operacional e às permissões.",
+          "Em Barra de controles, escolha até oito atalhos e defina a ordem; Configurações permanece disponível e não pode ser removido. As opções disponíveis dependem da capacidade da lente, do sistema operacional e das permissões.",
         ],
       },
     ],
@@ -633,8 +645,16 @@ export const docsPages: DocsPage[] = [
         ],
       },
       {
+        id: "focus-peaking",
+        title: "Focus peaking no preview",
+        badge: "Novo",
+        paragraphs: [
+          "No iOS, ative Configurações → Câmera → Focus peaking para destacar bordas de maior contraste e ajudar a ajustar o foco. O destaque acompanha o preview e não é gravado na foto. Confira o resultado salvo: contraste e iluminação podem afetar a indicação."
+        ]
+      },
+      {
         id: "auxilios",
-        title: "Histograma e zebra",
+        title: "Histograma, zebras e foco",
         paragraphs: [
           "O histograma mostra a distribuição de luminosidade; concentrações nas extremidades pedem atenção a sombras e altas luzes. Zebra marca regiões extremas no preview. Esses auxílios não são gravados na imagem.",
           "Preview, efeitos e processamento do sistema podem produzir diferenças no resultado salvo. Confira a imagem final, especialmente em RAW/HEIF+.",
@@ -709,7 +729,7 @@ export const docsPages: DocsPage[] = [
         ],
         items: [
           "O DNG preserva a área do sensor; a imagem processada segue a proporção escolhida.",
-          "RAW e HEIF+ usam uma dimensão normal de captura, aproximadamente 12 MP conforme suporte, em vez de RAW Max de 48 MP.",
+          "Em Configurações → Captura e arquivos → Megapixels, escolha 12, 24 ou 48 MP separadamente para RAW e HEIF/JPEG. Os padrões são 48 MP para RAW e 24 MP para HEIF/JPEG. Bayer pode ficar limitado a cerca de 12 MP; ProRAW depende da lente. Fotos menores nunca são ampliadas.",
           "O tamanho varia com a cena, lente e tipo de RAW; não existe tamanho fixo em MB.",
         ],
       },
@@ -815,7 +835,7 @@ export const docsPages: DocsPage[] = [
   {
     slug: "image-stacking",
     title: "Image Stacking",
-    description: "Combine capturas com Bulb, Motion Blur e Dupla exposição e saiba quando usar cada modo.",
+    description: "Combine capturas com Rastros de luz, Motion Blur e Dupla exposição e saiba quando usar cada modo.",
     platform: "Varia por recurso",
     status: "validate",
     prerequisites: [
@@ -826,33 +846,28 @@ export const docsPages: DocsPage[] = [
     sections: [
       {
         id: "modos",
-        images: [
-          {
-            src: "/images/docs/image-stacking.jpg",
-            width: 1006,
-            height: 1418,
-            alt: "Menu Modo de captura com Desligado selecionado e opções Bulb, Motion Blur, Focus Bracketing e Dupla exposição.",
-            caption: "O menu de captura reúne os modos de Image Stacking e Focus Bracketing, conforme o suporte da lente.",
-          },
-        ],
         title: "Modos disponíveis",
         paragraphs: [
-          "Abra Image Stacking na TopBar. O seletor atual oferece Bulb, Motion Blur, Dupla exposição e Focus Bracketing quando a lente anuncia suporte. Estratégias experimentais descritas em notas técnicas, como Night ou redução de ruído, não aparecem no seletor atual.",
+          "Abra Image Stacking na TopBar. O seletor oferece Rastros de luz, Motion Blur, Dupla exposição e Focus Bracketing conforme o suporte da lente.",
         ],
       },
       {
-        id: "bulb",
-        title: "Bulb: acumular luz",
+        id: "rastros-de-luz",
+        title: "Rastros de luz: desenhe com movimento",
+        badge: "Novo",
         paragraphs: [
-          "Bulb acumula frames ponderados pelo intervalo de tempo. Um disparo inicia; outro encerra. Exige pelo menos um segundo válido e para automaticamente em cinco minutos. O stream limita o maior lado a 4096 pixels.",
-          "Use para observar luz acumulada ao longo do tempo. Cenas muito claras podem saturar. Apoie o aparelho; o registro global não elimina todo movimento ou paralaxe.",
+          "Selecione Image Stacking → Rastros de luz. Apoie o iPhone em um tripé e enquadre faróis, luzes em movimento ou light painting. Ajuste a exposição antes de começar. Um toque no obturador inicia; outro encerra imediatamente. Cancelar descarta a captura; o limite automático é de cinco minutos.",
+          "O modo conserva os rastros mais claros conforme as luzes se movem. Ative a prévia de stacking para acompanhar o resultado acumulado. A câmera precisa ficar imóvel: este modo não alinha os frames. Ruído e cruzamentos de cores podem alterar o resultado."
         ],
+        items: [
+          "O resultado exige pelo menos um segundo e cinco frames válidos. A resolução vem do stream de vídeo, limitada a 4096 pixels no lado maior. Sair da câmera ou colocar o app em segundo plano cancela a sequência."
+        ]
       },
       {
         id: "motion-blur",
         title: "Motion Blur: suavizar movimento",
         paragraphs: [
-          "Motion Blur faz uma média temporal com alinhamento global para simular longa exposição sem somar o brilho como Bulb. Elementos que se movem podem criar borrão enquanto partes estáveis se mantêm mais definidas.",
+          "Motion Blur faz uma média temporal com alinhamento global para simular longa exposição. Elementos que se movem podem criar borrão enquanto partes estáveis se mantêm mais definidas.",
           "O resultado depende da duração, estabilidade e cena. A prévia é uma referência; confira a composição exportada.",
         ],
       },
@@ -865,7 +880,6 @@ export const docsPages: DocsPage[] = [
         ],
         items: [
           "Durante a sequência, orientação, lente e demais controles ficam bloqueados; obturador, Cancelar e EV continuam disponíveis.",
-          "Captura dupla é outro recurso: gera um recorte complementar da captura; Dupla exposição combina dois disparos.",
         ],
       },
       {
@@ -957,72 +971,15 @@ export const docsPages: DocsPage[] = [
     ]
   },
 
-  {
-    slug: "scanner-de-composicao",
-    title: "Scanner de composição",
-    description: "Escolha um assunto, use a guia de recorte e entenda a análise local e seus limites.",
-    platform: "Varia por recurso",
-    status: "validate",
-    prerequisites: [
-      "iOS, câmera traseira e Scanner ativado nas configurações",
-      "Preview normal, manual ou RAW/ProRAW compatível",
-      "MiniCPM-V opcional, aproximadamente 1,6 GB no aparelho",
-    ],
-    sections: [
-      {
-        id: "usar",
-        title: "Use o Scan",
-        items: [
-          "Enquadre uma cena ampla e, se quiser, toque no assunto para orientar o próximo Scan.",
-          "Toque em Scan e aguarde a análise de um frame.",
-          "Use a moldura para reenquadrar. Ao mantê-la alinhada, há feedback háptico e ajuste de zoom limitado pela lente.",
-          "Confira o enquadramento e dispare quando quiser; o Scan não fotografa nem salva sozinho.",
-        ],
-      },
-      {
-        id: "analise",
-        title: "O que ele analisa",
-        paragraphs: [
-          "O Scan identifica um assunto e propõe um recorte. A análise básica usa recursos Vision no aparelho. O MiniCPM-V opcional ajuda a identificar semanticamente o objeto e a região inicial.",
-          "Depois, o tracking estabiliza a moldura conforme o movimento da câmera. Ele não corrige uma escolha ruim de assunto. O recurso não produz uma avaliação geral de luz, fundo, linhas ou equilíbrio da fotografia.",
-        ],
-      },
-      {
-        id: "modelo",
-        title: "Modelo opcional e privacidade",
-        paragraphs: [
-          "Baixe ou remova o modelo nas configurações de inteligência. Os pesos ficam no aparelho; a análise de frames é local. Frames, caixas e sugestões não são enviados a servidor nem gravados na foto.",
-          "Sem o modelo pronto, o Scan mantém sua análise básica. Tags e nomes inteligentes são opções separadas e precisam do modelo pronto. Se a análise inteligente continuar indisponível após o download do modelo, verifique se há uma atualização do aplicativo.",
-        ],
-      },
-      {
-        id: "cancelamento",
-        title: "Disponibilidade e cancelamento",
-        paragraphs: [
-          "Scan não aparece na frontal nem nos previews nativos de Live Photo/Retrato. Image Stacking também usa um preview próprio. Durante processamento, inicialização ou background, o botão pode ficar indisponível.",
-          "Trocas de lente, modo, proporção, orientação e zoom manual cancelam a análise/guia. Disparar, navegar ou colocar o app em background também cancela. Pouca textura, movimento forte e paralaxe podem encerrar o tracking.",
-        ],
-      },
-      {
-        id: "aprender",
-        title: "Fluxo para quem desenvolve",
-        paragraphs: [
-          "A sessão reserva um único frame, converte orientação e produz uma cópia reduzida nativa. O JavaScript recebe um token opaco; a análise consome esse token numa fila serial. O controlador percorre captura, análise, resultados e retorno ao estado ocioso.",
-          "Cancelamento invalida a sessão e ignora callbacks antigos. O detector de sorriso é pausado durante o Scan. Os testes de coordenadas e controlador não substituem medir latência, FPS, memória e temperatura em iPhone.",
-        ],
-      },
-    ]
-  },
 
   {
     slug: "metadados-e-autoria",
     title: "Metadados e autoria",
-    description: "Grave autoria, classifique fotos e entenda tags, GPS, EXIF, IPTC e XMP.",
+    description: "Grave autoria, classifique fotos e entenda GPS, EXIF, IPTC e XMP.",
     platform: "Varia por recurso",
     status: "conditional",
     prerequisites: [
       "Biblioteca de mídia com permissão de leitura/escrita",
-      "Modelo local pronto para tags e nomes inteligentes",
       "iOS 27 e build com SDK compatível para sincronização da nota com o catálogo Fotos",
     ],
     sections: [
@@ -1037,7 +994,7 @@ export const docsPages: DocsPage[] = [
         id: "notas",
         title: "Classificação de 0 a 5 estrelas",
         paragraphs: [
-          "Abra a foto, toque em … e entre no painel Ações. Escolha a nota; a estrela cortada grava zero explicitamente. A interface confirma somente depois da escrita e apresenta falhas de permissão ou armazenamento.",
+          "Abra a foto e toque em Informações. Escolha a nota; a estrela cortada grava zero explicitamente. A interface confirma somente depois da escrita e apresenta falhas de permissão ou armazenamento.",
           "No iOS 27 com SDK compatível, a transação atualiza o catálogo Fotos e o XMP da imagem. A leitura do catálogo, incluindo zero, respeita alterações feitas no Fotos. Nas outras plataformas, a miniatura usa a nota lida da imagem.",
         ],
         items: [
@@ -1045,14 +1002,6 @@ export const docsPages: DocsPage[] = [
           "Na grade, toque em Selecionar ou mantenha uma miniatura pressionada para aplicar a mesma nota a várias fotos. Cancelar mantém as gravações já concluídas; falhas e pendências continuam selecionadas.",
           "Notas antigas apenas no XMP precisam ser selecionadas novamente para entrar no catálogo; a leitura não as migra automaticamente.",
           "No iOS, a edição preserva o original. Para RAW, a classificação fica na representação renderizada e o DNG original é mantido.",
-        ],
-      },
-      {
-        id: "inteligencia",
-        title: "Tags e nomes inteligentes",
-        paragraphs: [
-          "Ative as opções separadamente nas configurações de inteligência. Elas vêm desligadas e só executam com o modelo pronto. A análise local pode sugerir palavras-chave e um nome descritivo; falhas não impedem a captura.",
-          "As tags válidas são normalizadas, sem duplicatas, com cinco a oito palavras-chave aceitas. O nome é sanitizado e recebe data/hora e extensão. As sugestões não garantem identificar corretamente pessoas, objetos ou eventos.",
         ],
       },
       {

@@ -16,7 +16,7 @@ export default async function TermsPage({ params }: LocaleRouteProps) {
     <LegalPage
       locale={locale}
       title={t("Termos de Uso")}
-      updated={t("9 de outubro de 2026")}
+      updated={t("16 de outubro de 2026")}
       sections={termsSections}
     />
   );

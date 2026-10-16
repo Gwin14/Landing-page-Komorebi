@@ -16,7 +16,7 @@ export default async function PrivacyPage({ params }: LocaleRouteProps) {
     <LegalPage
       locale={locale}
       title={t("Política de Privacidade")}
-      updated={t("12 de outubro de 2026")}
+      updated={t("16 de outubro de 2026")}
       sections={privacySections}
     />
   );

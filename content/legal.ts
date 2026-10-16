@@ -24,9 +24,8 @@ export const privacySections: LegalSection[] = [
     ],
     items: [
       "Latitude, longitude e altitude só podem ser gravadas no EXIF quando a permissão estiver concedida e a opção de localização estiver ativada.",
-      "Preferências incluem grade, som, formato de imagem, cópia original e configuração da TopBar.",
-      "Arquivos .cube importados e o modelo opcional de inteligência ficam armazenados localmente. A análise de composição, tags e nomes ocorre no aparelho.",
-      "A geração experimental de profundidade também é local, inclusive para Live Photos elegíveis. O modelo de profundidade vem no app; o modelo opcional do Scan é baixado separadamente.",
+      "Preferências incluem grade, som, formato de imagem, megapixels, idioma, cópia original e configuração da TopBar. Presets e imagens de fundo dos widgets ficam no dispositivo; cópias reduzidas dos fundos, sem metadados da foto original, são compartilhadas com a extensão do iOS, sem sincronização por iCloud.",
+      "LUTs personalizados e a geração experimental de profundidade são locais. O modelo de profundidade vem no app, inclusive para Live Photos elegíveis.",
       "Aplicar profundidade na original mantém arquivos de recuperação privados. Desinstalar o app remove esses backups; criar uma cópia preserva a foto de origem na biblioteca.",
       "Autor, direitos autorais, classificação e palavras-chave podem ser gravados nos metadados das imagens. Trabalhos HEIF+ pendentes conservam fontes temporárias no aparelho até conclusão ou descarte.",
     ],
@@ -57,15 +56,14 @@ export const privacySections: LegalSection[] = [
   {
     title: "Serviços de terceiros",
     paragraphs: [
-      "O compartilhamento de diagnósticos começa ativado e pode ser desativado no onboarding beta ou em Configurações → Sobre → Compartilhar diagnósticos. A preferência fica no dispositivo. Ao desligar, o monitoramento é encerrado na sessão atual e não inicia nas próximas aberturas. Dados já enviados não são apagados.",
-      "Esses provedores têm políticas próprias, inclusive para dados técnicos de rede. O Komorebi não controla a retenção dos diagnósticos enviados ao Sentry.",
+      "O compartilhamento de uso e diagnósticos começa ativado e pode ser desativado no onboarding beta ou em Configurações → Sobre e suporte → Compartilhar uso e diagnósticos. A preferência fica no dispositivo e controla PostHog e Sentry. Ao desligar, novos envios são bloqueados e eventos de uso pendentes são descartados; os serviços não iniciam nas próximas aberturas. Requisições já iniciadas podem terminar e dados já enviados não são apagados.",
+      "Esses provedores têm políticas próprias, inclusive para dados técnicos de rede. A retenção dos dados enviados ao Sentry e ao PostHog segue as políticas de cada serviço.",
     ],
     items: [
       "Open-Meteo recebe latitude e longitude aproximadas para dados meteorológicos.",
       "BigDataCloud recebe latitude e longitude aproximadas para geocodificação reversa.",
       "Leaflet, OpenStreetMap e unpkg carregam scripts, estilos e mapas centrados nas coordenadas da foto.",
       "O gerador de EXIF Frame pode receber ou processar a imagem e metadados em WebView.",
-      "Hugging Face fornece o download opcional do MiniCPM-V e recebe requisições e dados técnicos de rede; as imagens analisadas permanecem no aparelho.",
       "Notion recebe as informações enviadas voluntariamente no formulário de feedback e os e-mails cadastrados na lista de espera do site.",
       "Quando os diagnósticos estão ativados, Sentry recebe mensagens de erro, rastros de execução, versão do app e informações técnicas do dispositivo e das operações afetadas. O app não configura envio de fotos, RAW, LUTs ou GPS ao Sentry.",
       "Links externos passam a seguir as políticas do serviço acessado.",
@@ -74,13 +72,13 @@ export const privacySections: LegalSection[] = [
   {
     title: "Publicidade analytics e venda de dados",
     paragraphs: [
-      "O Komorebi não exibe anúncios, não integra redes de publicidade, não vende dados e não inclui serviço próprio de analytics comportamental.",
+      "O Komorebi não exibe anúncios, não integra redes de publicidade e não vende dados. Com o compartilhamento ativado, PostHog recebe eventos de uso, onboarding, permissões e resultados das capturas, além de um identificador aleatório, versão do app e informações técnicas do dispositivo. O app não envia fotos, RAW, EXIF, GPS, nomes de arquivos ou álbuns, nem conteúdo de LUTs personalizados ao PostHog. Não usa perfis pessoais, gravação de sessões ou captura automática de toques; a geolocalização por IP é desativada na integração.",
     ],
   },
   {
     title: "Segurança e retenção",
     paragraphs: [
-      "Os dados locais ficam sujeitos às proteções do dispositivo. Você controla a retenção ao excluir fotos, remover LUTs, revogar permissões ou desinstalar o app. A desinstalação remove os backups privados de profundidade e não remove necessariamente fotos já salvas. A reversão de edições compatíveis exige os backups disponíveis; diagnósticos enviados seguem a retenção do Sentry.",
+      "Os dados locais ficam sujeitos às proteções do dispositivo. Você controla a retenção ao excluir fotos, remover LUTs, revogar permissões ou desinstalar o app. A desinstalação remove os backups privados de profundidade e não remove necessariamente fotos já salvas. A reversão de edições compatíveis exige os backups disponíveis; dados de uso e diagnósticos enviados seguem a retenção do PostHog e do Sentry.",
     ],
   },
   {
@@ -91,7 +89,7 @@ export const privacySections: LegalSection[] = [
       "Remover LUTs personalizados.",
       "Revogar permissões.",
       "Não usar serviços externos como mapa, feedback ou EXIF Frame.",
-      "Desativar o compartilhamento de diagnósticos; dúvidas ou pedidos sobre dados já enviados podem ser encaminhados pelos canais de contato.",
+      "Desativar o compartilhamento de uso e diagnósticos; dúvidas ou pedidos sobre dados já enviados podem ser encaminhados pelos canais de contato.",
     ],
   },
   {
@@ -130,7 +128,7 @@ export const termsSections: LegalSection[] = [
     ],
     items: [
       "RAW ou ProRAW, Live Photo, retrato e Camera Control dependem de iOS e hardware compatível.",
-      "Projetos, captura dupla, sorriso automático, volume, GPS, clima e EXIF Frame também dependem das condições descritas na documentação.",
+      "Projetos, volume, GPS, clima e EXIF Frame também dependem das condições descritas na documentação.",
       "Profundidade local na galeria é experimental no iOS. Compatibilidade com os controles de Retrato do Fotos depende do arquivo, aparelho e sistema.",
     ],
   },
@@ -178,7 +176,7 @@ export const termsSections: LegalSection[] = [
   {
     title: "Serviços de terceiros",
     paragraphs: [
-      "Open-Meteo, BigDataCloud, Leaflet, OpenStreetMap, unpkg, o gerador de EXIF Frame, Hugging Face, Notion, Sentry e links externos têm seus próprios termos e políticas. A equipe Komorebi não controla sua disponibilidade ou práticas.",
+      "Open-Meteo, BigDataCloud, Leaflet, OpenStreetMap, unpkg, o gerador de EXIF Frame, Notion, Sentry, PostHog e links externos têm seus próprios termos e políticas. A equipe Komorebi não controla sua disponibilidade ou práticas.",
     ],
   },
   {
