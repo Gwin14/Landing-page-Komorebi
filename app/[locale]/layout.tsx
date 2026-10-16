@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import LocaleProvider from "@/components/LocaleProvider";
 import { getTranslator, getUiMessages } from "@/lib/i18n/translate";
-import { isLocale, languageTag, locales } from "@/lib/i18n/routing";
+import { isLocale, languageTag, locales, openGraphLocale } from "@/lib/i18n/routing";
 import type { Metadata, Viewport } from "next";
 import {
   SITE_DESCRIPTION,
@@ -43,8 +43,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t(SITE_TITLE),
     description: t(SITE_DESCRIPTION),
     siteName: SITE_NAME,
-    locale: locale === "pt" ? "pt_BR" : "en",
-    alternateLocale: locale === "pt" ? "en" : "pt_BR",
+    locale: openGraphLocale[locale],
+    alternateLocale: locales.filter((language) => language !== locale).map((language) => openGraphLocale[language]),
     type: "website",
   },
   twitter: {

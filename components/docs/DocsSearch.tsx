@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Search, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import type { SearchEntry } from "@/lib/i18n/search";
+import { normalizeSearchText } from "@/lib/i18n/search-text";
 
 export default function DocsSearch({ entries }: { entries: SearchEntry[] }) {
   const { t, path, locale } = useI18n();
@@ -12,12 +13,11 @@ export default function DocsSearch({ entries }: { entries: SearchEntry[] }) {
   const [active, setActive] = useState(false);
   const inputId = useId();
   const containerRef = useRef<HTMLDivElement>(null);
-  const normalized = query.trim().toLocaleLowerCase(locale);
+  const normalized = normalizeSearchText(query, locale);
   const results = normalized
     ? entries
         .filter((item) =>
-          item.searchText
-          .toLocaleLowerCase(locale)
+          normalizeSearchText(item.searchText, locale)
           .includes(normalized),
         )
         .slice(0, 8)

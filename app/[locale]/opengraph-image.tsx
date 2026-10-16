@@ -14,6 +14,9 @@ export default async function OpenGraphImage({ params }: LocaleRouteProps) {
   const t = getTranslator(locale);
   const logo = await readFile(join(process.cwd(), "public/images/app-icon-512.png"));
   const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
+  const japaneseFont = locale === "ja"
+    ? await readFile(join(process.cwd(), "public/fonts/noto-sans-jp-og.ttf"))
+    : undefined;
   return new ImageResponse(
     <div
       style={{
@@ -24,7 +27,7 @@ export default async function OpenGraphImage({ params }: LocaleRouteProps) {
         display: "flex",
         position: "relative",
         overflow: "hidden",
-        fontFamily: "Arial, sans-serif",
+        fontFamily: locale === "ja" ? "Noto Sans JP" : "Arial, sans-serif",
       }}
     >
       <div
@@ -77,15 +80,15 @@ export default async function OpenGraphImage({ params }: LocaleRouteProps) {
             style={{
               color: "#f6a800",
               fontSize: 18,
-              letterSpacing: 5,
+              letterSpacing: locale === "ja" ? 0 : 3,
               fontWeight: 700,
             }}
           >{t("MENOS AUTOMÁTICO. MAIS SEU.")}</div>
           <div
             style={{
-              fontSize: 72,
-              lineHeight: 1.03,
-              letterSpacing: -3,
+              fontSize: locale === "ja" ? 50 : 68,
+              lineHeight: locale === "ja" ? 1.35 : 1.1,
+              letterSpacing: locale === "ja" ? 0 : -2,
               fontWeight: 700,
               display: "flex",
               flexDirection: "column",
@@ -98,6 +101,9 @@ export default async function OpenGraphImage({ params }: LocaleRouteProps) {
         </div>
       </div>
     </div>,
-    size,
+    {
+      ...size,
+      fonts: japaneseFont ? [{ name: "Noto Sans JP", data: japaneseFont.buffer.slice(japaneseFont.byteOffset, japaneseFont.byteOffset + japaneseFont.byteLength) as ArrayBuffer, weight: 400, style: "normal" }] : undefined,
+    },
   );
 }

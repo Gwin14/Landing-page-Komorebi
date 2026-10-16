@@ -6,8 +6,8 @@
   --muted: #a0a398;
   --orange: #ffaa00;
   --line: #ffffff19;
-  --font: "DM Sans", Arial, sans-serif;
-  --display: "Manrope", Arial, sans-serif;
+  --font: "DM Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, Arial, sans-serif;
+  --display: "Manrope", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, Arial, sans-serif;
   color-scheme: dark;
 }
 .sr-only {
@@ -36,6 +36,17 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
+html:lang(ja) {
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+html:lang(ja) :is(h1, h2, h3, .eyebrow, .docs-kicker) {
+  letter-spacing: normal;
+  text-transform: none;
+}
+html:lang(ja) :is(.docs-article, .legal-document) { line-height: 1.9; }
+html:lang(de) :is(h1, h2, h3, .docs-article, .legal-document) { overflow-wrap: anywhere; hyphens: auto; }
 button,
 a,
 input {
@@ -969,6 +980,7 @@ footer > span {
 }
 footer > div {
   display: flex;
+  flex-wrap: wrap;
   gap: 25px;
   font-size: 11px;
   color: #b5bea6;
@@ -1531,7 +1543,9 @@ footer a:hover {
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  overflow: hidden;
+  max-height: min(65dvh, 480px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   border: 1px solid #d2cfc4;
   border-radius: 8px;
   background: #fffefa;
@@ -2274,33 +2288,6 @@ html[data-docs-theme="dark"]
     padding-right: 6%;
   }
 }
-@media (max-width: 480px) {
-  .docs-search {
-    width: 44px;
-  }
-  .docs-search input {
-    cursor: pointer;
-    padding-left: 39px;
-    color: transparent;
-  }
-  .docs-search input::placeholder {
-    color: transparent;
-  }
-  .docs-search:focus-within {
-    position: absolute;
-    left: 5%;
-    right: 60px;
-    width: auto;
-  }
-  .docs-search:focus-within input {
-    color: #24271f;
-    background: #fffefa;
-  }
-  .docs-search:focus-within input::placeholder {
-    color: #74776d;
-  }
-}
-
 /* Comfortable control targets and readable labels across device sizes. */
 .filter {
   font-size: 14px;
@@ -2593,4 +2580,9 @@ html[data-docs-theme="dark"] .language-switcher { border-color: #ffffff26; backg
 }
 @media (max-width: 359px) {
   .docs-header .docs-brand .brand-icon { display: none; }
+  .header .brand { font-size: 20px; gap: 6px; }
+  .header .brand .brand-icon { width: 24px; height: 24px; }
+  .header > .language-switcher { gap: 0; padding-left: 6px; }
+  .header > .language-switcher select { min-width: 76px; }
+  .menu-toggle { flex-shrink: 0; }
 }

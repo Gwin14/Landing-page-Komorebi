@@ -1,11 +1,17 @@
 import uiKeys from "@/content/i18n/ui-keys.json";
 import english from "@/content/i18n/en.json";
+import japanese from "@/content/i18n/ja.json";
+import german from "@/content/i18n/de.json";
+import spanish from "@/content/i18n/es.json";
+import french from "@/content/i18n/fr.json";
 import type { Locale } from "./routing";
 
 export type Translate = (text: string) => string;
-const messages: Record<string, string> = english;
+export const dictionaries: Record<Exclude<Locale, "pt">, Record<string, string>> = {
+  en: english, ja: japanese, de: german, es: spanish, fr: french,
+};
 export function getTranslator(locale: Locale): Translate {
-  return locale === "en" ? (text) => messages[text] ?? text : (text) => text;
+  return locale === "pt" ? (text) => text : (text) => dictionaries[locale][text] ?? text;
 }
 
 /** Translate display copy while retaining route slugs, anchors, assets and status IDs. */
@@ -24,5 +30,5 @@ export function translateContent<T>(value: T, t: Translate): T {
 
 /** Only interface copy crosses the server/client boundary; guide bodies stay on the server. */
 export function getUiMessages(locale: Locale): Record<string, string> {
-  return locale === "en" ? Object.fromEntries(uiKeys.map((key) => [key, messages[key]])) : {};
+  return locale === "pt" ? {} : Object.fromEntries(uiKeys.map((key) => [key, dictionaries[locale][key]]));
 }
